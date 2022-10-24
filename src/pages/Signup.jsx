@@ -22,6 +22,9 @@ import { Link } from "react-router-dom";
 //TOAST
 import { AccountCreated } from "../components/Toasts";
 
+//RouterDOM
+import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -186,6 +189,7 @@ const H6 = styled.h6`
 `;
 
 const Signup = () => {
+  const nav = useNavigate();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -234,7 +238,7 @@ const Signup = () => {
         password: user.password,
       }
     );
-
+    nav("/");
     console.log(NewUser);
     AccountCreated();
 
