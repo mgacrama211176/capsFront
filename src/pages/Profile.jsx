@@ -317,7 +317,7 @@ const Profile = ({ nav }) => {
 
     const fetchingVideos = async () => {
       const Uploaded = await axios.get(
-        `hhttps://capstoneback2.herokuapp.com/api/videos/find/userVideos/${id}`
+        `https://capstoneback2.herokuapp.com/api/videos/find/userVideos/${id}`
       );
       setRetrivedVideos(Uploaded.data);
     };
