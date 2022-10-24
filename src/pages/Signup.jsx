@@ -238,7 +238,7 @@ const Signup = () => {
         password: user.password,
       }
     );
-    nav("/");
+    nav("/signin");
     console.log(NewUser);
     AccountCreated();
 
