@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/userSlice";
@@ -29,11 +30,6 @@ const style = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-};
-
-const buttonContainer = {
-  margin: "0 auto",
-  color: "black",
 };
 
 const button = {
@@ -140,18 +136,17 @@ export const LogoutModal = () => {
           <Typography variant="h6" component="h2">
             Are you sure you want to delete this video?
           </Typography>
-          <buttonContainer>
-            <Button onClick={onClickLogout} variant="contained" sx={button}>
-              YES
-            </Button>
-            <Button
-              onClick={() => setOpen(false)}
-              variant="contained"
-              sx={button}
-            >
-              NO
-            </Button>
-          </buttonContainer>
+
+          <Button onClick={onClickLogout} variant="contained" sx={button}>
+            YES
+          </Button>
+          <Button
+            onClick={() => setOpen(false)}
+            variant="contained"
+            sx={button}
+          >
+            NO
+          </Button>
         </Box>
       </Modal>
     </div>

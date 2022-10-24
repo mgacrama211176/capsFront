@@ -130,8 +130,8 @@ const Details = styled.div`
 `;
 
 const ChannelImage = styled.img`
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background-color: #999;
   display: ${(props) => props.type === "sm" && "none"};
@@ -149,7 +149,7 @@ const Texts = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: ${(props) => props.type !== "sm" && "12px"};
+  font-size: ${(props) => props.type !== "sm" && "16px"};
   font-weight: 500;
   color: ${({ theme }) => theme.titleColor};
   display: flex;
@@ -165,13 +165,13 @@ const Title = styled.h1`
 `;
 
 const AnimatorName = styled.h2`
-  font-size: 12px;
+  font-size: 14px;
   color: ${({ theme }) => theme.textSoft};
   margin: 5px 0;
 `;
 
 const Info = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   color: ${({ theme }) => theme.textSoft};
 `;
 
