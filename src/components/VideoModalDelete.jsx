@@ -26,11 +26,19 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: "10px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
 };
 
 const buttonContainer = {
   margin: "0 auto",
   color: "black",
+};
+
+const button = {
+  margin: "10px 40px",
+  backgroundColor: "#132550",
 };
 
 const VideoModalDelete = ({ video }) => {
@@ -133,8 +141,16 @@ export const LogoutModal = () => {
             Are you sure you want to delete this video?
           </Typography>
           <buttonContainer>
-            <Button onClick={onClickLogout}>YES</Button>
-            <Button onClick={() => setOpen(false)}>NO</Button>
+            <Button onClick={onClickLogout} variant="contained" sx={button}>
+              YES
+            </Button>
+            <Button
+              onClick={() => setOpen(false)}
+              variant="contained"
+              sx={button}
+            >
+              NO
+            </Button>
           </buttonContainer>
         </Box>
       </Modal>
