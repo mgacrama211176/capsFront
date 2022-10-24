@@ -154,3 +154,15 @@ export const DeleteVideoNotif = () => {
     progress: undefined,
   });
 };
+
+export const AccountCreated = () => {
+  toast.success("Account created", {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};

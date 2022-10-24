@@ -5,9 +5,13 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/userSlice";
+
 //Functionmalities
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div``;
 
@@ -96,6 +100,15 @@ export const LogoutModal = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.username.currentUser);
+
+  const onClickLogout = () => {
+    dispatch(logout(currentUser));
+    nav("/");
+  };
+
   return (
     <div>
       <Button
@@ -120,8 +133,8 @@ export const LogoutModal = () => {
             Are you sure you want to delete this video?
           </Typography>
           <buttonContainer>
-            <Button>YES</Button>
-            <Button>NO</Button>
+            <Button onClick={onClickLogout}>YES</Button>
+            <Button onClick={() => setOpen(false)}>NO</Button>
           </buttonContainer>
         </Box>
       </Modal>

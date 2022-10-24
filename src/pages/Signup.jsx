@@ -19,6 +19,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+//TOAST
+import { AccountCreated } from "../components/Toasts";
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -233,6 +236,7 @@ const Signup = () => {
     );
 
     console.log(NewUser);
+    AccountCreated();
 
     setUser({
       username: "",
