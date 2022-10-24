@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import CommentsBox from './CommentsBox';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import CommentsBox from "./CommentsBox";
+import axios from "axios";
 
 //TOAST
-import { CommentSuccess } from './Toasts';
+import { CommentSuccess } from "./Toasts";
 
 //MUI
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
 
 const Container = styled.div``;
 
@@ -37,13 +37,13 @@ const Input = styled.input`
 const ViewComments = ({ videoId }) => {
   const [comments, setComments] = useState([]);
   const { currentUser } = useSelector((state) => state.username);
-  const [newComment, setNewComment] = useState('');
-  const [selectedComment, setSelectedComment] = useState('');
+  const [newComment, setNewComment] = useState("");
+  const [selectedComment, setSelectedComment] = useState("");
 
   useEffect(() => {
     const fetchComments = async () => {
       const responseComments = await axios.get(
-        `http://localhost:4000/api/comments/${videoId}`
+        `https://capstoneback2.herokuapp.com/api/comments/${videoId}`
       );
       setComments(responseComments.data);
     };
@@ -62,13 +62,13 @@ const ViewComments = ({ videoId }) => {
     console.log(videoId);
     try {
       const currentUserComment = await axios.post(
-        `http://localhost:4000/api/comments/${currentUser._id}/${videoId}`,
+        `https://capstoneback2.herokuapp.com/api/comments/${currentUser._id}/${videoId}`,
         {
           desc: newComment,
         }
       );
       CommentSuccess();
-      setNewComment('');
+      setNewComment("");
 
       console.log(currentUserComment);
     } catch (err) {
@@ -79,7 +79,7 @@ const ViewComments = ({ videoId }) => {
   return (
     <Container>
       {currentUser === null ? (
-        ''
+        ""
       ) : (
         <NewComment>
           <Avatar src={currentUser?.image} />
@@ -90,7 +90,7 @@ const ViewComments = ({ videoId }) => {
             type="text"
             value={newComment}
           />
-          <SendIcon style={{ cursor: 'pointer' }} onClick={onSubmitHandler} />
+          <SendIcon style={{ cursor: "pointer" }} onClick={onSubmitHandler} />
         </NewComment>
       )}
 

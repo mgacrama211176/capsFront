@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { device } from '../media';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { device } from "../media";
 import {
   useLocation,
   useNavigate,
   useParams,
   useSearchParams,
-} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { loginFailed, loginStart, loginSuccess } from '../redux/userSlice';
+} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { loginFailed, loginStart, loginSuccess } from "../redux/userSlice";
 
 //Toastify
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //MUI
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 
 //Framer Motion
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.titleColor};
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 
   /* Mobile S */
   @media ${device.mobileS} {
@@ -132,13 +132,13 @@ const Alert = styled.p`
 const Signin = () => {
   const { token } = useParams();
   const [user, setUser] = useState({
-    password: '',
+    password: "",
   });
-  const [validatedpass, setValidatedPass] = useState('');
+  const [validatedpass, setValidatedPass] = useState("");
   //TOAST
   const Notify = () =>
-    toast.success('Password has been reset!', {
-      position: 'top-right',
+    toast.success("Password has been reset!", {
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -157,7 +157,7 @@ const Signin = () => {
   const onSubmitReset = async () => {
     try {
       const reset = await axios.put(
-        `http://localhost:4000/api/users/find/email/reset/${token}`,
+        `https://capstoneback2.herokuapp.com/api/users/find/email/reset/${token}`,
         {
           password: user.password,
         }
@@ -170,12 +170,12 @@ const Signin = () => {
 
   //CHECKER IF NEW PASSWORD MATCHES
   useEffect(() => {
-    let status = '';
+    let status = "";
     try {
       if (user.password !== user.validpass) {
-        status = 'Password does not match!';
+        status = "Password does not match!";
         setValidatedPass(status);
-      } else status = 'Password Match!';
+      } else status = "Password Match!";
       setValidatedPass(status);
     } catch (err) {
       status = err;
@@ -186,7 +186,7 @@ const Signin = () => {
   return (
     <motion.div
       initial={{ width: 0, opacity: 0 }}
-      animate={{ width: '100%', opacity: 1 }}
+      animate={{ width: "100%", opacity: 1 }}
       exit={{
         x: window.innerWidth,
         y: window.innerHeight,

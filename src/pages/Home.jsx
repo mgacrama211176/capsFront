@@ -42,7 +42,7 @@ const Home = ({ type, category }) => {
     if (type === "sub") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `http://localhost:4000/api/videos/${type}/${currentUser?._id}`
+          `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
         );
         setVideos(randomReturn.data);
       };
@@ -50,7 +50,7 @@ const Home = ({ type, category }) => {
     } else if (type === "library") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `http://localhost:4000/api/videos/${type}/${currentUser?._id}`
+          `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
         );
         setVideos(randomReturn.data);
       };
@@ -58,7 +58,7 @@ const Home = ({ type, category }) => {
     } else if (type === "category") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `http://localhost:4000/api/videos/${type}/${category}`
+          `https://capstoneback2.herokuapp.com/api/videos/${type}/${category}`
         );
         setVideos(randomReturn.data);
       };
@@ -66,7 +66,7 @@ const Home = ({ type, category }) => {
     } else {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `http://localhost:4000/api/videos/${type}`
+          `https://capstoneback2.herokuapp.com/api/videos/${type}`
         );
         setVideos(randomReturn.data);
       };

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { format } from 'timeago.js';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { format } from "timeago.js";
 
 //MUI
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SendIcon from "@mui/icons-material/Send";
 
 //TOAST
-import { DeleteNotif, UnauthorizedNotif, CommentSuccess } from './Toasts';
+import { DeleteNotif, UnauthorizedNotif, CommentSuccess } from "./Toasts";
 
 const Container = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 `;
 
 const Name = styled.span`
@@ -79,7 +79,7 @@ const CommentsBox = ({
   useEffect(() => {
     const fetchComments = async () => {
       const responseToComments = await axios.get(
-        `http://localhost:4000/api/users/find/${comment.userId}`
+        `https://capstoneback2.herokuapp.com/api/users/find/${comment.userId}`
       );
       setChannel(responseToComments.data);
     };
@@ -88,7 +88,7 @@ const CommentsBox = ({
 
   const deleteComment = async () => {
     const deletedComment = await axios.delete(
-      `http://localhost:4000/api/comments/${comment._id}`
+      `https://capstoneback2.herokuapp.com/api/comments/${comment._id}`
     );
     DeleteNotif();
   };
@@ -98,7 +98,7 @@ const CommentsBox = ({
     setSelectedComment(comment._id);
   };
 
-  const [updatedComment, setUpdatedComment] = useState('');
+  const [updatedComment, setUpdatedComment] = useState("");
 
   const onChangeHandler = (e) => {
     const latestComment = ([e.target.id] = e.target.value);
@@ -111,7 +111,7 @@ const CommentsBox = ({
     console.log(selectedComment);
     try {
       const latestComment = await axios.put(
-        `http://localhost:4000/api/comments/${selectedComment}`,
+        `https://capstoneback2.herokuapp.com/api/comments/${selectedComment}`,
         { desc: updatedComment }
       );
       CommentSuccess();
@@ -130,15 +130,15 @@ const CommentsBox = ({
             {channel?.username} |<Date>{format(comment?.createdAt)}</Date>
             <Separator>
               {currentUser !== comment.userId ? (
-                ''
+                ""
               ) : (
                 <>
                   <EditIcon
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: "pointer" }}
                     onClick={editComment}
                   />
                   <DeleteIcon
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: "pointer" }}
                     onClick={deleteComment}
                   />
                 </>
@@ -155,7 +155,7 @@ const CommentsBox = ({
                   onChange={(e) => onChangeHandler(e)}
                 />
                 <SendIcon
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   onClick={updatedSubmitHandler}
                 />
               </UpdateContainer>

@@ -87,10 +87,10 @@ const Follow = ({ currentUser, channelID }) => {
       } else {
         currentUser.subscribedUsers.includes(channelID)
           ? await axios.put(
-              `http://localhost:4000/api/users/unsub/${currentUser._id}/${channelID}`
+              `https://capstoneback2.herokuapp.com/api/users/unsub/${currentUser._id}/${channelID}`
             )
           : await axios.put(
-              `http://localhost:4000/api/users/sub/${currentUser._id}/${channelID}`
+              `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${channelID}`
             );
         // console.log(dispatch(subscription(channel._id)));
         dispatch(subscription(channelID));

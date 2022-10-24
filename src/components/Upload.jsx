@@ -189,7 +189,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
     e.preventDefault();
 
     const response = await axios.post(
-      `http://localhost:4000/api/videos/${currentUser}`,
+      `https://capstoneback2.herokuapp.com/api/videos/${currentUser}`,
       {
         title: uploadInformation.title,
         desc: uploadInformation.desc,

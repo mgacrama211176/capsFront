@@ -86,7 +86,7 @@ const UpdateVideoModal = ({ video }) => {
         console.log(video._id);
         console.log(currentUser._id);
         await axios.put(
-          `http://localhost:4000/api/videos/${video._id}/${currentUser._id}`,
+          `https://capstoneback2.herokuapp.com/api/videos/${video._id}/${currentUser._id}`,
           {
             title: videoInfo.title,
             tags: videoInfo.category,

@@ -11,10 +11,10 @@ export const DeleteVideoData = async ({ video }) => {
   try {
     //delete Videodata on Mongo
     const deleting = await axios.delete(
-      `http://localhost:4000/api/videos/${video._id}`
+      `https://capstoneback2.herokuapp.com/api/videos/${video._id}`
     );
     const deletingAllComments = await axios.delete(
-      `http://localhost:4000/api/comments/deleteAll/${video._id}`
+      `https://capstoneback2.herokuapp.com/api/comments/deleteAll/${video._id}`
     );
     console.log(deletingAllComments);
     console.log(deleting);

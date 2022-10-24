@@ -191,7 +191,7 @@ const Signin = () => {
     dispatch(loginStart(user));
     try {
       const login = await axios
-        .post("http://localhost:4000/api/auth/signin", {
+        .post("https://capstoneback2.herokuapp.com/api/auth/signin", {
           email: user.email,
           password: user.password,
         })
@@ -218,7 +218,7 @@ const Signin = () => {
       .then((result) => {
         setUser(result.user);
         const googleUser = axios
-          .post("http://localhost:4000/api/auth/google", {
+          .post("https://capstoneback2.herokuapp.com/api/auth/google", {
             username: result.user.displayName,
             email: result.user.email,
             image: result.user.photoURL,

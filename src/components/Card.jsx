@@ -192,7 +192,7 @@ const Card = ({ type, video, currentUser }) => {
   useEffect(() => {
     const fetchingChannel = async () => {
       const channel = await axios.get(
-        `http://localhost:4000/api/users/find/${video?.userId}`
+        `https://capstoneback2.herokuapp.com/api/users/find/${video?.userId}`
       );
       setChannel(channel?.data);
     };
