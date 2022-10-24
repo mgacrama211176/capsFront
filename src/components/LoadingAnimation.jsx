@@ -1,7 +1,5 @@
 import React from "react";
 
-const LoadingAnimation = () => {
+export default function LoadingAnimation() {
   return <div>LoadingAnimation</div>;
-};
-
-export default LoadingAnimation;
+}
