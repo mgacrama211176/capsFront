@@ -1,0 +1,68 @@
+.timeline {
+  padding: 0 !important;
+  
+  
+}
+/* @media only screen and (max-width: 320px) */
+/* Header */
+
+/* Header Title */
+.timeline .timeline_header {
+  padding-top: 7px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 20px;
+  
+}
+
+.timeline .MuiTimelineitem-root {
+  min-height: 0px;
+}
+
+.timeline .MuiTimelineItem-missingOppositeContent:before {
+  display: none;
+}
+.timeline .head_dot {
+  color: #fff !important;
+  background-color: #132550 !important;
+  font-size: small !important;
+  padding: 10px !important;
+}
+
+.timeline .head_padding {
+  padding-left: 8px;
+}
+.css-v6mo1y-MuiTimelineDot-root {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: baseline;
+  -ms-flex-item-align: baseline;
+  align-self: baseline;
+  border-style: solid;
+  border-width: 2px;
+  padding: 4px;
+  border-radius: 50%;
+  box-shadow: 0px 2px 1px -1pxrgba (0, 0, 0, 0.2),
+    0px 1px 1px 0pxrgba (0, 0, 0, 0.14), 0px 1px 3px 0pxrgba (0, 0, 0, 0.12);
+  margin: 11.5px 0;
+  border-color: transparent;
+  color: black;
+  background-color: #ffc500;
+}
+
+/*Content Info*/
+.timeline .timeline_dot {
+  color: black !important;
+  border-color: #132550 !important;
+  padding: 5px !important;
+}
+
+.timeline .separator_padding {
+  padding-left: 18px;
+}
+
+.timeline .timeline_header {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: bolder;
+}
