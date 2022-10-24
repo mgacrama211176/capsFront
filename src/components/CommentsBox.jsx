@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 //MUI
 import EditIcon from "@mui/icons-material/Edit";
@@ -121,10 +122,14 @@ const CommentsBox = ({
     }
   };
 
+  console.log(comment);
+
   return (
     <>
       <Container>
-        <Avatar src={channel.image} />
+        <Link to={`/profile/About/${comment.userId}`}>
+          <Avatar src={channel.image} />
+        </Link>
         <Details>
           <Name>
             {channel?.username} |<Date>{format(comment?.createdAt)}</Date>
@@ -154,6 +159,7 @@ const CommentsBox = ({
                   type="text"
                   onChange={(e) => onChangeHandler(e)}
                 />
+
                 <SendIcon
                   style={{ cursor: "pointer" }}
                   onClick={updatedSubmitHandler}
