@@ -41,24 +41,31 @@ import {
 import { ToastContainer } from "react-toastify";
 import Follow from "../components/Follow";
 
+//Loader
+import LoadingAnimation from "../components/LoadingAnimation";
+
 const Container = styled.div`
   display: flex;
   gap: 24px;
   font-family: Roboto, Arial, sans-serif;
-  max-width: 100vw;
+  max-width: 100%;
   padding: 0px 30px;
   margin-left: 20px;
 `;
 
 const Content = styled.div`
   flex: 5;
-  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 const VideoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  max-width: 100vw;
+  width: 100%;
 `;
 
 const VideoFrame = styled.video`
@@ -72,6 +79,7 @@ const VideoFrame = styled.video`
 
 const VideoInformationContainer = styled.div`
   padding: 5px;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -112,13 +120,6 @@ const Buttons = styled.div`
   display: flex;
   gap: 20px;
   color: ${({ theme }) => theme.titleColor};
-`;
-
-const Button = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
 `;
 
 const Like = styled.div`
@@ -279,6 +280,9 @@ const Video = () => {
   const path = useLocation().pathname.split("/")[2];
   const [channel, setChannel] = useState({});
   const [viewCounter, setViewCounter] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const channelContainer = channel._id;
 
   const channelID = channel._id;
 
@@ -294,6 +298,7 @@ const Video = () => {
 
         setChannel(channelResponse.data);
         dispatch(FetchSuccess(videoResponse.data));
+        setLoading(false);
       } catch (err) {}
     };
     fetchData();
@@ -305,6 +310,7 @@ const Video = () => {
         const increase = await axios.put(
           `https://capstoneback2.herokuapp.com/api/videos/views/view/${path}`
         );
+        setLoading(false);
       } else {
         return setViewCounter(true);
       }
@@ -319,6 +325,7 @@ const Video = () => {
       const like = await axios.put(
         `https://capstoneback2.herokuapp.com/api/users/like/${currentUser._id}/${currentVideo._id}`
       );
+      setLoading(false);
       dispatch(LikeFunction(currentUser._id));
       Liked();
     }
@@ -331,32 +338,11 @@ const Video = () => {
       await axios.put(
         `https://capstoneback2.herokuapp.com/api/users/dislike/${currentUser._id}/${currentVideo._id}`
       );
+      setLoading(false);
       dispatch(DislikeFunction(currentUser._id));
       Disliked();
     }
   };
-
-  // const subscribeHandler = async () => {
-  //   try {
-  //     if (currentUser._id === channel._id) {
-  //       SubscribeErrorNotif();
-  //     } else {
-  //       currentUser.subscribedUsers.includes(channel._id)
-  //         ? await axios.put(
-  //             `http://localhost:4000/api/users/unsub/${currentUser._id}/${channel._id}`
-  //           )
-  //         : await axios.put(
-  //             `http://localhost:4000/api/users/sub/${currentUser._id}/${channel._id}`
-  //           );
-  //       // console.log(dispatch(subscription(channel._id)));
-  //       dispatch(subscription(channel._id));
-  //     }
-  //   } catch (err) {
-  //     loginRequired();
-  //   }
-  // };
-
-  const channelContainer = channel._id;
 
   const saveVideo = async () => {
     try {
@@ -372,6 +358,7 @@ const Video = () => {
         SaveNotif();
         dispatch(reduxSaveVideo(currentVideo._id));
       }
+      setLoading(false);
     } catch (err) {
       loginRequired();
     }
@@ -397,78 +384,93 @@ const Video = () => {
             pauseOnHover
           />
           <Content>
-            <VideoWrapper>
-              <VideoFrame src={currentVideo?.videoUrl} controls></VideoFrame>
-            </VideoWrapper>
+            {loading ? (
+              <>
+                <LoadingAnimation />
+              </>
+            ) : (
+              <>
+                <VideoWrapper>
+                  <VideoFrame
+                    src={currentVideo?.videoUrl}
+                    controls
+                    controlsList="nodownload"
+                  ></VideoFrame>
+                </VideoWrapper>
 
-            <VideoInformationContainer>
-              <Title>{currentVideo?.title}</Title>
-              <Info>
-                {currentVideo?.views} views • {format(currentVideo?.createdAt)}
-              </Info>
-              <Hr />
-              <Details>
-                <Buttons>
-                  <Like onClick={likeHandler}>
-                    {currentUser === null ? (
-                      <ThumbUpIcon />
-                    ) : currentVideo?.likes?.includes(currentUser._id) ? (
-                      <ThumbUpIcon style={{ color: "#0675e8" }} />
-                    ) : (
-                      <ThumbUpIcon />
-                    )}
-                    {currentVideo?.likes?.length}
-                  </Like>
-                  <Dislike onClick={dislikeHandler}>
-                    {currentVideo?.dislikes.includes(currentUser?._id) ? (
-                      <ThumbDownIcon style={{ color: "#red" }} />
-                    ) : (
-                      <ThumbDownIcon />
-                    )}
-                    Dislike
-                  </Dislike>
+                <VideoInformationContainer>
+                  <Title>{currentVideo?.title}</Title>
+                  <Info>
+                    {currentVideo?.views} views •{" "}
+                    {format(currentVideo?.createdAt)}
+                  </Info>
+                  <Hr />
+                  <Details>
+                    <Buttons>
+                      <Like onClick={likeHandler}>
+                        {currentUser === null ? (
+                          <ThumbUpIcon />
+                        ) : currentVideo?.likes?.includes(currentUser._id) ? (
+                          <ThumbUpIcon style={{ color: "#0675e8" }} />
+                        ) : (
+                          <ThumbUpIcon />
+                        )}
+                        {currentVideo?.likes?.length}
+                      </Like>
+                      <Dislike onClick={dislikeHandler}>
+                        {currentVideo?.dislikes.includes(currentUser?._id) ? (
+                          <ThumbDownIcon style={{ color: "#red" }} />
+                        ) : (
+                          <ThumbDownIcon />
+                        )}
+                        Dislike
+                      </Dislike>
 
-                  <Save onClick={saveVideo}>
-                    {currentUser?.saveVideos?.includes(currentVideo?._id) ? (
-                      <SaveAltIcon style={{ color: "#04a86c" }} />
-                    ) : (
-                      <SaveAltIcon />
-                    )}
+                      <Save onClick={saveVideo}>
+                        {currentUser?.saveVideos?.includes(
+                          currentVideo?._id
+                        ) ? (
+                          <SaveAltIcon style={{ color: "#04a86c" }} />
+                        ) : (
+                          <SaveAltIcon />
+                        )}
 
-                    {currentUser?.saveVideos?.includes(currentVideo?._id)
-                      ? "SAVED"
-                      : "SAVE"}
-                  </Save>
+                        {currentUser?.saveVideos?.includes(currentVideo?._id)
+                          ? "SAVED"
+                          : "SAVE"}
+                      </Save>
 
-                  <Share currentVideo={currentVideo?._id} />
-                </Buttons>
-              </Details>
+                      <Share currentVideo={currentVideo?._id} />
+                    </Buttons>
+                  </Details>
 
-              <Hr />
+                  <Hr />
 
-              <Channel>
-                <ChannelInfo>
-                  <Link to={`/profile/About/${channelContainer}`}>
-                    <Image src={channel.image} />
-                  </Link>
-                  <ChannelDetail>
-                    <ChannelName>{channel.username}</ChannelName>
-                    <ChannelCounter>
-                      {channel.subscribers} subscribers
-                    </ChannelCounter>
-                  </ChannelDetail>
-                </ChannelInfo>
+                  <Channel>
+                    <ChannelInfo>
+                      <Link to={`/profile/About/${channelContainer}`}>
+                        <Image src={channel.image} />
+                      </Link>
+                      <ChannelDetail>
+                        <ChannelName>{channel.username}</ChannelName>
+                        <ChannelCounter>
+                          {channel.subscribers} subscribers
+                        </ChannelCounter>
+                      </ChannelDetail>
+                    </ChannelInfo>
 
-                <Follow currentUser={currentUser} channelID={channelID} />
-              </Channel>
+                    <Follow currentUser={currentUser} channelID={channelID} />
+                  </Channel>
 
-              <Description>{currentVideo?.desc}</Description>
-              <Hr />
-              <Title>Recommended Videos</Title>
-              <Recommendation tags={currentVideo?.tags[0]} />
-              <Hr />
-              <ViewComments videoId={currentVideo?._id} />
-            </VideoInformationContainer>
+                  <Description>{currentVideo?.desc}</Description>
+                  <Hr />
+                  <Title>Recommended Videos</Title>
+                  <Recommendation tags={currentVideo?.tags[0]} />
+                  <Hr />
+                  <ViewComments videoId={currentVideo?._id} />
+                </VideoInformationContainer>
+              </>
+            )}
           </Content>
         </Container>
       </>

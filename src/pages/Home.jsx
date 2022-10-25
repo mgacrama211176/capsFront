@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import videoSlice from "../redux/videoSlice";
 
 //loader
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 const Container = styled.div`
   display: flex;
@@ -44,12 +44,6 @@ const Loader = styled.div`
   gap: 10px;
   font-size: 42px;
   color: #132550;
-`;
-
-const OverRide = styled.div`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
 `;
 
 const Home = ({ type, category }) => {
@@ -107,15 +101,7 @@ const Home = ({ type, category }) => {
         <Container>
           {loading ? (
             <>
-              <Loader>
-                <ClimbingBoxLoader
-                  color="#132550"
-                  loading
-                  size={40}
-                  speedMultiplier={1}
-                />
-                Loading Videos...
-              </Loader>
+              <LoadingAnimation />
             </>
           ) : (
             <>
