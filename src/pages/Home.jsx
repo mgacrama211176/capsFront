@@ -15,6 +15,7 @@ import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import videoSlice from "../redux/videoSlice";
+import { LoadingAnimation } from "../components/LoadingAnimation";
 
 const Container = styled.div`
   display: flex;
@@ -84,6 +85,7 @@ const Home = ({ type, category }) => {
         {videos.map((video) => (
           <Card key={video._id} video={video} />
         ))}
+        {/* <LoadingAnimation type="feed" /> */}
       </Container>
     </motion.div>
   );
