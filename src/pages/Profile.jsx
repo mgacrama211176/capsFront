@@ -364,14 +364,14 @@ const Profile = ({ nav }) => {
   useEffect(() => {
     const getProfile = async () => {
       const profile = await axios.get(
-        `http://localhost:4000/api/users/find/${id}`
+        `https://capstoneback2.herokuapp.com/api/users/find/${id}`
       );
       setRetrievedUser(profile.data);
     };
 
     const fetchingVideos = async () => {
       const Uploaded = await axios.get(
-        `http://localhost:4000/api/videos/find/userVideos/${id}`
+        `https://capstoneback2.herokuapp.com/api/videos/find/userVideos/${id}`
       );
       setRetrivedVideos(Uploaded.data);
     };
@@ -538,7 +538,7 @@ const Profile = ({ nav }) => {
           <>
             {retrievedVideos.map((video) => (
               <Card
-                key={video.id}
+                key={video._id}
                 video={video}
                 type="profile"
                 currentUser={currentUser}

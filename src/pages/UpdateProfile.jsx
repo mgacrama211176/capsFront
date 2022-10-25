@@ -21,7 +21,9 @@ import FormControl from "@mui/material/FormControl";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: 0px;
+`;
 
 const Wrapper = styled.div`
   margin: 0 100px;
