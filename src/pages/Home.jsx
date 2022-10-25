@@ -9,13 +9,15 @@ import Card from "../components/Card";
 import { motion } from "framer-motion";
 
 // libraries
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import axios from "axios";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import videoSlice from "../redux/videoSlice";
-import { LoadingAnimation } from "../components/LoadingAnimation";
+
+//loader
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const Container = styled.div`
   display: flex;
@@ -35,9 +37,25 @@ const Container = styled.div`
   }
 `;
 
+const Loader = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 42px;
+  color: #132550;
+`;
+
+const OverRide = styled.div`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
 const Home = ({ type, category }) => {
   const [videos, setVideos] = useState([]);
   const { currentUser } = useSelector((state) => state.username);
+  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (type === "sub") {
@@ -46,6 +64,7 @@ const Home = ({ type, category }) => {
           `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
         );
         setVideos(randomReturn.data);
+        setLoading(false);
       };
       fetchingVideos();
     } else if (type === "library") {
@@ -53,6 +72,7 @@ const Home = ({ type, category }) => {
         const randomReturn = await axios.get(
           `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
         );
+        setLoading(false);
         setVideos(randomReturn.data);
       };
       fetchingVideos();
@@ -61,6 +81,7 @@ const Home = ({ type, category }) => {
         const randomReturn = await axios.get(
           `https://capstoneback2.herokuapp.com/api/videos/${type}/${category}`
         );
+        setLoading(false);
         setVideos(randomReturn.data);
       };
       fetchingVideos();
@@ -69,6 +90,7 @@ const Home = ({ type, category }) => {
         const randomReturn = await axios.get(
           `https://capstoneback2.herokuapp.com/api/videos/${type}`
         );
+        setLoading(false);
         setVideos(randomReturn.data);
       };
       fetchingVideos();
@@ -76,18 +98,35 @@ const Home = ({ type, category }) => {
   }, [type]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opcaity: 0 }}
-    >
-      <Container>
-        {videos.map((video) => (
-          <Card key={video._id} video={video} />
-        ))}
-        {/* <LoadingAnimation type="feed" /> */}
-      </Container>
-    </motion.div>
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opcaity: 0 }}
+      >
+        <Container>
+          {loading ? (
+            <>
+              <Loader>
+                <ClimbingBoxLoader
+                  color="#132550"
+                  loading
+                  size={40}
+                  speedMultiplier={1}
+                />
+                Loading Videos...
+              </Loader>
+            </>
+          ) : (
+            <>
+              {videos.map((video) => (
+                <Card key={video._id} video={video} />
+              ))}
+            </>
+          )}
+        </Container>
+      </motion.div>
+    </>
   );
 };
 
