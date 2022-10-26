@@ -10,9 +10,6 @@ import CategoryIcon from "@mui/icons-material/Category";
 import EmailIcon from "@mui/icons-material/Email";
 
 //Icons
-import Facebook from "../assets/icons/facebook.png";
-import Gmail from "../assets/icons/gmail.png";
-import Linkedin from "../assets/icons/linkedin.png";
 import PersonIcon from "@mui/icons-material/Person";
 
 //Framer Motion

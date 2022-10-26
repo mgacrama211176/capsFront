@@ -3,18 +3,17 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import styled from "styled-components";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import Container from "@mui/material/Container";
 
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/userSlice";
 
 //Functionmalities
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import { deleteObject } from "firebase/storage";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-const Container = styled.div``;
+import Contract from "./Contract";
 
 const style = {
   position: "absolute",
@@ -186,11 +185,9 @@ export const TermsModal = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography variant="h6" component="h2">
-            TERMS AND CONDITIONS
-          </Typography>
-        </Box>
+        <Container>
+          <Contract />
+        </Container>
       </Modal>
     </div>
   );
