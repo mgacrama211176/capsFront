@@ -25,6 +25,9 @@ import { AccountCreated } from "../components/Toasts";
 //RouterDOM
 import { useNavigate } from "react-router-dom";
 
+//Modal
+import { TermsModal } from "../components/VideoModalDelete";
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -197,6 +200,12 @@ const Signup = () => {
     password: "",
     validpass: "",
   });
+  const [validatedpass, setValidatedPass] = useState("");
+  const [agree, setAgree] = useState(false);
+
+  const onClickAgree = () => {
+    agree ? setAgree(false) : setAgree(true);
+  };
 
   const Alert = styled.p`
     display: flex;
@@ -211,8 +220,6 @@ const Signup = () => {
     setUser(newUser);
     `  `;
   };
-
-  const [validatedpass, setValidatedPass] = useState("");
 
   useEffect(() => {
     let status = "";
@@ -333,23 +340,31 @@ const Signup = () => {
             </>
           </InputWrapper>
           <InputWrapper>
-            <input type="checkbox" name="" id="" />
-            <H6>I have read and understood the TERMS AND CONDITIONS</H6>
+            <input type="checkbox" onClick={onClickAgree} />
+            <H6>
+              <TermsModal />
+            </H6>
           </InputWrapper>
-          <InputWrapper>
-            <Button onClick={onClickAddSubmit}>
-              SignUp
-              <LoginIcon />
-            </Button>
-          </InputWrapper>
-          <Options>
-            <Link to={"/signin"} style={{ textDecoration: "none" }}>
-              <H6>Already Signed up? </H6>
-            </Link>
-            <Link to={"/Fpassword"} style={{ textDecoration: "none" }}>
-              <H6>Forgot Password </H6>
-            </Link>
-          </Options>
+          {agree ? (
+            <>
+              <InputWrapper>
+                <Button onClick={onClickAddSubmit}>
+                  SignUp
+                  <LoginIcon />
+                </Button>
+              </InputWrapper>
+              <Options>
+                <Link to={"/signin"} style={{ textDecoration: "none" }}>
+                  <H6>Already Signed up? </H6>
+                </Link>
+                <Link to={"/Fpassword"} style={{ textDecoration: "none" }}>
+                  <H6>Forgot Password </H6>
+                </Link>
+              </Options>
+            </>
+          ) : (
+            ""
+          )}
         </LoginWrapper>
       </Container>
     </motion.div>

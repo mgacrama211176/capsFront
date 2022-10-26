@@ -152,3 +152,46 @@ export const LogoutModal = () => {
     </div>
   );
 };
+
+export const TermsModal = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.username.currentUser);
+
+  const onClickLogout = () => {
+    dispatch(logout(currentUser));
+    nav("/");
+  };
+
+  return (
+    <div>
+      <Button
+        onClick={handleOpen}
+        sx={{
+          fontSize: "10px",
+          color: "white",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        I have read and Agreed on the Terms and Conditions
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h6" component="h2">
+            TERMS AND CONDITIONS
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
