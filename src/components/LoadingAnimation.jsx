@@ -44,3 +44,17 @@ export const LoadingAProfile = () => {
     </Loader>
   );
 };
+
+export const LoadingComments = () => {
+  return (
+    <Loader>
+      <ClimbingBoxLoader
+        color="#132550"
+        loading
+        size={40}
+        speedMultiplier={1}
+      />
+      Loading Comments...
+    </Loader>
+  );
+};
