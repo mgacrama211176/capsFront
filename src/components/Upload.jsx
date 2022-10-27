@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 15px;
   align-items: center;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const Close = styled.div`
