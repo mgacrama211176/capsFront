@@ -34,7 +34,7 @@ import Stack from "@mui/material/Stack";
 /* PROFILE Section*/
 const ProfWrapper = styled.div`
   color: white;
-  background: #000000ae;
+
   max-width: 100%;
   position: relative;
   overflow: hidden;
@@ -43,7 +43,6 @@ const ProfWrapper = styled.div`
   margin-bottom: 2%;
   justify-content: center;
   align-items: center;
-  border-radius: 200px;
 `;
 
 //Image Styling
@@ -51,6 +50,7 @@ const ProfWrapper = styled.div`
 const ImgCon = styled.figure`
   width: 10em;
   height: 10em;
+  margin-left: 35%;
   position: relative;
 `;
 
@@ -73,9 +73,12 @@ const Pimg = styled.img`
 // PROF INFO STYLING
 
 const Infowrapper = styled.div`
+  margin-top: 2%;
   padding: 4em 4em 8em 4em;
   width: 100%;
   margin-left: 30px;
+  background-color: #132550;
+  border-radius: 100px;
 `;
 
 const Infoleft = styled.div`
@@ -83,7 +86,6 @@ const Infoleft = styled.div`
   display: flex;
   gap: 2em;
   z-index: 5;
-  border-radius: 10px;
 `;
 
 const Detailswrap = styled.div`
@@ -91,18 +93,13 @@ const Detailswrap = styled.div`
   display: flex;
   padding: 0.5em;
   gap: 2em;
-  z-index: 5;
-  border-radius: 10px;
+  margin-left: 45%;
 `;
 const UsernameWrapper = styled.span`
   margin: 2.5rem 1rem;
   text-decoration: uppercase;
   font-size: 2rem;
 `;
-const Cattitle = styled.span`
-  margin: 0;
-`;
-const TypoDetails = styled.div``;
 
 const Subbtn = styled.button`
   margin-right: 40px;
@@ -135,16 +132,9 @@ const Subbtn = styled.button`
   }
 `;
 
-const Bar = styled.div`
-  height: 60px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5rem 0rem;
-  background-color: #fff;
-  color: black;
-  box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+const Vl = styled.div`
+  border-left: 3px solid white;
+  height: 25px;
 `;
 
 //About Section
@@ -204,7 +194,6 @@ const Repbtn = styled.button`
   display: block;
   border: 0px;
   font-weight: 700;
-  position: absolute;
 
   background-color: #f51f1ff2;
   cursor: pointer;
@@ -235,7 +224,6 @@ const DownldCV = styled.button`
   display: block;
   border: 0px;
   font-weight: 700;
-  position: absolute;
 
   background-color: #f51f1ff2;
   cursor: pointer;
@@ -256,7 +244,7 @@ const DownldCV = styled.button`
 //Video Sectiton
 
 const Vidtitle = styled.h1`
-  color: white;
+  color: black;
   margin-left: 20px;
 `;
 const VidWrapper = styled.div`
@@ -393,7 +381,7 @@ const Profile = ({ nav }) => {
   ////
 
   const MainWrapper = styled.div`
-    background-color: black;
+    background-color: #f7f1f1;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -418,12 +406,12 @@ const Profile = ({ nav }) => {
             </ImgCon>
 
             <UsernameWrapper>
+              {" "}
               {retrivedUser.fullName !== undefined
                 ? retrivedUser.fullName
                 : retrivedUser.username}
               <br />
               {retrivedUser.userCategory}
-
               <PersonOutlineIcon />
             </UsernameWrapper>
             <Subbtn>
@@ -433,13 +421,9 @@ const Profile = ({ nav }) => {
             </Subbtn>
           </Infoleft>
           <Detailswrap>
-            <Cattitle></Cattitle>
-
-            <TypoDetails>
-              {retrivedUser.subscribers} Subscribers
-              <br />
-              {retrivedUser?.subscribedUsers?.length} Subscribed Users
-            </TypoDetails>
+            {retrivedUser.subscribers} Subscribers
+            <Vl />
+            {retrivedUser?.subscribedUsers?.length} Subscribed Users
           </Detailswrap>
         </Infowrapper>
       </ProfWrapper>
@@ -479,13 +463,14 @@ const Profile = ({ nav }) => {
                 Report user
                 <FlagIcon />
               </Repbtn>
+
               <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
               >
-                <Box sx={style}>
+                <Box sx={{ ...style, width: 400 }}>
                   <Typography
                     id="modal-modal-title"
                     variant="h6"
@@ -520,7 +505,7 @@ const Profile = ({ nav }) => {
                       label="Report 4"
                     />
                   </RadioGroup>
-                  <Repbtn onClick={handleOpen}>Submit report</Repbtn>
+                  <ChildModal />
                 </Box>
               </Modal>
             </Report>
@@ -584,3 +569,36 @@ const Profile = ({ nav }) => {
 };
 
 export default Profile;
+
+export function ChildModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Submitbtn onClick={handleOpen}>Submit report</Submitbtn>
+      <Modal
+        hideBackdrop
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 300, height: 100 }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Are you sure to report this user?
+          </Typography>
+          <Detailswrap>
+            <Repbtn onClick={handleClose}>Yes</Repbtn>
+            <Repbtn onClick={handleClose}>No</Repbtn>
+          </Detailswrap>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}

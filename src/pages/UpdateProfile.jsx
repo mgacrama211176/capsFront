@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   margin: 0 100px;
   display: flex;
   justify-content: center;
-  background-color: black;
+  background-color: #132550;
   border: 1px solid black;
   border-radius: 15px;
   padding: 30px;
@@ -82,7 +82,7 @@ const UserInfo = styled.div`
   align-items: center;
   padding: 10px;
   gap: 10px;
-  background-color: #00060ac0;
+
   border-radius: 20px;
   color: white;
 `;
