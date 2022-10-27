@@ -8,6 +8,8 @@ import Footer from "../components/Footer";
 
 import BGimage from "../assets/tiger.jpg";
 
+import Tooltip from "@mui/material/Tooltip";
+
 //MUI
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
@@ -358,7 +360,12 @@ const UpdateProfile = () => {
 
           <Upcv>Upload CV</Upcv>
           <CVhelpContainer>
-            <HelpOutlineIcon />
+            <Tooltip
+              title="Upload your CV for business and employment purposes"
+              arrow
+            >
+              <HelpOutlineIcon />
+            </Tooltip>
           </CVhelpContainer>
           <Savebtn onClick={onClickUpdateSubmit}>Save changes</Savebtn>
         </UpdateContainer>
