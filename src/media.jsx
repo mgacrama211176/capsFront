@@ -15,7 +15,7 @@ export const device = {
   mobileS: `(max-width: ${size.mobileS}) { ... }`,
   mobileM: `(min-width: ${size.mobileM} and (max-width: 424px)) { ... }`,
   mobileL: `(min-width: ${size.mobileL} and (max-width: 767px)) { ... }`,
-  tablet: `(min-width: ${size.tablet} and (max-width: 1023px)) { ... }`,
+  tablet: `(min-width: ${size.tablet})`,
   laptop: `(min-width: ${size.laptop} and (max-width: 1440px)) { ... }`,
   laptopL: `(min-width: ${size.laptopL} and (max-width: 1919px)) { ... }`,
   desktop: `(min-width: ${size.desktop} and (max-width: 2559px)) { ... }`,

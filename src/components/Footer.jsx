@@ -1,15 +1,15 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 //MUI ICONS
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import CopyrightIcon from '@mui/icons-material/Copyright';
-import Logo from '../assets/Logo.png';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import CopyrightIcon from "@mui/icons-material/Copyright";
+import Logo from "../assets/Logo.png";
 
 const Container = styled.div`
-  max-width: 100vw;
+  width: 100%;
   position: relative;
 `;
 
@@ -52,16 +52,16 @@ function Footer() {
         <Imgcon src={Logo} alt="" />
 
         <p>
-          {' '}
+          {" "}
           <CopyrightIcon />
           2022 CopyRight: Filanime.com
         </p>
         <br></br>
 
         <IconWrapper>
-          <FacebookIcon style={{ cursor: 'pointer' }} />
-          <InstagramIcon style={{ cursor: 'pointer' }} />
-          <TwitterIcon style={{ cursor: 'pointer' }} />
+          <FacebookIcon style={{ cursor: "pointer" }} />
+          <InstagramIcon style={{ cursor: "pointer" }} />
+          <TwitterIcon style={{ cursor: "pointer" }} />
         </IconWrapper>
       </Wrapper>
     </Container>

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Follow from "../components/Follow";
 import Card from "../components/Card";
 import axios from "axios";
-import BGimage from "../assets/tiger.jpg";
 
 //MUI COMPONENTS
 import Box from "@mui/material/Box";
@@ -31,18 +30,46 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
+const MainWrapper = styled.div`
+  background-color: #f7f1f1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  font-family: Roboto, Arial, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 /* PROFILE Section*/
 const ProfWrapper = styled.div`
   color: white;
-
-  max-width: 100%;
+  width: 85%;
   position: relative;
-  overflow: hidden;
   display: flex;
-  margin: 0 5rem;
   margin-bottom: 2%;
   justify-content: center;
   align-items: center;
+`;
+
+const Infowrapper = styled.div`
+  margin-top: 2%;
+  padding: 4em 4em 8em 4em;
+  width: 85%;
+  /* margin-left: 30px; */
+  background-color: #132550;
+  border-radius: 100px;
+  /* max-height: 180px; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 //Image Styling
@@ -72,16 +99,6 @@ const Pimg = styled.img`
 
 // PROF INFO STYLING
 
-const Infowrapper = styled.div`
-  margin-top: 2%;
-  padding: 4em 4em 8em 4em;
-  width: 100%;
-  margin-left: 30px;
-  background-color: #132550;
-  border-radius: 100px;
-  max-height: 180px;
-`;
-
 const Infoleft = styled.div`
   width: 100%;
   display: flex;
@@ -94,7 +111,7 @@ const Detailswrap = styled.div`
   display: flex;
   padding: 0.5em;
   gap: 2em;
-  margin-left: 45%;
+  justify-content: center;
 `;
 const UsernameWrapper = styled.span`
   margin: 2.5rem 1rem;
@@ -144,14 +161,20 @@ const Abtdthd = styled.h3``;
 
 const Row = styled.div`
   display: flex;
+
+  gap: 10px;
+  margin: 0px 100px;
+  /* Tablet */
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 const Aboutwrapper = styled.div`
   color: white;
   background: #000000ae;
   flex: 50%;
   padding: 10px;
-  margin-left: 20px;
-  margin-right: 10px;
+  /* margin-right: 100px; */
   display: inline-block;
   border-radius: 40px;
   margin-bottom: 2%;
@@ -165,7 +188,7 @@ const ContentWrap = styled.div`
   justify-content: center;
   align-content: center;
   align-self: center;
-  margin-left: 45px;
+  margin-left: 0px;
   padding: 3em 2em;
 `;
 
@@ -254,9 +277,10 @@ const VidWrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin: 2% 100px;
+  /* margin-left: 20px;
   margin-right: 10px;
-  margin-bottom: 2%;
+  margin-bottom: 2%; */
   border-radius: 40px;
 `;
 
@@ -272,21 +296,20 @@ const VidContainer = styled.div`
 const ContactWrapper = styled.div`
   color: white;
   background: #000000ae;
-  max-width: 100%;
+  /* width: 90%; */
   position: relative;
   overflow: hidden;
   display: flex;
-  margin-left: 20px;
-  margin-right: 10px;
+  margin: 0px 100px;
+
   align-content: center;
   justify-content: center;
-  border-radius: 40px;
+  border-radius: 20px;
   margin-bottom: 2%;
 `;
 
 const ContactInnerWrap = styled.div`
   background-color: #f2f2f2b3;
-
   padding: 10% 15%;
   margin-top: 3%;
   margin-bottom: 3%;
@@ -447,19 +470,6 @@ const Profile = ({ nav }) => {
 
   ////
 
-  const MainWrapper = styled.div`
-    background-color: #f7f1f1;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    font-family: Roboto, Arial, sans-serif;
-    width: 100%;
-
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-  `;
-
   return (
     <MainWrapper>
       {/* Profile Section */}
@@ -473,7 +483,6 @@ const Profile = ({ nav }) => {
             </ImgCon>
 
             <UsernameWrapper>
-              {" "}
               {retrivedUser.fullName !== undefined
                 ? retrivedUser.fullName
                 : retrivedUser.username}
@@ -608,8 +617,8 @@ const Profile = ({ nav }) => {
       </VidWrapper>
 
       {/* Contact Me Section */}
-      <ContactWrapper id="Contact">
-        <ContactInnerWrap>
+      <ContactWrapper>
+        <ContactInnerWrap id="Contact">
           <ContactDetails>
             <ContactHeader>
               Contact Me
