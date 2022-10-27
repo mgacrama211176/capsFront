@@ -21,7 +21,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 const Container = styled.div`
   width: 100%;
-  min-height: 150%;
+  min-height: 100%;
   position: absolute;
   top: 0px;
   left: 0;
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 15px;
   align-items: center;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const Close = styled.div`
@@ -67,17 +67,18 @@ const Close = styled.div`
 const Title = styled.h1``;
 
 const Input = styled.input`
+  position: relative;
   border: 1px solid ${({ theme }) => theme.bg};
   border-radius: 3px;
   padding: 10px;
   background-color: white;
   color: black;
-  width: 500px;
+  width: 80%;
 `;
 
 const TextArea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.bg};
-  width: 500px;
+  width: 80%;
   border-radius: 3px;
   padding: 10px;
   background-color: white;
@@ -101,7 +102,7 @@ const Button = styled.button`
 `;
 
 const Select = styled.select`
-  width: 500px;
+  width: 80%;
 `;
 
 const Option = styled.option``;

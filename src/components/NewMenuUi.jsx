@@ -35,7 +35,7 @@ const Container = styled.div`
 `;
 const P = styled.p`
   color: black;
-  font-size: 16px;
+  font-size: 10px;
 `;
 
 const SideBar = styled.div`

@@ -29,6 +29,7 @@ const Details = styled.div`
   flex-direction: column;
   gap: 10px;
   font-family: "Roboto", sans-serif;
+  width: 100%;
 `;
 
 const Name = styled.span`
@@ -56,6 +57,7 @@ const Separator = styled.div`
 
 const UpdateContainer = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -82,6 +84,7 @@ const CommentsBox = ({
       const responseToComments = await axios.get(
         `https://capstoneback2.herokuapp.com/api/users/find/${comment.userId}`
       );
+
       setChannel(responseToComments.data);
     };
     fetchComments();
@@ -122,8 +125,6 @@ const CommentsBox = ({
     }
   };
 
-  console.log(comment);
-
   return (
     <>
       <Container>
@@ -154,7 +155,7 @@ const CommentsBox = ({
             <>
               <UpdateContainer>
                 <Input
-                  placeholder="Add new comment"
+                  placeholder="Update comment"
                   id="comment"
                   type="text"
                   onChange={(e) => onChangeHandler(e)}
