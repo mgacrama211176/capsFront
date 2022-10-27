@@ -10,9 +10,9 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
   font-size: 42px;
   color: #132550;
+  background-color: transparent;
 `;
 
 const LoadingAnimation = () => {

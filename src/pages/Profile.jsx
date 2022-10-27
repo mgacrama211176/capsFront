@@ -30,8 +30,11 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
+//loader
+import { LoadingAProfile } from "../components/LoadingAnimation";
+
 const MainWrapper = styled.div`
-  background-color: #f7f1f1;
+  /* background-color: #f7f1f1; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -412,6 +415,7 @@ const Profile = ({ nav }) => {
 
   const [retrivedUser, setRetrievedUser] = useState({});
   const [retrievedVideos, setRetrivedVideos] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -419,6 +423,7 @@ const Profile = ({ nav }) => {
         `https://capstoneback2.herokuapp.com/api/users/find/${id}`
       );
       setRetrievedUser(profile.data);
+      setLoader(false);
     };
 
     const fetchingVideos = async () => {
@@ -472,181 +477,191 @@ const Profile = ({ nav }) => {
 
   return (
     <MainWrapper>
-      {/* Profile Section */}
-      <ProfWrapper>
-        <Infowrapper>
-          <Infoleft>
-            <ImgCon>
-              <Imginner>
-                <Pimg src={retrivedUser.image}></Pimg>
-              </Imginner>
-            </ImgCon>
+      {loader ? (
+        <>
+          <LoadingAProfile />
+        </>
+      ) : (
+        <>
+          <ProfWrapper>
+            <Infowrapper>
+              <Infoleft>
+                <ImgCon>
+                  <Imginner>
+                    <Pimg src={retrivedUser.image}></Pimg>
+                  </Imginner>
+                </ImgCon>
 
-            <UsernameWrapper>
-              {retrivedUser.fullName !== undefined
-                ? retrivedUser.fullName
-                : retrivedUser.username}
-              <br />
-              {retrivedUser.userCategory}
-              <PersonOutlineIcon />
-            </UsernameWrapper>
-            <Subbtn>
+                <UsernameWrapper>
+                  {retrivedUser.fullName !== undefined
+                    ? retrivedUser.fullName
+                    : retrivedUser.username}
+                  <br />
+                  {retrivedUser.userCategory}
+                  <PersonOutlineIcon />
+                </UsernameWrapper>
+                <Subbtn>
+                  <>
+                    <Follow currentUser={currentUser} channelID={id} />
+                  </>
+                </Subbtn>
+              </Infoleft>
+              <Detailswrap>
+                {retrivedUser.subscribers} Subscribers
+                <Vl />
+                {retrivedUser?.subscribedUsers?.length} Subscribed Users
+              </Detailswrap>
+              <Anchorwrap>
+                <Anchorbt onClick={scrollAbout}>About</Anchorbt>
+                <AnchorVl />
+                <Anchorbt onClick={scrollVideos}>Videos</Anchorbt>
+                <AnchorVl />
+                <Anchorbt onClick={scrollContact}>Contact</Anchorbt>
+              </Anchorwrap>
+            </Infowrapper>
+          </ProfWrapper>
+          {/* About Section */}
+          <Row>
+            <Aboutwrapper id="About">
+              <Aboutme>About Me</Aboutme>
+              <Aboutdetails>{retrivedUser.about}</Aboutdetails>
+              <ContentWrap>
+                <Abtdthd>Details</Abtdthd>
+                <hr />
+                Name:
+                <>
+                  {retrivedUser.fullName !== undefined
+                    ? retrivedUser.fullName
+                    : retrivedUser.username}
+                </>
+                <hr />
+                Birthdate: {retrivedUser.birthdate}
+                <hr />
+                User email: {retrivedUser.email}
+                <hr />
+                Address: {retrivedUser.address}
+              </ContentWrap>
+            </Aboutwrapper>
+            <Aboutwrapper>
+              <ContentWrap>
+                <Abtdthd>Stats</Abtdthd>
+                <hr />
+                Joined {currentUser?.createdAt}
+                <hr />
+                Total views: 100
+                <hr />
+                <Report>
+                  <Repbtn onClick={handleOpen}>
+                    Report user
+                    <FlagIcon />
+                  </Repbtn>
+
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description"
+                  >
+                    <Box sx={{ ...style, width: 400 }}>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                      >
+                        What is the issue?
+                      </Typography>
+
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                      >
+                        <FormControlLabel
+                          value="Report 1"
+                          control={<Radio />}
+                          label="Report 1"
+                        />
+                        <FormControlLabel
+                          value="Report 2"
+                          control={<Radio />}
+                          label="Report 2"
+                        />
+                        <FormControlLabel
+                          value="Report 3"
+                          control={<Radio />}
+                          label="Report 3"
+                        />
+                        <FormControlLabel
+                          value="Report 4"
+                          control={<Radio />}
+                          label="Report 4"
+                        />
+                      </RadioGroup>
+                      <ChildModal />
+                    </Box>
+                  </Modal>
+                </Report>
+                <hr />
+                You can check more about the user's info for business and
+                employment purposes by clicking "Download CV"
+                <DownldCV>Download CV</DownldCV>
+              </ContentWrap>
+            </Aboutwrapper>
+          </Row>
+          <VidWrapper>
+            <Vidtitle id="Video">Videos</Vidtitle>
+            <VidContainer>
               <>
-                <Follow currentUser={currentUser} channelID={id} />
+                {retrievedVideos.map((video) => (
+                  <Card
+                    key={video._id}
+                    video={video}
+                    type="profile"
+                    currentUser={currentUser}
+                  />
+                ))}
               </>
-            </Subbtn>
-          </Infoleft>
-          <Detailswrap>
-            {retrivedUser.subscribers} Subscribers
-            <Vl />
-            {retrivedUser?.subscribedUsers?.length} Subscribed Users
-          </Detailswrap>
-          <Anchorwrap>
-            <Anchorbt onClick={scrollAbout}>About</Anchorbt>
-            <AnchorVl />
-            <Anchorbt onClick={scrollVideos}>Videos</Anchorbt>
-            <AnchorVl />
-            <Anchorbt onClick={scrollContact}>Contact</Anchorbt>
-          </Anchorwrap>
-        </Infowrapper>
-      </ProfWrapper>
-
-      {/* About Section */}
-      <Row>
-        <Aboutwrapper id="About">
-          <Aboutme>About Me</Aboutme>
-          <Aboutdetails>{retrivedUser.about}</Aboutdetails>
-          <ContentWrap>
-            <Abtdthd>Details</Abtdthd>
-            <hr />
-            Name:
-            <>
-              {retrivedUser.fullName !== undefined
-                ? retrivedUser.fullName
-                : retrivedUser.username}
-            </>
-            <hr />
-            Birthdate: {retrivedUser.birthdate}
-            <hr />
-            User email: {retrivedUser.email}
-            <hr />
-            Address: {retrivedUser.address}
-          </ContentWrap>
-        </Aboutwrapper>
-        <Aboutwrapper>
-          <ContentWrap>
-            <Abtdthd>Stats</Abtdthd>
-            <hr />
-            Joined {currentUser?.createdAt}
-            <hr />
-            Total views: 100
-            <hr />
-            <Report>
-              <Repbtn onClick={handleOpen}>
-                Report user
-                <FlagIcon />
-              </Repbtn>
-
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-              >
-                <Box sx={{ ...style, width: 400 }}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    What is the issue?
-                  </Typography>
-
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="Report 1"
-                      control={<Radio />}
-                      label="Report 1"
-                    />
-                    <FormControlLabel
-                      value="Report 2"
-                      control={<Radio />}
-                      label="Report 2"
-                    />
-                    <FormControlLabel
-                      value="Report 3"
-                      control={<Radio />}
-                      label="Report 3"
-                    />
-                    <FormControlLabel
-                      value="Report 4"
-                      control={<Radio />}
-                      label="Report 4"
-                    />
-                  </RadioGroup>
-                  <ChildModal />
-                </Box>
-              </Modal>
-            </Report>
-            <hr />
-            You can check more about the user's info for business and employment
-            purposes by clicking "Download CV"
-            <DownldCV>Download CV</DownldCV>
-          </ContentWrap>
-        </Aboutwrapper>
-      </Row>
-
-      <VidWrapper>
-        <Vidtitle id="Video">Videos</Vidtitle>
-        <VidContainer>
-          <>
-            {retrievedVideos.map((video) => (
-              <Card
-                key={video._id}
-                video={video}
-                type="profile"
-                currentUser={currentUser}
-              />
-            ))}
-          </>
-        </VidContainer>
-      </VidWrapper>
-
-      {/* Contact Me Section */}
-      <ContactWrapper>
-        <ContactInnerWrap id="Contact">
-          <ContactDetails>
-            <ContactHeader>
-              Contact Me
-              <ContactMailIcon />
-            </ContactHeader>
-            <Stack component="form" spacing={2} noValidate autoComplete="off">
-              <TextField
-                label="Email"
-                helperText="Please enter your email"
-                defaultValue="hatsunemiku@gmail.com"
-              />
-              <TextField
-                sx={{
-                  width: "50ch",
-                  height: "18ch",
-                }}
-                label="Message"
-                multiline
-                rows={4}
-                helperText="Input some message"
-                defaultValue="Hi! I am interested with your videos and artworks."
-              />
-            </Stack>
-            <Submitbtn>Send</Submitbtn>
-          </ContactDetails>
-        </ContactInnerWrap>
-      </ContactWrapper>
-      <Footer />
+            </VidContainer>
+          </VidWrapper>
+          {/* Contact Me Section */}
+          <ContactWrapper>
+            <ContactInnerWrap id="Contact">
+              <ContactDetails>
+                <ContactHeader>
+                  Contact Me
+                  <ContactMailIcon />
+                </ContactHeader>
+                <Stack
+                  component="form"
+                  spacing={2}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <TextField
+                    label="Email"
+                    helperText="Please enter your email"
+                    defaultValue="hatsunemiku@gmail.com"
+                  />
+                  <TextField
+                    sx={{
+                      width: "50ch",
+                      height: "18ch",
+                    }}
+                    label="Message"
+                    multiline
+                    rows={4}
+                    helperText="Input some message"
+                    defaultValue="Hi! I am interested with your videos and artworks."
+                  />
+                </Stack>
+                <Submitbtn>Send</Submitbtn>
+              </ContactDetails>
+            </ContactInnerWrap>
+          </ContactWrapper>
+          <Footer />
+        </>
+      )}
+      {/* Profile Section */}
     </MainWrapper>
   );
 };

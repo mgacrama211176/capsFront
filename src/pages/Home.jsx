@@ -23,7 +23,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 30px;
   margin-left: 55px;
 
   /* Mobile S */
@@ -35,15 +35,6 @@ const Container = styled.div`
   @media ${device.tablet} {
     gap: 10px;
   }
-`;
-
-const Loader = styled.div`
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 42px;
-  color: #132550;
 `;
 
 const Home = ({ type, category }) => {
