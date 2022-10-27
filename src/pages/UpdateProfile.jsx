@@ -238,7 +238,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const update = await axios.put(
-        `http://localhost:4000/api/users/${currentUser?._id}`,
+        `https://capstoneback2.herokuapp.com/api/users/${currentUser?._id}`,
         {
           username: newData.username,
           userCategory: newData.userCategory,
@@ -268,9 +268,9 @@ const UpdateProfile = () => {
             <CardImage src={currentUser?.image} />
           </ImageContainer>
           <UserInfo>
-            <p>{currentUser.username}</p>
+            <p>{currentUser?.username}</p>
             <p>
-              {currentUser.userCategory}
+              {currentUser?.userCategory}
               <PersonOutlineIcon />
             </p>
           </UserInfo>
@@ -341,7 +341,7 @@ const UpdateProfile = () => {
             )}
 
             <TextField
-              id=""
+              id="birthdate"
               variant="outlined"
               type="date"
               onChange={(e) => onChangeHandle(e)}
