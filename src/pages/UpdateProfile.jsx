@@ -1,38 +1,30 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import background from "../assets/Overcome-bro.png";
-const ariaLabel = { "aria-label": "description" };
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Footer from "../components/Footer";
-
-import BGimage from "../assets/tiger.jpg";
-
 import Tooltip from "@mui/material/Tooltip";
 
 //MUI
 import TextField from "@mui/material/TextField";
-import Input from "@mui/material/Input";
-import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import BrushIcon from "@mui/icons-material/Brush";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import Typography from "@mui/material/Typography";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 
-const Container = styled.div`
-  margin: 0px;
-`;
+const Container = styled.div``;
+
+const ariaLabel = { "aria-label": "description" };
 
 const Wrapper = styled.div`
   margin: 0 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: #132550;
-  border: 1px solid black;
   border-radius: 15px;
   padding: 30px;
   background-position: center;
@@ -40,38 +32,27 @@ const Wrapper = styled.div`
   background-size: cover;
   margin-top: 2.2%;
   margin-bottom: 1%;
-  max-width: 100%;
-  height: 700px;
-`;
-
-const H1 = styled.h1``;
-
-const AccountSet = styled.div`
-  margin-top: 50px;
-  font-size: 36px;
-  margin-left: 100px;
-  margin-bottom: 20px;
+  /* Tablet */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 const CardContainer = styled.div`
   position: relative;
-  width: 25em;
-  height: 100%;
-  margin-right: 10%;
 `;
 
 const ImageContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-flow: wrap column;
-  margin-right: 5em;
-  padding: 2em;
 `;
 
 const CardImage = styled.img`
   width: 100%;
   border-radius: 50%;
   background-color: transparent;
-  margin-left: 18%;
 `;
 
 const UserInfo = styled.div`
@@ -84,7 +65,6 @@ const UserInfo = styled.div`
   align-items: center;
   padding: 10px;
   gap: 10px;
-
   border-radius: 20px;
   color: white;
 `;
@@ -92,39 +72,32 @@ const UserInfo = styled.div`
 const UpdateContainer = styled.div`
   display: flex;
   flex-flow: wrap column;
-  gap: 30px;
+  gap: 20px;
   justify-content: center;
-  max-height: fit-content;
   align-items: center;
   border-radius: 20px;
   background-color: #f3f4f5c3;
+  padding: 30px;
 `;
 
 const InputContainers = styled.div`
-  padding: 0 3em;
   display: flex;
-  margin-top: -20%;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
-  width: 30em;
-  max-width: 30em;
+  width: 100%;
 `;
-
-const FileUploadContainers = styled.div``;
-
-const Submit = styled.button``;
 
 const UpdateImageContainer = styled.div`
   position: absolute;
   display: block;
-  right: 120px;
-  top: 50px;
+  right: 20px;
+  top: 30px;
   color: #ffffff;
   background-color: #00000053;
   border-radius: 50%;
   border: 1px solid #00000053;
   padding: 5px;
-
   cursor: pointer;
 
   &:hover {
@@ -134,90 +107,47 @@ const UpdateImageContainer = styled.div`
   }
 `;
 
-const Upcv = styled.button`
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-  position: absolute;
-  margin-top: 30%;
-  margin-right: 5%;
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+// const Select = styled.select`
+//   margin-left: 15px;
+//   padding: 15px;
+//   border: 1px solid #c5c5c5;
+//   border-radius: 5px;
+//   width: 25rem;
+//   font-size: 16px;
+//   color: #797979;
 
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-`;
-
-const Savebtn = styled.button`
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-  position: absolute;
-  margin-top: 30%;
-  margin-left: 18%;
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-`;
-const CVhelpContainer = styled.div`
-  display: block;
-  position: absolute;
-  margin-top: 29.8%;
-  margin-left: 4%;
-`;
-
-const Select = styled.select`
-  background-color: #fdfdfd36;
-  border-radius: 2px;
-  height: 55px;
-  position: relative;
-`;
+//   &:hover {
+//     border: 1px solid black;
+//   }
+// `;
 
 const Options = styled.option``;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const ButtonStyle = {
+  width: "100%",
+};
+
+// const textfieldStyle = {
+//   display: "flex",
+//   m: 2,
+//   width: "600px",
+//   backgroundColor: "Transparent",
+// };
 
 const UpdateProfile = () => {
   const { currentUser } = useSelector((state) => state.username);
   const profileRef = useRef(null);
   const backgroudRef = useRef(null);
   const cvRef = useRef(null);
+  const UserAccesses = [
+    { value: "Animator", label: "Animator" },
+    { value: "Employer", label: "Employer" },
+  ];
 
   const [newData, setNewData] = useState({
     username: "",
@@ -275,8 +205,11 @@ const UpdateProfile = () => {
             </p>
           </UserInfo>
         </CardContainer>
-
         <UpdateContainer>
+          <Typography variant="h6" gutterBottom>
+            Update Profile Information
+          </Typography>
+
           <InputContainers>
             {/* DO NOT TOUCH THIS IS FOR EMAIL */}
             <TextField
@@ -285,6 +218,7 @@ const UpdateProfile = () => {
               label={currentUser?.email}
               variant="outlined"
               placeholder="Email"
+              sx={ButtonStyle}
             />
 
             <TextField
@@ -293,16 +227,8 @@ const UpdateProfile = () => {
               variant="outlined"
               placeholder="Channel Name"
               onChange={(e) => onChangeHandle(e)}
+              sx={ButtonStyle}
             />
-
-            <Select
-              name="userCategory"
-              id="userCategory"
-              onChange={(e) => onChangeHandle(e)}
-            >
-              <Options value="Animator">Animator</Options>
-              <Options value="Employer">Employer</Options>
-            </Select>
 
             {currentUser.fullName ? (
               <TextField
@@ -311,6 +237,7 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
+                sx={ButtonStyle}
               />
             ) : (
               <TextField
@@ -319,8 +246,26 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
+                sx={ButtonStyle}
               />
             )}
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="userCategory"
+              value={newData.userCategory}
+              label={newData.userCategory}
+              onChange={(e) => onChangeHandle(e)}
+            >
+              {UserAccesses.map((access) => (
+                <MenuItem value={access.value}>{access.label}</MenuItem>
+              ))}
+            </Select>
+
+            {/* const UserAccesses = [
+    { value: "Animator", label: "Animator" },
+    { value: "Employer", label: "Employer" },
+  ]; */}
 
             {currentUser.address ? (
               <TextField
@@ -329,6 +274,7 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
+                sx={ButtonStyle}
               />
             ) : (
               <TextField
@@ -337,6 +283,7 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
+                sx={ButtonStyle}
               />
             )}
 
@@ -346,6 +293,7 @@ const UpdateProfile = () => {
               type="date"
               onChange={(e) => onChangeHandle(e)}
               helperText="Birthdate"
+              sx={ButtonStyle}
             />
             <TextField
               id="about"
@@ -355,20 +303,35 @@ const UpdateProfile = () => {
               multiline
               maxRows={5}
               onChange={(e) => onChangeHandle(e)}
+              sx={ButtonStyle}
             />
           </InputContainers>
-
-          <Upcv>Upload CV</Upcv>
-          <CVhelpContainer>
+          <ButtonContainer>
+            <Button variant="contained">
+              Upload CV
+              <Tooltip
+                title="Upload your CV for business and employment purposes"
+                arrow
+              >
+                <HelpOutlineIcon />
+              </Tooltip>
+            </Button>
+            <Button variant="contained">Update Profile</Button>
+          </ButtonContainer>
+        </UpdateContainer>
+        {/* <ButtonContainer>
+          <Upcv>
+            Upload CV
             <Tooltip
               title="Upload your CV for business and employment purposes"
               arrow
             >
               <HelpOutlineIcon />
             </Tooltip>
-          </CVhelpContainer>
+          </Upcv>
+
           <Savebtn onClick={onClickUpdateSubmit}>Save changes</Savebtn>
-        </UpdateContainer>
+        </ButtonContainer> */}
       </Wrapper>
       <Footer />
     </Container>
