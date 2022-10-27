@@ -16,6 +16,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
 //REDUX
 import { current } from "@reduxjs/toolkit";
@@ -92,9 +93,10 @@ const Infoleft = styled.div`
 const Detailswrap = styled.div`
   width: 100%;
   display: flex;
-  padding: 0.5em;
+  padding: 1em;
   gap: 2em;
   margin-left: 45%;
+  margin-top: -2%;
 `;
 const UsernameWrapper = styled.span`
   margin: 2.5rem 1rem;
@@ -369,6 +371,36 @@ const AnchorVl = styled.div`
   border-left: 4px solid white;
   height: 50px;
 `;
+const Scrolltopbt = styled.button`
+  margin: 10px;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 1.7em;
+  max-height: 50px;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  border: 0px;
+  font-weight: 1000;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    background-position: right center;
+
+    text-decoration: none;
+  }
+  &:active {
+    transform: scale(1.3);
+  }
+`;
+const Scrolltopwrap = styled.div`
+  justify-content: center;
+  color: black;
+`;
 //MODAL
 
 const style = {
@@ -444,6 +476,14 @@ const Profile = ({ nav }) => {
       inline: "start",
     });
   }
+  function scrollTop() {
+    let e = document.getElementById("Top");
+    e.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
+      inline: "start",
+    });
+  }
 
   ////
 
@@ -463,7 +503,7 @@ const Profile = ({ nav }) => {
   return (
     <MainWrapper>
       {/* Profile Section */}
-      <ProfWrapper>
+      <ProfWrapper id="Top">
         <Infowrapper>
           <Infoleft>
             <ImgCon>
@@ -636,6 +676,9 @@ const Profile = ({ nav }) => {
             <Submitbtn>Send</Submitbtn>
           </ContactDetails>
         </ContactInnerWrap>
+        <Scrolltopbt onClick={scrollTop}>
+          <KeyboardDoubleArrowUpIcon />
+        </Scrolltopbt>
       </ContactWrapper>
       <Footer />
     </MainWrapper>
