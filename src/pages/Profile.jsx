@@ -35,13 +35,8 @@ import Stack from "@mui/material/Stack";
 import { LoadingAProfile } from "../components/LoadingAnimation";
 
 const MainWrapper = styled.div`
-  /* background-color: #f7f1f1; */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
   font-family: Roboto, Arial, sans-serif;
-
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   display: flex;
@@ -60,6 +55,8 @@ const ProfWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const Followrap = styled.div``;
 
 const Infowrapper = styled.div`
   margin-top: 2%;
@@ -165,9 +162,10 @@ const Abtdthd = styled.h3``;
 
 const Row = styled.div`
   display: flex;
-
+  width: 98%;
   gap: 10px;
   margin: 0px 100px;
+
   /* Tablet */
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -175,9 +173,10 @@ const Row = styled.div`
 `;
 const Aboutwrapper = styled.div`
   color: white;
-  background: #000000ae;
+  background: #383535;
   flex: 50%;
   padding: 10px;
+
   /* margin-right: 100px; */
   display: inline-block;
   border-radius: 40px;
@@ -272,12 +271,13 @@ const DownldCV = styled.button`
 //Video Sectiton
 
 const Vidtitle = styled.h1`
-  color: black;
+  color: white;
   margin-left: 20px;
 `;
 const VidWrapper = styled.div`
-  max-width: 100%;
+  width: 98%;
   position: relative;
+  background-color: #383535;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -299,8 +299,8 @@ const VidContainer = styled.div`
 
 const ContactWrapper = styled.div`
   color: white;
-  background: #000000ae;
-  /* width: 90%; */
+  background: #383535;
+  width: 98%;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -540,9 +540,7 @@ const Profile = ({ nav }) => {
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
-                  <>
-                    <Follow currentUser={currentUser} channelID={id} />
-                  </>
+                  <Follow currentUser={currentUser} channelID={id} />
                 </Subbtn>
               </Infoleft>
               <Detailswrap>
