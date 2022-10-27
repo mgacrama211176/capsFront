@@ -79,6 +79,7 @@ const Infowrapper = styled.div`
   margin-left: 30px;
   background-color: #132550;
   border-radius: 100px;
+  max-height: 180px;
 `;
 
 const Infoleft = styled.div`
@@ -328,6 +329,46 @@ const Submitbtn = styled.button`
     transform: scale(1.3);
   }
 `;
+
+//ANCHOR BUTTONS
+const Anchorbt = styled.button`
+  margin: 10px;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 1.7em;
+  max-height: 50px;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  border: 0px;
+  font-weight: 1000;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    background-position: right center;
+
+    text-decoration: none;
+  }
+  &:active {
+    transform: scale(1.3);
+  }
+`;
+const Anchorwrap = styled.div`
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  display: flex;
+  position: relative;
+`;
+const AnchorVl = styled.div`
+  margin-top: 2%;
+  border-left: 4px solid white;
+  height: 50px;
+`;
 //MODAL
 
 const style = {
@@ -378,6 +419,32 @@ const Profile = ({ nav }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
 
+  //ANCHOR FUNCTIONS
+  function scrollAbout() {
+    let e = document.getElementById("About");
+    e.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
+      inline: "start",
+    });
+  }
+  function scrollVideos() {
+    let e = document.getElementById("Video");
+    e.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
+      inline: "start",
+    });
+  }
+  function scrollContact() {
+    let e = document.getElementById("Contact");
+    e.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
+      inline: "start",
+    });
+  }
+
   ////
 
   const MainWrapper = styled.div`
@@ -425,12 +492,19 @@ const Profile = ({ nav }) => {
             <Vl />
             {retrivedUser?.subscribedUsers?.length} Subscribed Users
           </Detailswrap>
+          <Anchorwrap>
+            <Anchorbt onClick={scrollAbout}>About</Anchorbt>
+            <AnchorVl />
+            <Anchorbt onClick={scrollVideos}>Videos</Anchorbt>
+            <AnchorVl />
+            <Anchorbt onClick={scrollContact}>Contact</Anchorbt>
+          </Anchorwrap>
         </Infowrapper>
       </ProfWrapper>
 
       {/* About Section */}
       <Row>
-        <Aboutwrapper>
+        <Aboutwrapper id="About">
           <Aboutme>About Me</Aboutme>
           <Aboutdetails>{retrivedUser.about}</Aboutdetails>
           <ContentWrap>
@@ -518,7 +592,7 @@ const Profile = ({ nav }) => {
       </Row>
 
       <VidWrapper>
-        <Vidtitle>Videos</Vidtitle>
+        <Vidtitle id="Video">Videos</Vidtitle>
         <VidContainer>
           <>
             {retrievedVideos.map((video) => (
@@ -534,7 +608,7 @@ const Profile = ({ nav }) => {
       </VidWrapper>
 
       {/* Contact Me Section */}
-      <ContactWrapper>
+      <ContactWrapper id="Contact">
         <ContactInnerWrap>
           <ContactDetails>
             <ContactHeader>
