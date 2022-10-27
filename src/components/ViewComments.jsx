@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentsBox from "./CommentsBox";
 import axios from "axios";
@@ -9,6 +8,13 @@ import { CommentSuccess } from "./Toasts";
 
 //MUI
 import SendIcon from "@mui/icons-material/Send";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { FetchSuccess } from "../redux/commentSlice";
+
+//loader
+import { LoadingComments } from "./LoadingAnimation";
 
 const Container = styled.div``;
 
@@ -35,24 +41,30 @@ const Input = styled.input`
 `;
 
 const ViewComments = ({ videoId }) => {
+  const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  const { currentUser } = useSelector((state) => state.username);
   const [newComment, setNewComment] = useState("");
   const [selectedComment, setSelectedComment] = useState("");
+
+  const { currentUser } = useSelector((state) => state.username);
+  // const commentsOnVideo = useSelector((state) => state.comments);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchComments = async () => {
       const responseComments = await axios.get(
         `https://capstoneback2.herokuapp.com/api/comments/${videoId}`
       );
+      dispatch(FetchSuccess(responseComments.data));
       setComments(responseComments.data);
     };
     fetchComments();
-  }, [videoId]);
+    setLoading(false);
+  }, [videoId, dispatch, comments]);
 
   const onChangeHandler = (e) => {
     const latestComment = ([e.target.id] = e.target.value);
-    console.log(latestComment);
     setNewComment(latestComment);
   };
 
@@ -69,8 +81,6 @@ const ViewComments = ({ videoId }) => {
       );
       CommentSuccess();
       setNewComment("");
-
-      console.log(currentUserComment);
     } catch (err) {
       console.log(err);
     }
@@ -93,16 +103,21 @@ const ViewComments = ({ videoId }) => {
           <SendIcon style={{ cursor: "pointer" }} onClick={onSubmitHandler} />
         </NewComment>
       )}
-
-      {comments.map((comment) => (
-        <CommentsBox
-          key={comment._id}
-          comment={comment}
-          currentUser={currentUser?._id}
-          setSelectedComment={setSelectedComment}
-          selectedComment={selectedComment}
-        />
-      ))}
+      {loading ? (
+        <>
+          <LoadingComments />
+        </>
+      ) : (
+        comments.map((comment) => (
+          <CommentsBox
+            key={comment._id}
+            comment={comment}
+            currentUser={currentUser?._id}
+            setSelectedComment={setSelectedComment}
+            selectedComment={selectedComment}
+          />
+        ))
+      )}
     </Container>
   );
 };
