@@ -141,6 +141,7 @@ const Texts = styled.div`
   display: flex;
   flex-flow: column wrap;
   min-width: ${(props) => (props.type === "sm" ? "0px" : "250px")};
+  color: black;
 
   /* Mobile S [fixed]*/
   @media ${device.mobileS} {
@@ -151,7 +152,7 @@ const Texts = styled.div`
 const Title = styled.h1`
   font-size: ${(props) => props.type !== "sm" && "16px"};
   font-weight: 500;
-  color: ${({ theme }) => theme.titleColor};
+  color: black;
   display: flex;
   width: 80%;
 
@@ -166,13 +167,13 @@ const Title = styled.h1`
 
 const AnimatorName = styled.h2`
   font-size: 14px;
-  color: ${({ theme }) => theme.textSoft};
+  color: black;
   margin: 5px 0;
 `;
 
 const Info = styled.div`
   font-size: 14px;
-  color: ${({ theme }) => theme.textSoft};
+  color: black;
 `;
 
 const ImgContainer = styled.div`
