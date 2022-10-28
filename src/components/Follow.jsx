@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import axios from "axios";
+import { SubsCriptionModal } from "../components/VideoModalDelete";
 
 //redux
 
@@ -110,9 +111,11 @@ const Follow = ({ currentUser, channelID }) => {
           <Wrapper>
             <NotificationsActiveIcon />
             <>
-              {currentUser?.subscribedUsers?.includes(channelID)
-                ? "FOLLOWED"
-                : "FOLLOW"}
+              {currentUser?.subscribedUsers?.includes(channelID) ? (
+                "FOLLOWED"
+              ) : (
+                <SubsCriptionModal />
+              )}
             </>
           </Wrapper>
         </>
