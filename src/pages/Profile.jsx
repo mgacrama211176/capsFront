@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Follow from "../components/Follow";
 import Card from "../components/Card";
 import axios from "axios";
-
+import media from "../media";
 //MUI COMPONENTS
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -54,6 +54,11 @@ const ProfWrapper = styled.div`
   margin-bottom: 2%;
   justify-content: center;
   align-items: center;
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    flex-direction: column;
+  }
 `;
 
 const Followrap = styled.div``;
@@ -425,6 +430,8 @@ const Scrolltopbt = styled.button`
 const Scrolltopwrap = styled.div`
   justify-content: center;
   color: black;
+  width: 100%;
+  position: fixed;
 `;
 //MODAL
 
@@ -532,11 +539,12 @@ const Profile = ({ nav }) => {
                 </ImgCon>
 
                 <UsernameWrapper>
+                  TEST
                   {retrivedUser.fullName !== undefined
                     ? retrivedUser.fullName
                     : retrivedUser.username}
                   <br />
-                  {retrivedUser.userCategory}
+                  {retrivedUser.userCategory}TEST
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>

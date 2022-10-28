@@ -30,8 +30,7 @@ const Wrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top: 2.2%;
-  margin-bottom: 1%;
+  margin: 50px 100px;
   /* Tablet */
   @media (max-width: 768px) {
     flex-direction: column;
@@ -41,6 +40,7 @@ const Wrapper = styled.div`
 
 const CardContainer = styled.div`
   position: relative;
+  top: 150px;
 `;
 
 const ImageContainer = styled.div`
@@ -50,7 +50,7 @@ const ImageContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  width: 100%;
+  width: 250%;
   border-radius: 50%;
   background-color: transparent;
 `;
@@ -78,6 +78,7 @@ const UpdateContainer = styled.div`
   border-radius: 20px;
   background-color: #f3f4f5c3;
   padding: 30px;
+  width: 40%;
 `;
 
 const InputContainers = styled.div`
@@ -91,7 +92,7 @@ const InputContainers = styled.div`
 const UpdateImageContainer = styled.div`
   position: absolute;
   display: block;
-  right: 20px;
+  right: -100px;
   top: 30px;
   color: #ffffff;
   background-color: #00000053;
