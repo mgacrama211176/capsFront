@@ -1,9 +1,10 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
 
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/userSlice";
@@ -11,9 +12,15 @@ import { logout } from "../redux/userSlice";
 //Functionmalities
 import { deleteObject } from "firebase/storage";
 import axios from "axios";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
+import { subscription } from "../redux/userSlice";
 
 import Contract from "./Contract";
+
+//TOAST
+import { Congratulations } from "../components/Toasts";
 
 const style = {
   position: "absolute",
@@ -34,6 +41,19 @@ const style = {
 const button = {
   margin: "10px 40px",
   backgroundColor: "#132550",
+};
+
+const Substyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid transparent",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "15px",
 };
 
 const VideoModalDelete = ({ video }) => {
@@ -193,26 +213,80 @@ export const TermsModal = () => {
   );
 };
 
-export const SubsCriptionModal = () => {
+export const SubsCriptionModal = ({ currentUser, merger }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+
+  const onClickHandler = () => {
+    const follower = async () => {
+      const perform = await axios.put(
+        `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${merger._id}`
+      );
+      dispatch(subscription(merger._id));
+      console.log(perform);
+    };
+
+    Congratulations();
+    follower();
+  };
+
   return (
     <>
-      <Button onClick={handleOpen}>Follow</Button>
+      <Button onClick={handleOpen} sx={{ fontWeight: "bold", color: "white" }}>
+        Follow
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={Substyle}>
+          <Container
+            sx={{
+              margin: "10px 0px",
+              padding: "25px",
+              display: "flex",
+              backgroundColor: "#132550",
+              borderRadius: "10px",
+            }}
+          >
+            <Avatar src={merger.image} sx={{ width: 80, height: 80 }} />
+            <Container sx={{ color: "white" }}>
+              <Typography variant="h6" gutterBottom>
+                {merger.username}
+              </Typography>
+              <Typography variant="subtitle2" gutterBottom>
+                {merger.email}
+              </Typography>
+              <Typography variant="subtitle2" gutterBottom>
+                {merger.userCategory}
+              </Typography>
+            </Container>
+          </Container>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            FOLLOW AND GET THESE BENEFITS
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            ✅ FULL ACCESS TO THIS USERS VIDEOS
           </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            ✅ CANCEL SUBSCRIPTIONS ANYTIME
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            ✅ VIEW THIS CHANNELS EXCLUSIVE VIDEOS
+          </Typography>
+          <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              variant="contained"
+              sx={{ margin: "15px", backgroundColor: "#132550" }}
+              onClick={onClickHandler}
+            >
+              ACCEPT
+            </Button>
+          </Container>
         </Box>
       </Modal>
     </>

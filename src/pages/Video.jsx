@@ -459,7 +459,7 @@ const Video = () => {
                       </ChannelDetail>
                     </ChannelInfo>
 
-                    <Follow currentUser={currentUser} channelID={channelID} />
+                    <Follow currentUser={currentUser} merger={channel} />
                   </Channel>
 
                   <Description>{currentVideo?.desc}</Description>

@@ -512,8 +512,6 @@ const Profile = ({ nav }) => {
     });
   }
 
-  ////
-
   return (
     <MainWrapper>
       {loader ? (
@@ -540,7 +538,7 @@ const Profile = ({ nav }) => {
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
-                  <Follow currentUser={currentUser} channelID={id} />
+                  <Follow currentUser={currentUser} merger={retrivedUser} />
                 </Subbtn>
               </Infoleft>
               <Detailswrap>
@@ -583,7 +581,7 @@ const Profile = ({ nav }) => {
               <ContentWrap>
                 <Abtdthd>Stats</Abtdthd>
                 <hr />
-                Joined {currentUser?.createdAt}
+                Joined {retrivedUser?.createdAt}
                 <hr />
                 Total views: 100
                 <hr />
