@@ -32,6 +32,7 @@ const Wrapper = styled.div`
   background-size: cover;
   margin-top: 2.2%;
   margin-bottom: 1%;
+
   /* Tablet */
   @media (max-width: 768px) {
     flex-direction: column;
@@ -56,6 +57,7 @@ const CardImage = styled.img`
 `;
 
 const UserInfo = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,20 +108,6 @@ const UpdateImageContainer = styled.div`
     background-color: #1976d25c;
   }
 `;
-
-// const Select = styled.select`
-//   margin-left: 15px;
-//   padding: 15px;
-//   border: 1px solid #c5c5c5;
-//   border-radius: 5px;
-//   width: 25rem;
-//   font-size: 16px;
-//   color: #797979;
-
-//   &:hover {
-//     border: 1px solid black;
-//   }
-// `;
 
 const Options = styled.option``;
 
@@ -249,23 +237,6 @@ const UpdateProfile = () => {
                 sx={ButtonStyle}
               />
             )}
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="userCategory"
-              value={newData.userCategory}
-              label={newData.userCategory}
-              onChange={(e) => onChangeHandle(e)}
-            >
-              {UserAccesses.map((access) => (
-                <MenuItem value={access.value}>{access.label}</MenuItem>
-              ))}
-            </Select>
-
-            {/* const UserAccesses = [
-    { value: "Animator", label: "Animator" },
-    { value: "Employer", label: "Employer" },
-  ]; */}
 
             {currentUser.address ? (
               <TextField
