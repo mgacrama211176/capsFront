@@ -153,9 +153,11 @@ export const LogoutModal = () => {
       >
         <Box sx={style}>
           <Typography variant="h6" component="h2">
-            Are you sure you want to delete this video?
+            Are you sure you want to Logout??
           </Typography>
 
+          {/* 1. Contain in a COntainer
+2. Display Flex */}
           <Button onClick={onClickLogout} variant="contained" sx={button}>
             YES
           </Button>

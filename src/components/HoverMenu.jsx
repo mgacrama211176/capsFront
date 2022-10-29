@@ -168,6 +168,7 @@ const HoverMenu = ({ setOpenModal }) => {
                   HELP
                 </DropdownContent>
                 <DropdownContent onClick={OnclickLogout}>
+                  {/* CALL LogoutModal to use the logout Modal */}
                   <LogoutIcon />
                   LOG OUT
                 </DropdownContent>

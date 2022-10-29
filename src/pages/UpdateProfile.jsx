@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Footer from "../components/Footer";
@@ -15,8 +15,14 @@ import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
+import { createTheme, useMediaQuery } from "@mui/material";
 
-const Container = styled.div``;
+const Container = styled.div`
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+`;
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -29,22 +35,39 @@ const Wrapper = styled.div`
   padding: 30px;
   margin-top: 2.2%;
   margin-bottom: 1%;
+  gap: 30px;
 
   /* Tablet */
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
   }
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 75%;
+    margin: 10px 20px;
+  }
 `;
 
 const CardContainer = styled.div`
   position: relative;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
 `;
 
 const ImageContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   flex-flow: wrap column;
+  max-width: 300px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 55%;
+  }
 `;
 
 const CardImage = styled.img`
@@ -77,6 +100,13 @@ const UpdateContainer = styled.div`
   border-radius: 20px;
   background-color: #f3f4f5c3;
   padding: 30px;
+  width: 60%;
+  margin: 0px 5px;
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    width: 85%;
+  }
 `;
 
 const InputContainers = styled.div`
@@ -90,8 +120,8 @@ const InputContainers = styled.div`
 const UpdateImageContainer = styled.div`
   position: absolute;
   display: block;
-  right: 20px;
-  top: 30px;
+  right: 30px;
+  top: 35px;
   color: #ffffff;
   background-color: #00000053;
   border-radius: 50%;
@@ -117,6 +147,22 @@ const ButtonStyle = {
   width: "100%",
 };
 
+const InputMedia = {
+  width: {
+    xs: "200px",
+    sm: "300px",
+    md: "350px",
+    lg: "400px",
+    xl: "500px",
+  },
+  fontSize: {
+    xs: "20px",
+    sm: "30px",
+    md: "40px",
+    lg: "50px",
+    xl: "60px",
+  },
+};
 // const textfieldStyle = {
 //   display: "flex",
 //   m: 2,
@@ -151,9 +197,10 @@ const UpdateProfile = () => {
 
   const onClickUpdateSubmit = async (e) => {
     e.preventDefault();
+    console.log(`ataya`);
     try {
       const update = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/${currentUser?._id}`,
+        `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
         {
           username: newData.username,
           userCategory: newData.userCategory,
@@ -169,18 +216,16 @@ const UpdateProfile = () => {
     }
   };
 
-  console.log(newData);
-
   return (
     <Container>
       {/* <AccountSet>Account Update</AccountSet> */}
       <Wrapper>
         <CardContainer>
-          <UpdateImageContainer>
-            <BrushIcon />
-          </UpdateImageContainer>
           <ImageContainer>
             <CardImage src={currentUser?.image} />
+            <UpdateImageContainer>
+              <BrushIcon />
+            </UpdateImageContainer>
           </ImageContainer>
           <UserInfo>
             <p>{currentUser?.username}</p>
@@ -194,8 +239,8 @@ const UpdateProfile = () => {
           <Typography variant="h6" gutterBottom>
             Update Profile Information
           </Typography>
-
           <InputContainers>
+            {" "}
             {/* DO NOT TOUCH THIS IS FOR EMAIL */}
             <TextField
               disabled
@@ -203,18 +248,16 @@ const UpdateProfile = () => {
               label={currentUser?.email}
               variant="outlined"
               placeholder="Email"
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
-
             <TextField
               id="username"
               label={currentUser?.username}
               variant="outlined"
               placeholder="Channel Name"
               onChange={(e) => onChangeHandle(e)}
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
-
             {currentUser.fullName ? (
               <TextField
                 id="fullName"
@@ -222,7 +265,7 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             ) : (
               <TextField
@@ -231,10 +274,9 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             )}
-
             {currentUser.address ? (
               <TextField
                 id="address"
@@ -242,7 +284,7 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             ) : (
               <TextField
@@ -251,17 +293,16 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             )}
-
             <TextField
               id="birthdate"
               variant="outlined"
               type="date"
               onChange={(e) => onChangeHandle(e)}
               helperText="Birthdate"
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
             <TextField
               id="about"
@@ -271,9 +312,9 @@ const UpdateProfile = () => {
               multiline
               maxRows={5}
               onChange={(e) => onChangeHandle(e)}
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
-          </InputContainers>
+          </InputContainers>{" "}
           <ButtonContainer>
             <Button variant="contained">
               Upload CV
@@ -284,7 +325,9 @@ const UpdateProfile = () => {
                 <HelpOutlineIcon />
               </Tooltip>
             </Button>
-            <Button variant="contained">Update Profile</Button>
+            <Button variant="contained" onClick={onClickUpdateSubmit}>
+              Update Profile
+            </Button>
           </ButtonContainer>
         </UpdateContainer>
         {/* <ButtonContainer>
@@ -298,7 +341,7 @@ const UpdateProfile = () => {
             </Tooltip>
           </Upcv>
 
-          <Savebtn onClick={onClickUpdateSubmit}>Save changes</Savebtn>
+          <Savebtn >Save changes</Savebtn>
         </ButtonContainer> */}
       </Wrapper>
       <Footer />

@@ -209,6 +209,7 @@ const Report = styled.p`
 `;
 
 const Repbtn = styled.button`
+  /* AIC || JCC*/
   margin: 10px;
   padding: 10px;
   text-align: center;
@@ -680,7 +681,7 @@ const Profile = ({ nav }) => {
                   <TextField
                     label="Email"
                     helperText="Please enter your email"
-                    defaultValue="hatsunemiku@gmail.com"
+                    defaultValue={retrivedUser.email}
                   />
                   <TextField
                     sx={{

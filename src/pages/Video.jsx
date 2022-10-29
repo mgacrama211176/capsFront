@@ -65,12 +65,13 @@ const VideoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
+  object-fit: fill;
   width: 100%;
 `;
 
 const VideoFrame = styled.video`
   padding: 10px;
-  max-height: 500px;
+  max-height: 1024px;
   margin-top: 10px;
   border: none;
   width: 100%;
