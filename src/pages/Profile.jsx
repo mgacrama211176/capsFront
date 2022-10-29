@@ -607,7 +607,7 @@ const Profile = ({ nav }) => {
                     aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description"
                   >
-                    <Box sx={{ ...style, width: 400 }}>
+                    <Box sx={{ ...style, width: 400, height: 300 }}>
                       <Typography
                         id="modal-modal-title"
                         variant="h6"
@@ -622,24 +622,29 @@ const Profile = ({ nav }) => {
                         name="radio-buttons-group"
                       >
                         <FormControlLabel
-                          value="Report 1"
+                          value="Privacy"
                           control={<Radio />}
-                          label="Report 1"
+                          label="Privacy"
                         />
                         <FormControlLabel
-                          value="Report 2"
+                          value="Spams and scams"
                           control={<Radio />}
-                          label="Report 2"
+                          label="Spams and scams"
                         />
                         <FormControlLabel
-                          value="Report 3"
+                          value="Violent threats"
                           control={<Radio />}
-                          label="Report 3"
+                          label="Violent threats"
                         />
                         <FormControlLabel
-                          value="Report 4"
+                          value="Cyberbullying and harassment"
                           control={<Radio />}
-                          label="Report 4"
+                          label="Cyberbullying and harassment"
+                        />
+                        <FormControlLabel
+                          value="Other issues"
+                          control={<Radio />}
+                          label="Other issues"
                         />
                       </RadioGroup>
                       <ChildModal />

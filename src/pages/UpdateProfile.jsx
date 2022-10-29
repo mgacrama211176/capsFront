@@ -52,7 +52,7 @@ const ImageContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  width: 250%;
+  width: 50%;
   border-radius: 50%;
   background-color: transparent;
 `;
@@ -81,7 +81,6 @@ const UpdateContainer = styled.div`
   border-radius: 20px;
   background-color: #f3f4f5c3;
   padding: 30px;
-  width: 40%;
 `;
 
 const InputContainers = styled.div`
