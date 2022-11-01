@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 //Components
 import Footer from "../components/Footer";
@@ -13,10 +14,6 @@ import BrushIcon from "@mui/icons-material/Brush";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Typography from "@mui/material/Typography";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import { createTheme, useMediaQuery } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 
 //firebase
@@ -28,6 +25,7 @@ import {
   ref,
   deleteObject,
 } from "firebase/storage";
+import { loginSuccess } from "../redux/userSlice";
 
 const Container = styled.div`
   /* Mobile Large */
@@ -187,6 +185,8 @@ const Input = styled.input`
 `;
 
 const UpdateProfile = () => {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.username);
   const profileRef = useRef(null);
   const cvRef = useRef(null);
@@ -196,12 +196,12 @@ const UpdateProfile = () => {
   const [newProfile, setNewProfile] = useState(0);
 
   const [newData, setNewData] = useState({
-    username: "",
-    userCategory: "",
-    fullName: "",
-    address: "",
-    birthdate: "",
-    about: "",
+    username: currentUser?.username,
+    userCategory: currentUser?.userCategory,
+    fullName: currentUser?.fullName,
+    address: currentUser?.address,
+    birthdate: currentUser?.birthdate,
+    about: currentUser?.about,
   });
 
   const onChangeHandle = (e) => {
@@ -226,13 +226,15 @@ const UpdateProfile = () => {
           image: newData.image,
         }
       );
+
+      dispatch(loginSuccess(update.data));
+      // nav(`/profile/About/${currentUser._id}`);
       console.log(update);
+      console.log(currentUser);
     } catch (err) {
       console.log(err);
     }
   };
-
-  console.log(newData);
 
   //Uploading firebase Segment
 
@@ -243,19 +245,24 @@ const UpdateProfile = () => {
     profileRef.current.click();
   };
 
-  console.log(currentUser);
-
   const uploadFile = (file, urlType) => {
+    const storage = getStorage(app);
     try {
       if (urlType === "uploadCv" && currentUser.uploadCV !== "") {
         const deletingCv = async () => {
-          const storage = getStorage();
           const cvDelete = ref(storage, currentUser.uploadCV);
-          await deleteObject(cvDelete);
+          deleteObject(cvDelete);
+          console.log(`cvDeleted`);
         };
-        console.log(deletingCv);
+        deletingCv();
+      } else {
+        const deletingImage = async () => {
+          const imageDelete = ref(storage, currentUser.image);
+          deleteObject(imageDelete);
+          console.log(`Old Image Deleted`);
+        };
+        deletingImage();
       }
-      const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -369,7 +376,7 @@ const UpdateProfile = () => {
                 sx={InputMedia}
               />
             )}
-            {currentUser.address ? (
+            {currentUser?.address ? (
               <TextField
                 id="address"
                 label={currentUser.address}
@@ -392,6 +399,7 @@ const UpdateProfile = () => {
               id="birthdate"
               variant="outlined"
               type="date"
+              value={currentUser?.birthdate}
               onChange={(e) => onChangeHandle(e)}
               helperText="Birthdate"
               sx={InputMedia}
