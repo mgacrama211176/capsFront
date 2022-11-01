@@ -228,9 +228,7 @@ const UpdateProfile = () => {
       );
 
       dispatch(loginSuccess(update.data));
-      // nav(`/profile/About/${currentUser._id}`);
-      console.log(update);
-      console.log(currentUser);
+      nav(`/profile/About/${currentUser._id}`);
     } catch (err) {
       console.log(err);
     }

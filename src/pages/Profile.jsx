@@ -22,7 +22,7 @@ import { current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
 //ROUTER DOM
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 //MUI ICONS
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -513,6 +513,7 @@ const Profile = ({ nav }) => {
     });
   }
 
+  console.log(retrivedUser.uploadCV);
   return (
     <MainWrapper>
       {loader ? (
@@ -645,7 +646,13 @@ const Profile = ({ nav }) => {
                 <hr />
                 You can check more about the user's info for business and
                 employment purposes by clicking "Download CV"
-                <DownldCV>Download CV</DownldCV>
+                <Link
+                  to={`../../${retrivedUser.uploadCV}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <DownldCV>Download CV</DownldCV>
+                </Link>
               </ContentWrap>
             </Aboutwrapper>
           </Row>
