@@ -163,8 +163,6 @@ export const LogoutModal = () => {
             Are you sure you want to Logout??
           </Typography>
 
-          {/* 1. Contain in a COntainer
-2. Display Flex */}
           <Box sx={StyleLogOut}>
             <Button onClick={onClickLogout} variant="contained" sx={button}>
               YES
