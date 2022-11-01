@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
 import axios from "axios";
+
+//Components
 import Footer from "../components/Footer";
-import Tooltip from "@mui/material/Tooltip";
 
 //MUI
 import TextField from "@mui/material/TextField";
@@ -16,6 +17,17 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import { createTheme, useMediaQuery } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+
+//firebase
+import app from "../firebase";
+import {
+  getDownloadURL,
+  getStorage,
+  uploadBytesResumable,
+  ref,
+  deleteObject,
+} from "firebase/storage";
 
 const Container = styled.div`
   /* Mobile Large */
@@ -170,15 +182,18 @@ const InputMedia = {
 //   backgroundColor: "Transparent",
 // };
 
+const Input = styled.input`
+  display: none;
+`;
+
 const UpdateProfile = () => {
   const { currentUser } = useSelector((state) => state.username);
   const profileRef = useRef(null);
-  const backgroudRef = useRef(null);
   const cvRef = useRef(null);
-  const UserAccesses = [
-    { value: "Animator", label: "Animator" },
-    { value: "Employer", label: "Employer" },
-  ];
+  const [cv, setCv] = useState(undefined);
+  const [cvUploadPercentage, setCvUploadPercentage] = useState(0);
+  const [imageUploadPercentage, setImageUploadPercentage] = useState(0);
+  const [newProfile, setNewProfile] = useState(0);
 
   const [newData, setNewData] = useState({
     username: "",
@@ -197,7 +212,6 @@ const UpdateProfile = () => {
 
   const onClickUpdateSubmit = async (e) => {
     e.preventDefault();
-    console.log(`ataya`);
     try {
       const update = await axios.put(
         `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
@@ -208,6 +222,8 @@ const UpdateProfile = () => {
           address: newData.address,
           birthdate: newData.birthdate,
           about: newData.about,
+          uploadCV: newData.uploadCv,
+          image: newData.image,
         }
       );
       console.log(update);
@@ -216,15 +232,92 @@ const UpdateProfile = () => {
     }
   };
 
+  console.log(newData);
+
+  //Uploading firebase Segment
+
+  const handleCVUpload = () => {
+    cvRef.current.click();
+  };
+  const handleNewImageUpload = () => {
+    profileRef.current.click();
+  };
+
+  console.log(currentUser);
+
+  const uploadFile = (file, urlType) => {
+    try {
+      if (urlType === "uploadCv" && currentUser.uploadCV !== "") {
+        const deletingCv = async () => {
+          const storage = getStorage();
+          const cvDelete = ref(storage, currentUser.uploadCV);
+          await deleteObject(cvDelete);
+        };
+        console.log(deletingCv);
+      }
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      console.log(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          urlType === "uploadCv"
+            ? setCvUploadPercentage(Math.round(progress))
+            : setImageUploadPercentage(Math.round(progress));
+          switch (snapshot.state) {
+            case "paused":
+              console.log(`Upload is paused`);
+              break;
+            case "running":
+              console.log(`Upload is running`);
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setNewData((prev) => {
+              return { ...prev, [urlType]: downloadURL };
+            });
+          });
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    cv && uploadFile(cv, "uploadCv");
+  }, [cv]);
+
+  useEffect(() => {
+    newProfile && uploadFile(newProfile, "image");
+  }, [newProfile]);
+
   return (
     <Container>
       {/* <AccountSet>Account Update</AccountSet> */}
       <Wrapper>
         <CardContainer>
           <ImageContainer>
+            {imageUploadPercentage}
             <CardImage src={currentUser?.image} />
-            <UpdateImageContainer>
+            <UpdateImageContainer onClick={handleNewImageUpload}>
               <BrushIcon />
+              <Input
+                type="file"
+                id="image"
+                accept="image/*"
+                ref={profileRef}
+                onChange={(e) => setNewProfile(e.target.files[0])}
+              />
             </UpdateImageContainer>
           </ImageContainer>
           <UserInfo>
@@ -240,7 +333,6 @@ const UpdateProfile = () => {
             Update Profile Information
           </Typography>
           <InputContainers>
-            {" "}
             {/* DO NOT TOUCH THIS IS FOR EMAIL */}
             <TextField
               disabled
@@ -258,7 +350,7 @@ const UpdateProfile = () => {
               onChange={(e) => onChangeHandle(e)}
               sx={InputMedia}
             />
-            {currentUser.fullName ? (
+            {currentUser?.fullName ? (
               <TextField
                 id="fullName"
                 label={currentUser?.fullName}
@@ -314,35 +406,35 @@ const UpdateProfile = () => {
               onChange={(e) => onChangeHandle(e)}
               sx={InputMedia}
             />
-          </InputContainers>{" "}
+          </InputContainers>
+          {cvUploadPercentage < 100 && cvUploadPercentage > 0 ? (
+            <p>{`${cv?.name} has uploaded ${cvUploadPercentage} %`}</p>
+          ) : cvUploadPercentage === 100 ? (
+            `${cv?.name} Uploaded!`
+          ) : (
+            ""
+          )}
+
           <ButtonContainer>
-            <Button variant="contained">
+            <Button variant="contained" onClick={handleCVUpload}>
               Upload CV
-              <Tooltip
-                title="Upload your CV for business and employment purposes"
-                arrow
-              >
+              <Tooltip title="File must be PDF format" arrow>
                 <HelpOutlineIcon />
               </Tooltip>
             </Button>
+            <Input
+              type="file"
+              name="uploadCV"
+              id="uploadCV"
+              accept="application/pdf, application/vnd.ms-excel"
+              ref={cvRef}
+              onChange={(e) => setCv(e.target.files[0])}
+            />
             <Button variant="contained" onClick={onClickUpdateSubmit}>
               Update Profile
             </Button>
           </ButtonContainer>
         </UpdateContainer>
-        {/* <ButtonContainer>
-          <Upcv>
-            Upload CV
-            <Tooltip
-              title="Upload your CV for business and employment purposes"
-              arrow
-            >
-              <HelpOutlineIcon />
-            </Tooltip>
-          </Upcv>
-
-          <Savebtn >Save changes</Savebtn>
-        </ButtonContainer> */}
       </Wrapper>
       <Footer />
     </Container>

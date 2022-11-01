@@ -128,6 +128,8 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const [video, setVideo] = useState(undefined);
   const [thumbnailPercentage, setThumbnailPercentage] = useState(0);
   const [videoPercentage, setVideoPercentage] = useState(0);
+  const videoRef = useRef(null);
+  const thumbRef = useRef(null);
 
   const [uploadInformation, setUploadInformation] = useState({
     title: "",
@@ -145,7 +147,9 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const uploadFile = (file, urlType) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
+
     const storageRef = ref(storage, fileName);
+
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -203,9 +207,6 @@ const Upload = ({ setOpenModal, currentUser }) => {
     response.status === 200 && nav("/");
     Uploaded();
   };
-
-  const videoRef = useRef(null);
-  const thumbRef = useRef(null);
 
   const handleVideoClick = () => {
     videoRef.current.click();
