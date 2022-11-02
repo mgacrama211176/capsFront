@@ -8,7 +8,7 @@ Fixed Media Queries:
 //to be fixed
 [✅] - password match
 [✅] - searched videos margins
-[] - remove the facebook login function
+[✅] - remove the facebook login function
 [] - like/unlike/subs/save must be directed to the login page / create modal
 [] - profile media query
 [] - re-allign video funtions
