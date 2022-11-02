@@ -28,7 +28,7 @@ import { subscription } from "../redux/userSlice";
 import { logout } from "../redux/userSlice";
 
 //TOAST
-import { Congratulations } from "../components/Toasts";
+import { Congratulations, loginRequired } from "../components/Toasts";
 
 const style = {
   position: "absolute",
@@ -51,7 +51,7 @@ const SignInStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -253,16 +253,20 @@ export const SubsCriptionModal = ({ currentUser, merger }) => {
   const dispatch = useDispatch();
 
   const onClickHandler = () => {
-    const follower = async () => {
-      const perform = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${merger._id}`
-      );
-      dispatch(subscription(merger._id));
-      console.log(perform);
-    };
-
-    Congratulations();
-    follower();
+    if (currentUser === null) {
+      loginRequired();
+      SigninRedirectModal();
+    } else {
+      const follower = async () => {
+        const perform = await axios.put(
+          `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${merger._id}`
+        );
+        dispatch(subscription(merger._id));
+        console.log(perform);
+        Congratulations();
+      };
+      follower();
+    }
   };
 
   return (
@@ -312,13 +316,21 @@ export const SubsCriptionModal = ({ currentUser, merger }) => {
             ✅ VIEW THIS CHANNELS EXCLUSIVE VIDEOS
           </Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              variant="contained"
-              sx={{ margin: "15px", backgroundColor: "#132550" }}
-              onClick={onClickHandler}
-            >
-              ACCEPT
-            </Button>
+            {currentUser ? (
+              <>
+                <Button
+                  variant="contained"
+                  sx={{ margin: "15px", backgroundColor: "#132550" }}
+                  onClick={onClickHandler}
+                >
+                  ACCEPT
+                </Button>
+              </>
+            ) : (
+              <>
+                <SigninRedirectModal />
+              </>
+            )}
           </Container>
         </Box>
       </Modal>
@@ -326,18 +338,25 @@ export const SubsCriptionModal = ({ currentUser, merger }) => {
   );
 };
 
-export const SigninRedirectModal = ({ type }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export const SigninRedirectModal = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => {
+    setOpenModal(true);
+    loginRequired();
+  };
+  const handleClose = () => setOpenModal(false);
 
   return (
     <div>
-      <Button onClick={handleOpen} sx={{ color: "black" }}>
-        <ThumbUpIcon />
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        sx={{ margin: "15px", backgroundColor: "#132550" }}
+      >
+        ACCEPT
       </Button>
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

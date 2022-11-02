@@ -242,7 +242,7 @@ const Signup = () => {
         setStatus("Password Match!");
       }
     } catch (err) {
-      status = err;
+      console.log(err);
     }
   }, [user.password, user.validpass]);
 
