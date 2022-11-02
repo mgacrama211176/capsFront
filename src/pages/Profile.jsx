@@ -17,6 +17,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import Tooltip from "@mui/material/Tooltip";
+import ScrollToTop from "react-scroll-to-top";
 //REDUX
 import { current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
@@ -516,6 +517,7 @@ const Profile = ({ nav }) => {
   console.log(retrivedUser.uploadCV);
   return (
     <MainWrapper>
+      <ScrollToTop smooth top="300" color="#132550" />
       {loader ? (
         <>
           <LoadingAProfile />
