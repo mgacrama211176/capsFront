@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/userSlice";
 
+//modals
+import { LogoutModal } from "./VideoModalDelete";
+
 //MUI
 import SettingsIcon from "@mui/icons-material/Settings";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -81,8 +84,8 @@ const HoverMenu = ({ setOpenModal }) => {
   const [rightMenu, setRightMenu] = useState(false);
 
   const OnclickLogout = () => {
-    dispatch(logout(currentUser));
-    nav("/");
+    // dispatch(logout(currentUser));
+    // nav("/");
   };
 
   const onHover = () => {
@@ -170,7 +173,7 @@ const HoverMenu = ({ setOpenModal }) => {
                 <DropdownContent onClick={OnclickLogout}>
                   {/* CALL LogoutModal to use the logout Modal */}
                   <LogoutIcon />
-                  LOG OUT
+                  <LogoutModal />
                 </DropdownContent>
               </ContentWrapper>
             </>
