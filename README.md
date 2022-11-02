@@ -12,4 +12,4 @@ Fixed Media Queries:
 [] - like/unlike/subs/save must be directed to the login page / create modal
 [] - profile media query
 [] - re-allign video funtions
-[] - share function needs to be fixed
+[✅] - share function needs to be fixed

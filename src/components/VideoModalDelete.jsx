@@ -1,4 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+//Components
+import Contract from "./Contract";
+import Signin from "../pages/Signin";
+
+//MUI
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -6,8 +12,11 @@ import Modal from "@mui/material/Modal";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 
+//MUI ICONS
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+
+//Router Dom
 import { useNavigate } from "react-router-dom";
-import { logout } from "../redux/userSlice";
 
 //Functionmalities
 import { deleteObject } from "firebase/storage";
@@ -16,13 +25,28 @@ import axios from "axios";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { subscription } from "../redux/userSlice";
-
-import Contract from "./Contract";
+import { logout } from "../redux/userSlice";
 
 //TOAST
 import { Congratulations } from "../components/Toasts";
 
 const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "10px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
+const SignInStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -299,5 +323,29 @@ export const SubsCriptionModal = ({ currentUser, merger }) => {
         </Box>
       </Modal>
     </>
+  );
+};
+
+export const SigninRedirectModal = ({ type }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <Button onClick={handleOpen} sx={{ color: "black" }}>
+        <ThumbUpIcon />
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <Signin />
+        </Box>
+      </Modal>
+    </div>
   );
 };
