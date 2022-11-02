@@ -649,7 +649,7 @@ const Profile = ({ nav }) => {
                 You can check more about the user's info for business and
                 employment purposes by clicking "Download CV"
                 <Link
-                  to={`../../${retrivedUser.uploadCV}`}
+                  to={`${retrivedUser.uploadCV}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
