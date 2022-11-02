@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import logoImg from '../assets/Logo.png';
-import { device } from '../media';
-import { useSelector } from 'react-redux';
-import Upload from '../components/Upload';
-import HoverMenu from '../components/HoverMenu';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import logoImg from "../assets/Logo.png";
+import { device } from "../media";
+import { useSelector } from "react-redux";
+import Upload from "../components/Upload";
+import HoverMenu from "../components/HoverMenu";
 
 //MUI
-import PersonPinIcon from '@mui/icons-material/PersonPin';
-import SearchIcon from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
 
 const Container = styled.div`
   position: relative;
@@ -74,6 +74,7 @@ const Input = styled.input`
   height: 2em;
   font-family: Inter;
   border: none;
+  outline: none;
 `;
 
 const Button = styled.button`
@@ -112,7 +113,7 @@ const Avatar = styled.img`
 
 const Navbar = ({ setOpen, setClose }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [q, setQ] = useState('');
+  const [q, setQ] = useState("");
 
   const User = styled.div`
     display: flex;
@@ -131,7 +132,7 @@ const Navbar = ({ setOpen, setClose }) => {
       <Container>
         <Wrapper>
           <LeftContainer>
-            <Link to="/" style={{ textDecoration: 'none' }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Logo>
                 <Img src={logoImg} />
               </Logo>
@@ -150,9 +151,9 @@ const Navbar = ({ setOpen, setClose }) => {
             <SearchIcon
               onClick={() => {
                 nav(`/search?q=${q}`);
-                setQ('');
+                setQ("");
               }}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             />
           </Search>
 
