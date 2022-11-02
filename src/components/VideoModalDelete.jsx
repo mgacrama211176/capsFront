@@ -38,6 +38,13 @@ const style = {
   alignItems: "center",
 };
 
+const StyleLogOut = {
+  position: "relative",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+};
+
 const button = {
   margin: "10px 40px",
   backgroundColor: "#132550",
@@ -156,18 +163,18 @@ export const LogoutModal = () => {
             Are you sure you want to Logout??
           </Typography>
 
-          {/* 1. Contain in a COntainer
-2. Display Flex */}
-          <Button onClick={onClickLogout} variant="contained" sx={button}>
-            YES
-          </Button>
-          <Button
-            onClick={() => setOpen(false)}
-            variant="contained"
-            sx={button}
-          >
-            NO
-          </Button>
+          <Box sx={StyleLogOut}>
+            <Button onClick={onClickLogout} variant="contained" sx={button}>
+              YES
+            </Button>
+            <Button
+              onClick={() => setOpen(false)}
+              variant="contained"
+              sx={button}
+            >
+              NO
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>
