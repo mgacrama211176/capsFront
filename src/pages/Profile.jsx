@@ -239,7 +239,7 @@ const Aboutdetails = styled.p`
 `;
 
 const Aboutdt = styled.p`
-  /* Mobile S */
+  /* Mobile Large */
   @media (max-width: 425px) {
     font-size: 0.8em;
   }
@@ -313,7 +313,7 @@ const DownldCV = styled.button`
   &:active {
     transform: scale(1.3);
   }
-  /* Mobile S */
+  /* Mobile Large */
   @media (max-width: 425px) {
     padding: 10px 15px;
     font-size: 0.8em;
@@ -345,7 +345,7 @@ const VidWrapper = styled.div`
   margin-bottom: 2%; */
   border-radius: 40px;
 
-  /* Mobile S */
+  /* Mobile Large */
   @media (max-width: 425px) {
     width: 42%;
     margin-right: 600px;
@@ -374,7 +374,7 @@ const ContactWrapper = styled.div`
   justify-content: center;
   border-radius: 20px;
   margin-bottom: 2%;
-  /* Mobile S */
+  /* Mobile Large */
   @media (max-width: 425px) {
     width: 42%;
     margin-right: 600px;
@@ -397,7 +397,7 @@ const ContactDetails = styled.div``;
 const ContactHeader = styled.h1`
   padding: 0;
   color: black;
-  /* Mobile S */
+  /* Mobile Large */
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding: 5px;
