@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+
 import FormLabel from "@mui/material/FormLabel";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import Tooltip from "@mui/material/Tooltip";
@@ -55,6 +55,12 @@ const ProfWrapper = styled.div`
   margin-bottom: 2%;
   justify-content: center;
   align-items: center;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 34%;
+    right: 250px;
+  }
 `;
 
 const Followrap = styled.div``;
@@ -63,11 +69,8 @@ const Infowrapper = styled.div`
   margin-top: 2%;
   padding: 4em 4em 8em 4em;
   width: 85%;
-  /* margin-left: 30px; */
   background-color: #132550;
   border-radius: 100px;
-  /* max-height: 180px; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +83,11 @@ const ImgCon = styled.figure`
   width: 10em;
   height: 10em;
   margin-left: 35%;
-  position: relative;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    margin-left: 20%;
+  }
 `;
 
 const Imginner = styled.div`
@@ -104,21 +111,38 @@ const Pimg = styled.img`
 const Infoleft = styled.div`
   width: 100%;
   display: flex;
-  gap: 2em;
-  z-index: 5;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `;
 
 const Detailswrap = styled.div`
   width: 100%;
   display: flex;
   padding: 1em;
-  gap: 2em;
+
   justify-content: center;
+`;
+
+const Subsinfo = styled.p`
+  display: flex;
+  gap: 2em;
+  position: relative;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 0.8em;
+  }
 `;
 const UsernameWrapper = styled.span`
   margin: 2.5rem 1rem;
   text-decoration: uppercase;
   font-size: 2rem;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    margin: 2.5rem 5rem;
+    font-size: 1em;
+  }
 `;
 
 const Subbtn = styled.button`
@@ -182,10 +206,19 @@ const Aboutwrapper = styled.div`
   display: inline-block;
   border-radius: 40px;
   margin-bottom: 2%;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 42%;
+  }
 `;
 
 const Aboutme = styled.h1`
   padding-left: 5rem;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding-left: 5em;
+  }
 `;
 const ContentWrap = styled.div`
   align-items: center;
@@ -205,6 +238,13 @@ const Aboutdetails = styled.p`
   padding: 2em;
 `;
 
+const Aboutdt = styled.p`
+  /* Mobile S */
+  @media (max-width: 425px) {
+    font-size: 0.8em;
+  }
+`;
+
 const Report = styled.p`
   margin-bottom: 10%;
 `;
@@ -212,7 +252,7 @@ const Report = styled.p`
 const Repbtn = styled.button`
   /* AIC || JCC*/
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   text-transform: uppercase;
   max-height: 50px;
@@ -237,6 +277,11 @@ const Repbtn = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    font-size: 0.8em;
   }
 `;
 
@@ -268,6 +313,11 @@ const DownldCV = styled.button`
   &:active {
     transform: scale(1.3);
   }
+  /* Mobile S */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    font-size: 0.8em;
+  }
 `;
 
 //Video Sectiton
@@ -275,6 +325,12 @@ const DownldCV = styled.button`
 const Vidtitle = styled.h1`
   color: white;
   margin-left: 20px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding: 5px;
+  }
 `;
 const VidWrapper = styled.div`
   width: 98%;
@@ -288,6 +344,12 @@ const VidWrapper = styled.div`
   margin-right: 10px;
   margin-bottom: 2%; */
   border-radius: 40px;
+
+  /* Mobile S */
+  @media (max-width: 425px) {
+    width: 42%;
+    margin-right: 600px;
+  }
 `;
 
 const VidContainer = styled.div`
@@ -312,6 +374,11 @@ const ContactWrapper = styled.div`
   justify-content: center;
   border-radius: 20px;
   margin-bottom: 2%;
+  /* Mobile S */
+  @media (max-width: 425px) {
+    width: 42%;
+    margin-right: 600px;
+  }
 `;
 
 const ContactInnerWrap = styled.div`
@@ -320,12 +387,21 @@ const ContactInnerWrap = styled.div`
   margin-top: 3%;
   margin-bottom: 3%;
   border-radius: 5em;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 50%;
+  }
 `;
 const ContactDetails = styled.div``;
 
 const ContactHeader = styled.h1`
   padding: 0;
   color: black;
+  /* Mobile S */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding: 5px;
+  }
 `;
 
 const Submitbtn = styled.button`
@@ -357,6 +433,13 @@ const Submitbtn = styled.button`
   &:active {
     transform: scale(1.3);
   }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    bottom: 4px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
 `;
 
 //ANCHOR BUTTONS
@@ -384,6 +467,10 @@ const Anchorbt = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: smaller;
   }
 `;
 const Anchorwrap = styled.div`
@@ -441,6 +528,24 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+
+// SX Media
+const InputMedia = {
+  width: {
+    xs: "200px",
+    sm: "300px",
+    md: "350px",
+    lg: "400px",
+    xl: "500px",
+  },
+  fontSize: {
+    xs: "20px",
+    sm: "30px",
+    md: "40px",
+    lg: "50px",
+    xl: "60px",
+  },
 };
 
 const Profile = ({ nav }) => {
@@ -555,7 +660,7 @@ const Profile = ({ nav }) => {
                     ? retrivedUser.fullName
                     : retrivedUser.username}
                   <br />
-                  {retrivedUser.userCategory}
+                  {retrivedUser.userCategory}Employer
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
@@ -563,9 +668,11 @@ const Profile = ({ nav }) => {
                 </Subbtn>
               </Infoleft>
               <Detailswrap>
-                {retrivedUser.subscribers} Subscribers
-                <Vl />
-                {retrivedUser?.subscribedUsers?.length} Subscribed Users
+                <Subsinfo>
+                  {retrivedUser.subscribers} Subscribers
+                  <Vl />
+                  {retrivedUser?.subscribedUsers?.length} Subscribed Users
+                </Subsinfo>
               </Detailswrap>
               <Anchorwrap>
                 <Anchorbt onClick={scrollAbout}>About</Anchorbt>
@@ -583,33 +690,37 @@ const Profile = ({ nav }) => {
               <Aboutdetails>{retrivedUser.about}</Aboutdetails>
               <ContentWrap>
                 <Abtdthd>Details</Abtdthd>
-                <hr />
-                Name:
-                <>
-                  {retrivedUser.fullName !== undefined
-                    ? retrivedUser.fullName
-                    : retrivedUser.username}
-                </>
-                <hr />
-                Birthdate: {retrivedUser.birthdate}
-                <hr />
-                User email: {retrivedUser.email}
-                <hr />
-                Address: {retrivedUser.address}
+                <Aboutdt>
+                  <hr />
+                  Name:
+                  <>
+                    {retrivedUser.fullName !== undefined
+                      ? retrivedUser.fullName
+                      : retrivedUser.username}
+                  </>
+                  <hr />
+                  Birthdate: {retrivedUser.birthdate}
+                  <hr />
+                  User email: {retrivedUser.email}
+                  <hr />
+                  Address: {retrivedUser.address}
+                </Aboutdt>
               </ContentWrap>
             </Aboutwrapper>
             <Aboutwrapper>
               <ContentWrap>
                 <Abtdthd>Stats</Abtdthd>
-                <hr />
-                Joined {retrivedUser?.createdAt}
-                <hr />
-                Total views: 100
-                <hr />
+                <Aboutdt>
+                  <hr />
+                  Joined {retrivedUser?.createdAt}
+                  <hr />
+                  Total views: 100
+                  <hr />
+                </Aboutdt>
                 <Report>
                   <Repbtn onClick={handleOpen}>
                     Report user
-                    <FlagIcon />
+                    {/* <FlagIcon /> */}
                   </Repbtn>
 
                   <Modal
@@ -663,8 +774,10 @@ const Profile = ({ nav }) => {
                   </Modal>
                 </Report>
                 <hr />
-                You can check more about the user's info for business and
-                employment purposes by clicking "Download CV"
+                <Aboutdt>
+                  You can check more about the user's info for business and
+                  employment purposes by clicking "Download CV"
+                </Aboutdt>
                 <a href={retrivedUser.uploadCV} download target="_blank">
                   <DownldCV>Download CV</DownldCV>
                 </a>
@@ -704,11 +817,11 @@ const Profile = ({ nav }) => {
                     label="Email"
                     helperText="Please enter your email"
                     defaultValue={retrivedUser.email}
+                    sx={InputMedia}
                   />
                   <TextField
                     sx={{
-                      width: "50ch",
-                      height: "18ch",
+                      InputMedia,
                     }}
                     label="Message"
                     multiline
@@ -721,10 +834,9 @@ const Profile = ({ nav }) => {
               </ContactDetails>
             </ContactInnerWrap>
           </ContactWrapper>
-          <Footer />
+          {/* <Footer /> */}
         </>
       )}
-      {/* Profile Section */}
     </MainWrapper>
   );
 };
