@@ -660,7 +660,7 @@ const Profile = ({ nav }) => {
                     ? retrivedUser.fullName
                     : retrivedUser.username}
                   <br />
-                  {retrivedUser.userCategory}Employer
+                  {retrivedUser.userCategory}
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
