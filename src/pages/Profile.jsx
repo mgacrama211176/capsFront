@@ -514,7 +514,24 @@ const Profile = ({ nav }) => {
     });
   }
 
-  console.log(retrivedUser.uploadCV);
+  // const onClickDownload = () => {
+  //   try {
+  //     // using Java Script method to get PDF file
+  //     fetch(retrivedUser.uploadCV).then((response) => {
+  //       response.blob().then((blob) => {
+  //         // Creating new object of PDF file
+  //         const fileURL = window.URL.createObjectURL(blob);
+  //         // Setting various property values
+  //         let alink = document.createElement("a");
+  //         alink.href = fileURL;
+  //         alink.download = "SamplePDF.pdf";
+  //         alink.click();
+  //       });
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <MainWrapper>
       <ScrollToTop smooth top="300" color="#132550" />
@@ -648,13 +665,9 @@ const Profile = ({ nav }) => {
                 <hr />
                 You can check more about the user's info for business and
                 employment purposes by clicking "Download CV"
-                <Link
-                  to={`${retrivedUser.uploadCV}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={retrivedUser.uploadCV} download target="_blank">
                   <DownldCV>Download CV</DownldCV>
-                </Link>
+                </a>
               </ContentWrap>
             </Aboutwrapper>
           </Row>
