@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 //MUI COMPONENTS
 import Modal from "@mui/material/Modal";
@@ -9,6 +10,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 const Report = styled.div`
@@ -109,7 +111,36 @@ const style = {
   p: 4,
 };
 
-const ReportComponent = () => {
+const ReportComponent = ({ retrivedUser }) => {
+  const { currentUser } = useSelector((state) => state.username);
+
+  const [reports, setReport] = useState({
+    userReporting: "",
+    channelReported: "",
+    issues: "",
+    desc: "",
+  });
+
+  //   const onClickReport = async (e) => {
+  //     e.preventDefault();
+  //     const NewUser = await axios.post(
+  //       `https://capstoneback2.herokuapp.com/api/reports/${currentUser._id}/${retrivedUser._id}`,
+  //       {
+  //         userReporting: report.userReporting,
+  //         channelReported: report.channelReported,
+  //         issues: report.issues,
+  //         desc: report.desc,
+  //       }
+  //     );
+  //   };
+
+  const onChangeHandle = (e) => {
+    const newReport = { ...reports };
+    newReport[e.target.id] = e.target.value;
+    console.log(newReport);
+    setReport(newReport);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -135,11 +166,7 @@ const ReportComponent = () => {
               What is the issue?
             </Typography>
 
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
+            <RadioGroup name="issues" id="issues" onChange={onChangeHandle}>
               <FormControlLabel
                 value="Privacy"
                 control={<Radio />}
@@ -203,11 +230,15 @@ export function ChildModal() {
             sx={{
               width: 400,
             }}
-            label="Additional context"
+            label="Reason"
+            id="desc"
             multiline
             rows={6}
             helperText="Provide additional description"
-          />{" "}
+            onChange={(e) => {
+              onChangeHandle(e);
+            }}
+          />
           <Submitbtn onClick={handleOpen}>Next</Submitbtn>
           <SubmitRpt />
         </Box>
@@ -227,7 +258,7 @@ export function SubmitRpt() {
 
   return (
     <React.Fragment>
-      <Submitbtn onClick={handleOpen}>Next</Submitbtn>
+      <Submitbtn onClick={handleOpen}>Submit</Submitbtn>
       <Modal
         hideBackdrop
         open={open}

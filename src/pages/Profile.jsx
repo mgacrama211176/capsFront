@@ -131,7 +131,7 @@ const Detailswrap = styled.div`
   justify-content: center;
 `;
 
-const Subsinfo = styled.p`
+const Subsinfo = styled.div`
   display: flex;
   gap: 2em;
   position: relative;
@@ -295,7 +295,7 @@ const Aboutdetails = styled.p`
   padding: 2em;
 `;
 
-const Aboutdt = styled.p`
+const Aboutdt = styled.div`
   /* Mobile Large */
   @media (max-width: 425px) {
     font-size: 0.8em;
@@ -695,7 +695,7 @@ const Profile = ({ nav }) => {
                   <hr />
                   Total views: 100
                   <hr />
-                  <ReportComponent />
+                  <ReportComponent retrivedUser={retrivedUser} />
                 </Aboutdt>
 
                 <hr />
