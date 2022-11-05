@@ -86,7 +86,7 @@ const ImgCon = styled.figure`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin-left: 20%;
+    margin-left: 22%;
   }
 `;
 
@@ -96,6 +96,11 @@ const Imginner = styled.div`
   position: relative;
   border-radius: 50%;
   overflow: hidden;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 90%;
+    height: 90%;
+  }
 `;
 
 const Pimg = styled.img`
@@ -173,6 +178,11 @@ const Subbtn = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    right: 60px;
+    top: 220px;
   }
 `;
 
@@ -348,7 +358,7 @@ const VidWrapper = styled.div`
   /* Mobile Large */
   @media (max-width: 425px) {
     width: 42%;
-    margin-right: 600px;
+    right: 250px;
   }
 `;
 
@@ -834,9 +844,9 @@ const Profile = ({ nav }) => {
               </ContactDetails>
             </ContactInnerWrap>
           </ContactWrapper>
-          {/* <Footer /> */}
         </>
       )}
+      <Footer />
     </MainWrapper>
   );
 };

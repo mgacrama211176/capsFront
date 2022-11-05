@@ -30,6 +30,10 @@ const Wrapper = styled.div`
   flex-flow: wrap column;
   align-items: center;
   justify-content: center;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 45.2%;
+  }
 `;
 const H2 = styled.h2`
   color: white;
