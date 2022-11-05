@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Follow from "../components/Follow";
 import Card from "../components/Card";
 import axios from "axios";
+import ReportComponent from "../components/ReportComponent";
 
 //MUI COMPONENTS
 import Box from "@mui/material/Box";
@@ -199,6 +200,44 @@ const Vl = styled.div`
   height: 25px;
 `;
 
+const Submitbtn = styled.button`
+  margin: 10px;
+  padding: 20px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  max-height: 50px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  position: absolute;
+
+  background-color: #f51f1ff2;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    background-position: right center;
+
+    text-decoration: none;
+  }
+  &:active {
+    transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    bottom: 4px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+`;
+
 //About Section
 
 const Abtdthd = styled.h3``;
@@ -259,46 +298,6 @@ const Aboutdetails = styled.p`
 const Aboutdt = styled.p`
   /* Mobile Large */
   @media (max-width: 425px) {
-    font-size: 0.8em;
-  }
-`;
-
-const Report = styled.p`
-  margin-bottom: 10%;
-`;
-
-const Repbtn = styled.button`
-  /* AIC || JCC*/
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-  /* Mobile Large */
-  @media (max-width: 425px) {
-    padding: 10px 15px;
     font-size: 0.8em;
   }
 `;
@@ -419,44 +418,6 @@ const ContactHeader = styled.h1`
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding: 5px;
-  }
-`;
-
-const Submitbtn = styled.button`
-  margin: 10px;
-  padding: 20px 30px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-  position: absolute;
-
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-  /* Mobile Large */
-  @media (max-width: 425px) {
-    padding: 10px 15px;
-    bottom: 4px;
-    font-size: 0.8em;
-    font-weight: 700;
   }
 `;
 
@@ -734,68 +695,15 @@ const Profile = ({ nav }) => {
                   <hr />
                   Total views: 100
                   <hr />
+                  <ReportComponent />
                 </Aboutdt>
-                <Report>
-                  <Repbtn onClick={handleOpen}>
-                    Report user
-                    {/* <FlagIcon /> */}
-                  </Repbtn>
 
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="parent-modal-title"
-                    aria-describedby="parent-modal-description"
-                  >
-                    <Box sx={{ ...style, width: 400, height: 300 }}>
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        What is the issue?
-                      </Typography>
-
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="female"
-                        name="radio-buttons-group"
-                      >
-                        <FormControlLabel
-                          value="Privacy"
-                          control={<Radio />}
-                          label="Privacy"
-                        />
-                        <FormControlLabel
-                          value="Spams and scams"
-                          control={<Radio />}
-                          label="Spams and scams"
-                        />
-                        <FormControlLabel
-                          value="Violent threats"
-                          control={<Radio />}
-                          label="Violent threats"
-                        />
-                        <FormControlLabel
-                          value="Cyberbullying and harassment"
-                          control={<Radio />}
-                          label="Cyberbullying and harassment"
-                        />
-                        <FormControlLabel
-                          value="Other issues"
-                          control={<Radio />}
-                          label="Other issues"
-                        />
-                      </RadioGroup>
-                      <ChildModal />
-                    </Box>
-                  </Modal>
-                </Report>
                 <hr />
                 <Aboutdt>
                   You can check more about the user's info for business and
                   employment purposes by clicking "Download CV"
                 </Aboutdt>
+
                 <a href={retrivedUser.uploadCV} download target="_blank">
                   <DownldCV>Download CV</DownldCV>
                 </a>
@@ -860,76 +768,3 @@ const Profile = ({ nav }) => {
 };
 
 export default Profile;
-
-export function ChildModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <Submitbtn onClick={handleOpen}>Next</Submitbtn>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 400, height: 300 }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Report User
-          </Typography>
-          <TextField
-            sx={{
-              width: 400,
-            }}
-            label="Additional context"
-            multiline
-            rows={6}
-            helperText="Provide additional description"
-          />{" "}
-          <Submitbtn onClick={handleOpen}>Next</Submitbtn>
-          <SubmitRpt />
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
-
-export function SubmitRpt() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <Submitbtn onClick={handleOpen}>Next</Submitbtn>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 300, height: 100 }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Are you sure to report this user?
-          </Typography>
-          <Detailswrap>
-            <Repbtn onClick={handleClose}>Yes</Repbtn>
-            <Repbtn onClick={handleClose}>No</Repbtn>
-          </Detailswrap>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}

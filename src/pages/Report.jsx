@@ -83,7 +83,7 @@ const Report = () => {
     <MainWrapper>
       <Container>
         <DatasWrapper>
-          <Card sx={{ width: 275, margin: 5 }}>
+          <Card sx={{ width: 275, margin: 5, bgcolor: "#0dbbf0d5" }}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -98,7 +98,7 @@ const Report = () => {
               </Typography>
             </CardContent>
           </Card>
-          <Card sx={{ width: 275, margin: 5 }}>
+          <Card sx={{ width: 275, margin: 5, bgcolor: "#0dbbf0d5" }}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -122,7 +122,11 @@ const Report = () => {
         <TableContainer component={Paper} sx={{ width: "100%" }}>
           <Table sx={{ width: "100%" }} aria-label="simple table">
             <TableHead>
-              <TableRow>
+              <TableRow
+                sx={{
+                  bgcolor: "#13040421",
+                }}
+              >
                 <TableCell align="center">Complainant</TableCell>
                 <TableCell align="center">Reported User</TableCell>
                 <TableCell align="center">Issue</TableCell>
@@ -133,7 +137,10 @@ const Report = () => {
               {rows.map((row) => (
                 <TableRow
                   key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    bgcolor: "#f0030347",
+                  }}
                 >
                   <TableCell align="center">{row.name}</TableCell>
                   <TableCell align="center">{row.calories}</TableCell>
