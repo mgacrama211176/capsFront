@@ -146,7 +146,7 @@ const UsernameWrapper = styled.span`
   /* Mobile Large */
   @media (max-width: 425px) {
     margin: 2.5rem 5rem;
-    font-size: 1em;
+    font-size: 1.1em;
   }
 `;
 
@@ -163,8 +163,8 @@ const Subbtn = styled.button`
   font-weight: 700;
   position: absolute;
 
-  right: 0;
-  top: 95px;
+  right: 60px;
+  top: 120px;
 
   cursor: pointer;
   user-select: none;
@@ -178,6 +178,14 @@ const Subbtn = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Laptop */
+  @media (max-width: 1024px) {
+    right: 30px;
+    top: 130px;
+  }
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
   }
   /* Mobile Large */
   @media (max-width: 425px) {
@@ -534,7 +542,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   height: 250,
-  bgcolor: "#f3ededb9",
+  bgcolor: "#f3eded",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -864,7 +872,47 @@ export function ChildModal() {
 
   return (
     <React.Fragment>
-      <Submitbtn onClick={handleOpen}>Submit report</Submitbtn>
+      <Submitbtn onClick={handleOpen}>Next</Submitbtn>
+      <Modal
+        hideBackdrop
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 400, height: 300 }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Report User
+          </Typography>
+          <TextField
+            sx={{
+              width: 400,
+            }}
+            label="Additional context"
+            multiline
+            rows={6}
+            helperText="Provide additional description"
+          />{" "}
+          <Submitbtn onClick={handleOpen}>Next</Submitbtn>
+          <SubmitRpt />
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
+
+export function SubmitRpt() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Submitbtn onClick={handleOpen}>Next</Submitbtn>
       <Modal
         hideBackdrop
         open={open}
