@@ -62,6 +62,7 @@ const Wrapper = styled.div`
 
 const CardContainer = styled.div`
   position: relative;
+  top: 150px;
   flex-direction: column;
   align-items: center;
   display: flex;
@@ -81,7 +82,7 @@ const ImageContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  width: 100%;
+  width: 50%;
   border-radius: 50%;
   background-color: transparent;
 `;
