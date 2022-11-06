@@ -76,6 +76,10 @@ const Wrapper = styled.div`
     gap: 3px;
     font-size: 12px;
   }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 1px 3px;
+  }
 `;
 
 const Follow = ({ currentUser, merger }) => {

@@ -103,14 +103,6 @@ const I = styled.i`
 const NewMenuUi = ({ darkmode, setDarkMode }) => {
   const currentUser = useSelector((state) => state.username.currentUser);
 
-  const nav = useNavigate();
-  const dispatch = useDispatch();
-
-  const OnclickLogout = () => {
-    // dispatch(logout(currentUser));
-    // nav("/");
-  };
-
   return (
     <Container>
       <SideBar>
@@ -228,19 +220,6 @@ const NewMenuUi = ({ darkmode, setDarkMode }) => {
 
           <P>{darkmode ? "Dark" : "Light"} Mode</P>
         </Item>
-
-        {!currentUser ? (
-          ""
-        ) : (
-          <Item onClick={OnclickLogout}>
-            <Span>
-              <I>
-                <LogoutIcon />
-              </I>
-            </Span>
-            <LogoutModal />
-          </Item>
-        )}
       </SideBar>
     </Container>
   );

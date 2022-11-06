@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Follow from "../components/Follow";
 import Card from "../components/Card";
 import axios from "axios";
+import ReportComponent from "../components/ReportComponent";
 
 //MUI COMPONENTS
 import Box from "@mui/material/Box";
@@ -13,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+
 import FormLabel from "@mui/material/FormLabel";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import Tooltip from "@mui/material/Tooltip";
@@ -55,6 +56,12 @@ const ProfWrapper = styled.div`
   margin-bottom: 2%;
   justify-content: center;
   align-items: center;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 34%;
+    right: 250px;
+  }
 `;
 
 const Followrap = styled.div``;
@@ -63,11 +70,8 @@ const Infowrapper = styled.div`
   margin-top: 2%;
   padding: 4em 4em 8em 4em;
   width: 85%;
-  /* margin-left: 30px; */
   background-color: #132550;
   border-radius: 100px;
-  /* max-height: 180px; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +84,11 @@ const ImgCon = styled.figure`
   width: 10em;
   height: 10em;
   margin-left: 35%;
-  position: relative;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    margin-left: 22%;
+  }
 `;
 
 const Imginner = styled.div`
@@ -89,6 +97,11 @@ const Imginner = styled.div`
   position: relative;
   border-radius: 50%;
   overflow: hidden;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 90%;
+    height: 90%;
+  }
 `;
 
 const Pimg = styled.img`
@@ -104,21 +117,38 @@ const Pimg = styled.img`
 const Infoleft = styled.div`
   width: 100%;
   display: flex;
-  gap: 2em;
-  z-index: 5;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `;
 
 const Detailswrap = styled.div`
   width: 100%;
   display: flex;
   padding: 1em;
-  gap: 2em;
+
   justify-content: center;
+`;
+
+const Subsinfo = styled.div`
+  display: flex;
+  gap: 2em;
+  position: relative;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 0.8em;
+  }
 `;
 const UsernameWrapper = styled.span`
   margin: 2.5rem 1rem;
   text-decoration: uppercase;
   font-size: 2rem;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    margin: 2.5rem 5rem;
+    font-size: 1.1em;
+  }
 `;
 
 const Subbtn = styled.button`
@@ -134,8 +164,8 @@ const Subbtn = styled.button`
   font-weight: 700;
   position: absolute;
 
-  right: 0;
-  top: 95px;
+  right: 60px;
+  top: 120px;
 
   cursor: pointer;
   user-select: none;
@@ -149,183 +179,25 @@ const Subbtn = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Laptop */
+  @media (max-width: 1024px) {
+    right: 30px;
+    top: 130px;
+  }
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    right: 60px;
+    top: 220px;
   }
 `;
 
 const Vl = styled.div`
   border-left: 3px solid white;
   height: 25px;
-`;
-
-//About Section
-
-const Abtdthd = styled.h3``;
-
-const Row = styled.div`
-  display: flex;
-  width: 98%;
-  gap: 10px;
-  margin: 0px 100px;
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    flex-direction: column;
-  }
-`;
-const Aboutwrapper = styled.div`
-  color: white;
-  background: #383535;
-  flex: 50%;
-  padding: 10px;
-
-  /* margin-right: 100px; */
-  display: inline-block;
-  border-radius: 40px;
-  margin-bottom: 2%;
-`;
-
-const Aboutme = styled.h1`
-  padding-left: 5rem;
-`;
-const ContentWrap = styled.div`
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  align-self: center;
-  margin-left: 0px;
-  padding: 3em 2em;
-`;
-
-const Aboutdetails = styled.p`
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  align-self: center;
-  margin-left: 45px;
-  padding: 2em;
-`;
-
-const Report = styled.p`
-  margin-bottom: 10%;
-`;
-
-const Repbtn = styled.button`
-  /* AIC || JCC*/
-  margin: 10px;
-  padding: 10px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-`;
-
-const DownldCV = styled.button`
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  max-height: 50px;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-
-  background-color: #f51f1ff2;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-`;
-
-//Video Sectiton
-
-const Vidtitle = styled.h1`
-  color: white;
-  margin-left: 20px;
-`;
-const VidWrapper = styled.div`
-  width: 98%;
-  position: relative;
-  background-color: #383535;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  margin: 2% 100px;
-  /* margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 2%; */
-  border-radius: 40px;
-`;
-
-const VidContainer = styled.div`
-  display: flex;
-  flex-flow: wrap row;
-  padding: 20px;
-  gap: 10px;
-`;
-
-//Contact Section
-
-const ContactWrapper = styled.div`
-  color: white;
-  background: #383535;
-  width: 98%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  margin: 0px 100px;
-
-  align-content: center;
-  justify-content: center;
-  border-radius: 20px;
-  margin-bottom: 2%;
-`;
-
-const ContactInnerWrap = styled.div`
-  background-color: #f2f2f2b3;
-  padding: 10% 15%;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  border-radius: 5em;
-`;
-const ContactDetails = styled.div``;
-
-const ContactHeader = styled.h1`
-  padding: 0;
-  color: black;
 `;
 
 const Submitbtn = styled.button`
@@ -357,6 +229,196 @@ const Submitbtn = styled.button`
   &:active {
     transform: scale(1.3);
   }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    bottom: 4px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+`;
+
+//About Section
+
+const Abtdthd = styled.h3``;
+
+const Row = styled.div`
+  display: flex;
+  width: 98%;
+  gap: 10px;
+  margin: 0px 100px;
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+const Aboutwrapper = styled.div`
+  color: white;
+  background: #383535;
+  flex: 50%;
+  padding: 10px;
+
+  /* margin-right: 100px; */
+  display: inline-block;
+  border-radius: 40px;
+  margin-bottom: 2%;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 42%;
+  }
+`;
+
+const Aboutme = styled.h1`
+  padding-left: 5rem;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding-left: 5em;
+  }
+`;
+const ContentWrap = styled.div`
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin-left: 0px;
+  padding: 3em 2em;
+`;
+
+const Aboutdetails = styled.p`
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin-left: 45px;
+  padding: 2em;
+`;
+
+const Aboutdt = styled.div`
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 0.8em;
+  }
+`;
+
+const DownldCV = styled.button`
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  max-height: 50px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+
+  background-color: #f51f1ff2;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    background-position: right center;
+
+    text-decoration: none;
+  }
+  &:active {
+    transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 10px 15px;
+    font-size: 0.8em;
+  }
+`;
+
+//Video Sectiton
+
+const Vidtitle = styled.h1`
+  color: white;
+  margin-left: 20px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding: 5px;
+  }
+`;
+const VidWrapper = styled.div`
+  width: 98%;
+  position: relative;
+  background-color: #383535;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 2% 100px;
+  /* margin-left: 20px;
+  margin-right: 10px;
+  margin-bottom: 2%; */
+  border-radius: 40px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 42%;
+    right: 250px;
+  }
+`;
+
+const VidContainer = styled.div`
+  display: flex;
+  flex-flow: wrap row;
+  padding: 20px;
+  gap: 10px;
+`;
+
+//Contact Section
+
+const ContactWrapper = styled.div`
+  color: white;
+  background: #383535;
+  width: 98%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  margin: 0px 100px;
+
+  align-content: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin-bottom: 2%;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 42%;
+    margin-right: 600px;
+  }
+`;
+
+const ContactInnerWrap = styled.div`
+  background-color: #f2f2f2b3;
+  padding: 10% 15%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 5em;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 50%;
+  }
+`;
+const ContactDetails = styled.div``;
+
+const ContactHeader = styled.h1`
+  padding: 0;
+  color: black;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding: 5px;
+  }
 `;
 
 //ANCHOR BUTTONS
@@ -384,6 +446,10 @@ const Anchorbt = styled.button`
   }
   &:active {
     transform: scale(1.3);
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: smaller;
   }
 `;
 const Anchorwrap = styled.div`
@@ -437,10 +503,28 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   height: 250,
-  bgcolor: "#f3ededb9",
+  bgcolor: "#f3eded",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+
+// SX Media
+const InputMedia = {
+  width: {
+    xs: "200px",
+    sm: "300px",
+    md: "350px",
+    lg: "400px",
+    xl: "500px",
+  },
+  fontSize: {
+    xs: "20px",
+    sm: "30px",
+    md: "40px",
+    lg: "50px",
+    xl: "60px",
+  },
 };
 
 const Profile = ({ nav }) => {
@@ -514,7 +598,24 @@ const Profile = ({ nav }) => {
     });
   }
 
-  console.log(retrivedUser.uploadCV);
+  // const onClickDownload = () => {
+  //   try {
+  //     // using Java Script method to get PDF file
+  //     fetch(retrivedUser.uploadCV).then((response) => {
+  //       response.blob().then((blob) => {
+  //         // Creating new object of PDF file
+  //         const fileURL = window.URL.createObjectURL(blob);
+  //         // Setting various property values
+  //         let alink = document.createElement("a");
+  //         alink.href = fileURL;
+  //         alink.download = "SamplePDF.pdf";
+  //         alink.click();
+  //       });
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <MainWrapper>
       <ScrollToTop smooth top="300" color="#132550" />
@@ -546,9 +647,11 @@ const Profile = ({ nav }) => {
                 </Subbtn>
               </Infoleft>
               <Detailswrap>
-                {retrivedUser.subscribers} Subscribers
-                <Vl />
-                {retrivedUser?.subscribedUsers?.length} Subscribed Users
+                <Subsinfo>
+                  {retrivedUser.subscribers} Subscribers
+                  <Vl />
+                  {retrivedUser?.subscribedUsers?.length} Subscribed Users
+                </Subsinfo>
               </Detailswrap>
               <Anchorwrap>
                 <Anchorbt onClick={scrollAbout}>About</Anchorbt>
@@ -566,95 +669,44 @@ const Profile = ({ nav }) => {
               <Aboutdetails>{retrivedUser.about}</Aboutdetails>
               <ContentWrap>
                 <Abtdthd>Details</Abtdthd>
-                <hr />
-                Name:
-                <>
-                  {retrivedUser.fullName !== undefined
-                    ? retrivedUser.fullName
-                    : retrivedUser.username}
-                </>
-                <hr />
-                Birthdate: {retrivedUser.birthdate}
-                <hr />
-                User email: {retrivedUser.email}
-                <hr />
-                Address: {retrivedUser.address}
+                <Aboutdt>
+                  <hr />
+                  Name:
+                  <>
+                    {retrivedUser.fullName !== undefined
+                      ? retrivedUser.fullName
+                      : retrivedUser.username}
+                  </>
+                  <hr />
+                  Birthdate: {retrivedUser.birthdate}
+                  <hr />
+                  User email: {retrivedUser.email}
+                  <hr />
+                  Address: {retrivedUser.address}
+                </Aboutdt>
               </ContentWrap>
             </Aboutwrapper>
             <Aboutwrapper>
               <ContentWrap>
                 <Abtdthd>Stats</Abtdthd>
-                <hr />
-                Joined {retrivedUser?.createdAt}
-                <hr />
-                Total views: 100
-                <hr />
-                <Report>
-                  <Repbtn onClick={handleOpen}>
-                    Report user
-                    <FlagIcon />
-                  </Repbtn>
+                <Aboutdt>
+                  <hr />
+                  Joined {retrivedUser?.createdAt}
+                  <hr />
+                  Total views: 100
+                  <hr />
+                  <ReportComponent retrivedUser={retrivedUser} />
+                </Aboutdt>
 
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="parent-modal-title"
-                    aria-describedby="parent-modal-description"
-                  >
-                    <Box sx={{ ...style, width: 400, height: 300 }}>
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        What is the issue?
-                      </Typography>
-
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="female"
-                        name="radio-buttons-group"
-                      >
-                        <FormControlLabel
-                          value="Privacy"
-                          control={<Radio />}
-                          label="Privacy"
-                        />
-                        <FormControlLabel
-                          value="Spams and scams"
-                          control={<Radio />}
-                          label="Spams and scams"
-                        />
-                        <FormControlLabel
-                          value="Violent threats"
-                          control={<Radio />}
-                          label="Violent threats"
-                        />
-                        <FormControlLabel
-                          value="Cyberbullying and harassment"
-                          control={<Radio />}
-                          label="Cyberbullying and harassment"
-                        />
-                        <FormControlLabel
-                          value="Other issues"
-                          control={<Radio />}
-                          label="Other issues"
-                        />
-                      </RadioGroup>
-                      <ChildModal />
-                    </Box>
-                  </Modal>
-                </Report>
                 <hr />
-                You can check more about the user's info for business and
-                employment purposes by clicking "Download CV"
-                <Link
-                  to={`${retrivedUser.uploadCV}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Aboutdt>
+                  You can check more about the user's info for business and
+                  employment purposes by clicking "Download CV"
+                </Aboutdt>
+
+                <a href={retrivedUser.uploadCV} download target="_blank">
                   <DownldCV>Download CV</DownldCV>
-                </Link>
+                </a>
               </ContentWrap>
             </Aboutwrapper>
           </Row>
@@ -691,11 +743,11 @@ const Profile = ({ nav }) => {
                     label="Email"
                     helperText="Please enter your email"
                     defaultValue={retrivedUser.email}
+                    sx={InputMedia}
                   />
                   <TextField
                     sx={{
-                      width: "50ch",
-                      height: "18ch",
+                      InputMedia,
                     }}
                     label="Message"
                     multiline
@@ -708,45 +760,11 @@ const Profile = ({ nav }) => {
               </ContactDetails>
             </ContactInnerWrap>
           </ContactWrapper>
-          <Footer />
         </>
       )}
-      {/* Profile Section */}
+      <Footer />
     </MainWrapper>
   );
 };
 
 export default Profile;
-
-export function ChildModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <Submitbtn onClick={handleOpen}>Submit report</Submitbtn>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 300, height: 100 }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Are you sure to report this user?
-          </Typography>
-          <Detailswrap>
-            <Repbtn onClick={handleClose}>Yes</Repbtn>
-            <Repbtn onClick={handleClose}>No</Repbtn>
-          </Detailswrap>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
