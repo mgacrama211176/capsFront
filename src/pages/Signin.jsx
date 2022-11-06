@@ -7,7 +7,7 @@ import axios from "axios";
 import { loginFailed, loginStart, loginSuccess } from "../redux/userSlice";
 
 //firebase
-import { auth, googleProvider, facebookProvider } from "../firebase";
+import { auth, googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
 //MUI
@@ -16,7 +16,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import LoginIcon from "@mui/icons-material/Login";
 
 //Icons
-import Facebook from "../assets/icons/facebook.png";
+
 import Gmail from "../assets/icons/gmail.png";
 
 //Framer Motion
@@ -26,9 +26,6 @@ import { Link } from "react-router-dom";
 //Toastify
 import { userNotFound, incorrectPassword, blank } from "../components/Toasts";
 import { ToastContainer } from "react-toastify";
-
-//js-cookie
-import Cookies from "js-cookie";
 
 const Container = styled.div`
   display: flex;
@@ -234,14 +231,6 @@ const Signin = () => {
       });
   };
 
-  const signInWithFacebook = async () => {
-    signInWithPopup(auth, facebookProvider)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {});
-  };
-
   return (
     <motion.div
       initial={{ width: 0, opacity: 0 }}
@@ -250,7 +239,6 @@ const Signin = () => {
         x: window.innerWidth,
         y: window.innerHeight,
       }}
-      // transition={{'1s'}}
     >
       <Container>
         <ToastContainer
@@ -265,14 +253,8 @@ const Signin = () => {
           pauseOnHover
         />
         <LoginWrapper>
-          {/* <Image src={Logo}></Image> */}
           <Title>Login Using</Title>
           <IconsContainer>
-            <Icons
-              src={Facebook}
-              alt="facebook"
-              onClick={signInWithFacebook}
-            ></Icons>
             <Icons src={Gmail} alt="gmail" onClick={signInWithGoogle}></Icons>
           </IconsContainer>
           <HrContainer>

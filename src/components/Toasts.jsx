@@ -1,4 +1,4 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const userNotFound = () => {
@@ -159,6 +159,18 @@ export const AccountCreated = () => {
   toast.success("Account created", {
     position: "top-right",
     autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
+
+export const Congratulations = () => {
+  toast.success("Congratulations! You have successully followed", {
+    position: "top-right",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

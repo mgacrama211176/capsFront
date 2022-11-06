@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+
+//Components
 import CommentsBox from "../components/CommentsBox";
 import ViewComments from "../components/ViewComments";
 import Recommendation from "../components/Recommendation";
 import Share from "../components/Share";
+import { SigninRedirectModal } from "../components/VideoModalDelete";
 
 //MUI
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -65,12 +68,13 @@ const VideoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
+  object-fit: fill;
   width: 100%;
 `;
 
 const VideoFrame = styled.video`
   padding: 10px;
-  max-height: 500px;
+  max-height: 1024px;
   margin-top: 10px;
   border: none;
   width: 100%;
@@ -284,8 +288,6 @@ const Video = () => {
 
   const channelContainer = channel._id;
 
-  const channelID = channel._id;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -319,6 +321,7 @@ const Video = () => {
   }, [viewCounter]);
 
   const likeHandler = async () => {
+    const type = "like";
     if (currentUser === null) {
       loginRequired();
     } else {
@@ -405,46 +408,6 @@ const Video = () => {
                     {format(currentVideo?.createdAt)}
                   </Info>
                   <Hr />
-                  <Details>
-                    <Buttons>
-                      <Like onClick={likeHandler}>
-                        {currentUser === null ? (
-                          <ThumbUpIcon />
-                        ) : currentVideo?.likes?.includes(currentUser._id) ? (
-                          <ThumbUpIcon style={{ color: "#0675e8" }} />
-                        ) : (
-                          <ThumbUpIcon />
-                        )}
-                        {currentVideo?.likes?.length}
-                      </Like>
-                      <Dislike onClick={dislikeHandler}>
-                        {currentVideo?.dislikes.includes(currentUser?._id) ? (
-                          <ThumbDownIcon style={{ color: "#red" }} />
-                        ) : (
-                          <ThumbDownIcon />
-                        )}
-                        Dislike
-                      </Dislike>
-
-                      <Save onClick={saveVideo}>
-                        {currentUser?.saveVideos?.includes(
-                          currentVideo?._id
-                        ) ? (
-                          <SaveAltIcon style={{ color: "#04a86c" }} />
-                        ) : (
-                          <SaveAltIcon />
-                        )}
-
-                        {currentUser?.saveVideos?.includes(currentVideo?._id)
-                          ? "SAVED"
-                          : "SAVE"}
-                      </Save>
-
-                      <Share currentVideo={currentVideo?._id} />
-                    </Buttons>
-                  </Details>
-
-                  <Hr />
 
                   <Channel>
                     <ChannelInfo>
@@ -457,9 +420,51 @@ const Video = () => {
                           {channel.subscribers} subscribers
                         </ChannelCounter>
                       </ChannelDetail>
+                      <Follow currentUser={currentUser} merger={channel} />
                     </ChannelInfo>
+                    <Details>
+                      <Buttons>
+                        {/* Like Function */}
+                        <Like onClick={likeHandler}>
+                          {currentUser === null ? (
+                            <>
+                              <ThumbUpIcon />
+                            </>
+                          ) : currentVideo?.likes?.includes(currentUser._id) ? (
+                            <ThumbUpIcon style={{ color: "#0675e8" }} />
+                          ) : (
+                            <ThumbUpIcon />
+                          )}
+                          {currentVideo?.likes?.length}
+                        </Like>
 
-                    <Follow currentUser={currentUser} channelID={channelID} />
+                        {/* Dislike function */}
+                        <Dislike onClick={dislikeHandler}>
+                          {currentVideo?.dislikes.includes(currentUser?._id) ? (
+                            <ThumbDownIcon style={{ color: "#red" }} />
+                          ) : (
+                            <ThumbDownIcon />
+                          )}
+                          Dislike
+                        </Dislike>
+
+                        <Save onClick={saveVideo}>
+                          {currentUser?.saveVideos?.includes(
+                            currentVideo?._id
+                          ) ? (
+                            <SaveAltIcon style={{ color: "#04a86c" }} />
+                          ) : (
+                            <SaveAltIcon />
+                          )}
+
+                          {currentUser?.saveVideos?.includes(currentVideo?._id)
+                            ? "SAVED"
+                            : "SAVE"}
+                        </Save>
+
+                        <Share currentVideo={currentVideo?._id} />
+                      </Buttons>
+                    </Details>
                   </Channel>
 
                   <Description>{currentVideo?.desc}</Description>

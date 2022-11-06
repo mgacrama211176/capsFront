@@ -8,7 +8,6 @@ export const darkTheme = {
   titleColor: "white",
   profileSubs: "#aaaaaa",
   hover: "#B2792d",
-
   menu: "#132550",
 };
 export const coloredTheme = {

@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
+import React, { useState, useRef, useEffect } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+//Components
 import Footer from "../components/Footer";
-import Tooltip from "@mui/material/Tooltip";
 
 //MUI
 import TextField from "@mui/material/TextField";
@@ -12,11 +14,25 @@ import BrushIcon from "@mui/icons-material/Brush";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Typography from "@mui/material/Typography";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
+import Tooltip from "@mui/material/Tooltip";
 
-const Container = styled.div``;
+//firebase
+import app from "../firebase";
+import {
+  getDownloadURL,
+  getStorage,
+  uploadBytesResumable,
+  ref,
+  deleteObject,
+} from "firebase/storage";
+import { loginSuccess } from "../redux/userSlice";
+
+const Container = styled.div`
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+`;
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -27,28 +43,42 @@ const Wrapper = styled.div`
   background-color: #132550;
   border-radius: 15px;
   padding: 30px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   margin-top: 2.2%;
   margin-bottom: 1%;
+  gap: 30px;
 
   /* Tablet */
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
   }
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 75%;
+    margin: 10px 20px;
+  }
 `;
 
 const CardContainer = styled.div`
   position: relative;
   top: 150px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
 `;
 
 const ImageContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   flex-flow: wrap column;
+  max-width: 300px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 55%;
+  }
 `;
 
 const CardImage = styled.img`
@@ -81,6 +111,13 @@ const UpdateContainer = styled.div`
   border-radius: 20px;
   background-color: #f3f4f5c3;
   padding: 30px;
+  width: 60%;
+  margin: 0px 5px;
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    width: 85%;
+  }
 `;
 
 const InputContainers = styled.div`
@@ -94,8 +131,8 @@ const InputContainers = styled.div`
 const UpdateImageContainer = styled.div`
   position: absolute;
   display: block;
-  right: -100px;
-  top: 30px;
+  right: 30px;
+  top: 35px;
   color: #ffffff;
   background-color: #00000053;
   border-radius: 50%;
@@ -121,6 +158,22 @@ const ButtonStyle = {
   width: "100%",
 };
 
+const InputMedia = {
+  width: {
+    xs: "200px",
+    sm: "300px",
+    md: "350px",
+    lg: "400px",
+    xl: "500px",
+  },
+  fontSize: {
+    xs: "20px",
+    sm: "30px",
+    md: "40px",
+    lg: "50px",
+    xl: "60px",
+  },
+};
 // const textfieldStyle = {
 //   display: "flex",
 //   m: 2,
@@ -128,23 +181,28 @@ const ButtonStyle = {
 //   backgroundColor: "Transparent",
 // };
 
+const Input = styled.input`
+  display: none;
+`;
+
 const UpdateProfile = () => {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.username);
   const profileRef = useRef(null);
-  const backgroudRef = useRef(null);
   const cvRef = useRef(null);
-  const UserAccesses = [
-    { value: "Animator", label: "Animator" },
-    { value: "Employer", label: "Employer" },
-  ];
+  const [cv, setCv] = useState(undefined);
+  const [cvUploadPercentage, setCvUploadPercentage] = useState(0);
+  const [imageUploadPercentage, setImageUploadPercentage] = useState(0);
+  const [newProfile, setNewProfile] = useState(0);
 
   const [newData, setNewData] = useState({
-    username: "",
-    userCategory: "",
-    fullName: "",
-    address: "",
-    birthdate: "",
-    about: "",
+    username: currentUser?.username,
+    userCategory: currentUser?.userCategory,
+    fullName: currentUser?.fullName,
+    address: currentUser?.address,
+    birthdate: currentUser?.birthdate,
+    about: currentUser?.about,
   });
 
   const onChangeHandle = (e) => {
@@ -157,7 +215,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const update = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/${currentUser?._id}`,
+        `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
         {
           username: newData.username,
           userCategory: newData.userCategory,
@@ -165,26 +223,108 @@ const UpdateProfile = () => {
           address: newData.address,
           birthdate: newData.birthdate,
           about: newData.about,
+          uploadCV: newData.uploadCv,
+          image: newData.image,
         }
       );
-      console.log(update);
+
+      dispatch(loginSuccess(update.data));
+      nav(`/profile/About/${currentUser._id}`);
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(newData);
+  //Uploading firebase Segment
+
+  const handleCVUpload = () => {
+    cvRef.current.click();
+  };
+  const handleNewImageUpload = () => {
+    profileRef.current.click();
+  };
+
+  const uploadFile = (file, urlType) => {
+    const storage = getStorage(app);
+    try {
+      if (urlType === "uploadCv" && currentUser.uploadCV !== "") {
+        const deletingCv = async () => {
+          const cvDelete = ref(storage, currentUser.uploadCV);
+          deleteObject(cvDelete);
+          console.log(`cvDeleted`);
+        };
+        deletingCv();
+      } else {
+        const deletingImage = async () => {
+          const imageDelete = ref(storage, currentUser.image);
+          deleteObject(imageDelete);
+          console.log(`Old Image Deleted`);
+        };
+        deletingImage();
+      }
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      console.log(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          urlType === "uploadCv"
+            ? setCvUploadPercentage(Math.round(progress))
+            : setImageUploadPercentage(Math.round(progress));
+          switch (snapshot.state) {
+            case "paused":
+              console.log(`Upload is paused`);
+              break;
+            case "running":
+              console.log(`Upload is running`);
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setNewData((prev) => {
+              return { ...prev, [urlType]: downloadURL };
+            });
+          });
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    cv && uploadFile(cv, "uploadCv");
+  }, [cv]);
+
+  useEffect(() => {
+    newProfile && uploadFile(newProfile, "image");
+  }, [newProfile]);
 
   return (
     <Container>
       {/* <AccountSet>Account Update</AccountSet> */}
       <Wrapper>
         <CardContainer>
-          <UpdateImageContainer>
-            <BrushIcon />
-          </UpdateImageContainer>
           <ImageContainer>
+            {imageUploadPercentage}
             <CardImage src={currentUser?.image} />
+            <UpdateImageContainer onClick={handleNewImageUpload}>
+              <BrushIcon />
+              <Input
+                type="file"
+                id="image"
+                accept="image/*"
+                ref={profileRef}
+                onChange={(e) => setNewProfile(e.target.files[0])}
+              />
+            </UpdateImageContainer>
           </ImageContainer>
           <UserInfo>
             <p>{currentUser?.username}</p>
@@ -198,7 +338,6 @@ const UpdateProfile = () => {
           <Typography variant="h6" gutterBottom>
             Update Profile Information
           </Typography>
-
           <InputContainers>
             {/* DO NOT TOUCH THIS IS FOR EMAIL */}
             <TextField
@@ -207,26 +346,24 @@ const UpdateProfile = () => {
               label={currentUser?.email}
               variant="outlined"
               placeholder="Email"
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
-
             <TextField
               id="username"
               label={currentUser?.username}
               variant="outlined"
               placeholder="Channel Name"
               onChange={(e) => onChangeHandle(e)}
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
-
-            {currentUser.fullName ? (
+            {currentUser?.fullName ? (
               <TextField
                 id="fullName"
                 label={currentUser?.fullName}
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             ) : (
               <TextField
@@ -235,18 +372,17 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Full Name"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             )}
-
-            {currentUser.address ? (
+            {currentUser?.address ? (
               <TextField
                 id="address"
                 label={currentUser.address}
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             ) : (
               <TextField
@@ -255,17 +391,17 @@ const UpdateProfile = () => {
                 variant="outlined"
                 placeholder="Address"
                 onChange={(e) => onChangeHandle(e)}
-                sx={ButtonStyle}
+                sx={InputMedia}
               />
             )}
-
             <TextField
               id="birthdate"
               variant="outlined"
               type="date"
+              value={currentUser?.birthdate}
               onChange={(e) => onChangeHandle(e)}
               helperText="Birthdate"
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
             <TextField
               id="about"
@@ -275,35 +411,37 @@ const UpdateProfile = () => {
               multiline
               maxRows={5}
               onChange={(e) => onChangeHandle(e)}
-              sx={ButtonStyle}
+              sx={InputMedia}
             />
           </InputContainers>
+          {cvUploadPercentage < 100 && cvUploadPercentage > 0 ? (
+            <p>{`${cv?.name} has uploaded ${cvUploadPercentage} %`}</p>
+          ) : cvUploadPercentage === 100 ? (
+            `${cv?.name} Uploaded!`
+          ) : (
+            ""
+          )}
+
           <ButtonContainer>
-            <Button variant="contained">
+            <Button variant="contained" onClick={handleCVUpload}>
               Upload CV
-              <Tooltip
-                title="Upload your CV for business and employment purposes"
-                arrow
-              >
+              <Tooltip title="File must be PDF format" arrow>
                 <HelpOutlineIcon />
               </Tooltip>
             </Button>
-            <Button variant="contained">Update Profile</Button>
+            <Input
+              type="file"
+              name="uploadCV"
+              id="uploadCV"
+              accept="application/pdf, application/vnd.ms-excel"
+              ref={cvRef}
+              onChange={(e) => setCv(e.target.files[0])}
+            />
+            <Button variant="contained" onClick={onClickUpdateSubmit}>
+              Update Profile
+            </Button>
           </ButtonContainer>
         </UpdateContainer>
-        {/* <ButtonContainer>
-          <Upcv>
-            Upload CV
-            <Tooltip
-              title="Upload your CV for business and employment purposes"
-              arrow
-            >
-              <HelpOutlineIcon />
-            </Tooltip>
-          </Upcv>
-
-          <Savebtn onClick={onClickUpdateSubmit}>Save changes</Savebtn>
-        </ButtonContainer> */}
       </Wrapper>
       <Footer />
     </Container>

@@ -9,6 +9,7 @@ const Container = styled.div`
   flex-flow: wrap row;
   gap: 10px;
   padding: 20px;
+  justify-content: center;
 `;
 
 const Search = () => {

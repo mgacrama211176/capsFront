@@ -9,11 +9,12 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 `;
 
 const share = ({ currentVideo }) => {
   //SHARING SHOULD BE WORKING ONCE DEPLOYED
-  const shareUrl = `https://www.youtube.com/channel/UCmewiMiq1dSV1vlX6CGs_aQ`;
+  const shareUrl = `https://filanime.netlify.app/`;
   return (
     <Container>
       <FacebookShareButton url={shareUrl}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import axios from "axios";
@@ -76,25 +76,26 @@ const Wrapper = styled.div`
     gap: 3px;
     font-size: 12px;
   }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    padding: 1px 3px;
+  }
 `;
 
-const Follow = ({ currentUser, channelID }) => {
+const Follow = ({ currentUser, merger }) => {
   const dispatch = useDispatch();
 
   const subscribeHandler = async () => {
     try {
-      if (currentUser._id === channelID) {
+      if (currentUser._id === merger._id) {
         SubscribeErrorNotif();
       } else {
-        currentUser.subscribedUsers.includes(channelID)
-          ? await axios.put(
-              `https://capstoneback2.herokuapp.com/api/users/unsub/${currentUser._id}/${channelID}`
-            )
-          : await axios.put(
-              `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${channelID}`
-            );
-        // console.log(dispatch(subscription(channel._id)));
-        dispatch(subscription(channelID));
+        if (currentUser.subscribedUsers.includes(merger._id)) {
+          await axios.put(
+            `https://capstoneback2.herokuapp.com/api/users/unsub/${currentUser._id}/${merger._id}`
+          );
+        }
+        dispatch(subscription(merger._id));
       }
     } catch (err) {
       console.log(err);
@@ -103,18 +104,20 @@ const Follow = ({ currentUser, channelID }) => {
   };
 
   return (
-    <Container onClick={subscribeHandler}>
-      {currentUser?._id === channelID ? (
+    <Container>
+      {currentUser?._id === merger._id ? (
         ""
       ) : (
         <>
           <Wrapper>
             <NotificationsActiveIcon />
             <>
-              {currentUser?.subscribedUsers?.includes(channelID) ? (
-                "FOLLOWED"
+              {currentUser?.subscribedUsers?.includes(merger._id) ? (
+                <>
+                  <p onClick={subscribeHandler}>FOLLOWED</p>
+                </>
               ) : (
-                <SubsCriptionModal />
+                <SubsCriptionModal currentUser={currentUser} merger={merger} />
               )}
             </>
           </Wrapper>

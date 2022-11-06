@@ -115,15 +115,25 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
-
   align-items: center;
 `;
 
 const PasswordWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-content: center;
   justify-content: center;
+`;
+
+const LockIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const H4 = styled.h4`
@@ -197,37 +207,41 @@ const Signup = () => {
     password: "",
     validpass: "",
   });
-  const [validatedpass, setValidatedPass] = useState("");
+  // const [validatedpass, setValidatedPass] = useState("");
   const [agree, setAgree] = useState(false);
+
+  const [status, setStatus] = useState("");
 
   const onClickAgree = () => {
     agree ? setAgree(false) : setAgree(true);
   };
 
   const Alert = styled.p`
+    margin: 15px 0px 0px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-weight: bold;
   `;
 
   const onChangeHandle = (e) => {
     const newUser = { ...user };
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
-    `  `;
   };
 
   useEffect(() => {
-    let status = "";
     try {
-      if (user.password !== user.validpass) {
-        status = "Password does not match!";
-        setValidatedPass(status);
-      } else status = "Password Match!";
-      setValidatedPass(status);
+      if (user.password === "") {
+        setStatus("");
+      } else if (user.password !== user.validpass) {
+        setStatus("Password does not match!");
+      } else {
+        setStatus("Password Match!");
+      }
     } catch (err) {
-      status = err;
+      console.log(err);
     }
   }, [user.password, user.validpass]);
 
@@ -266,7 +280,6 @@ const Signup = () => {
     >
       <Container>
         <LoginWrapper>
-          {/* <Image src={Logo}></Image> */}
           <Title>Signup</Title>
 
           <H4> Email Address </H4>
@@ -311,28 +324,32 @@ const Signup = () => {
             </Select>
           </InputWrapper>
           <H4> Password </H4>
+
           <InputWrapper>
-            <LockIcon />
             <>
               <PasswordWrapper>
-                <Input
-                  placeholder="Password"
-                  type="password"
-                  id="password"
-                  onChange={(e) => {
-                    onChangeHandle(e);
-                  }}
-                />
-                <Input
-                  placeholder="Confirm Password"
-                  type="password"
-                  id="validpass"
-                  onChange={(e) => {
-                    onChangeHandle(e);
-                  }}
-                />
-
-                <Alert>{validatedpass}</Alert>
+                <LockIconContainer>
+                  <LockIcon />
+                </LockIconContainer>
+                <BtnContainer>
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    id="password"
+                    onChange={(e) => {
+                      onChangeHandle(e);
+                    }}
+                  />
+                  <Input
+                    placeholder="Confirm Password"
+                    type="password"
+                    id="validpass"
+                    onChange={(e) => {
+                      onChangeHandle(e);
+                    }}
+                  />
+                  <Alert>{status}</Alert>
+                </BtnContainer>
               </PasswordWrapper>
             </>
           </InputWrapper>
