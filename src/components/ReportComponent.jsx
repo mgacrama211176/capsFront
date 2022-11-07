@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 //MUI COMPONENTS
 import Modal from "@mui/material/Modal";
@@ -11,6 +12,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
+
+import { Reported } from "../components/Toasts";
 
 const Container = styled.div``;
 const Report = styled.div`
@@ -114,31 +117,11 @@ const style = {
 const ReportComponent = ({ retrivedUser }) => {
   const { currentUser } = useSelector((state) => state.username);
 
-  const [reports, setReport] = useState({
-    userReporting: "",
-    channelReported: "",
-    issues: "",
-    desc: "",
-  });
-
-  //   const onClickReport = async (e) => {
-  //     e.preventDefault();
-  //     const NewUser = await axios.post(
-  //       `https://capstoneback2.herokuapp.com/api/reports/${currentUser._id}/${retrivedUser._id}`,
-  //       {
-  //         userReporting: report.userReporting,
-  //         channelReported: report.channelReported,
-  //         issues: report.issues,
-  //         desc: report.desc,
-  //       }
-  //     );
-  //   };
+  const [reportIssue, setReportIssue] = useState("");
+  const [reportReason, setReportReason] = useState("");
 
   const onChangeHandle = (e) => {
-    const newReport = { ...reports };
-    newReport[e.target.id] = e.target.value;
-    console.log(newReport);
-    setReport(newReport);
+    setReportIssue(e.target.value);
   };
 
   const handleClose = () => {
@@ -193,7 +176,13 @@ const ReportComponent = ({ retrivedUser }) => {
                 label="Other issues"
               />
             </RadioGroup>
-            <ChildModal />
+            <ChildModal
+              reportReason={reportReason}
+              setReportReason={setReportReason}
+              reportIssue={reportIssue}
+              retrivedUser={retrivedUser}
+              currentUser={currentUser}
+            />
           </Box>
         </Modal>
       </Report>
@@ -203,13 +192,23 @@ const ReportComponent = ({ retrivedUser }) => {
 
 export default ReportComponent;
 
-export function ChildModal() {
+export function ChildModal({
+  reportReason,
+  setReportReason,
+  reportIssue,
+  retrivedUser,
+  currentUser,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onChangeHandle = (e) => {
+    setReportReason(e.target.value);
   };
 
   return (
@@ -240,20 +239,47 @@ export function ChildModal() {
             }}
           />
           <Submitbtn onClick={handleOpen}>Next</Submitbtn>
-          <SubmitRpt />
+          <SubmitRpt
+            reportReason={reportReason}
+            reportIssue={reportIssue}
+            retrivedUser={retrivedUser}
+            currentUser={currentUser}
+          />
         </Box>
       </Modal>
     </React.Fragment>
   );
 }
 
-export function SubmitRpt() {
+export function SubmitRpt({
+  retrivedUser,
+  currentUser,
+  reportIssue,
+  reportReason,
+}) {
+  const nav = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onClickReport = async (e) => {
+    e.preventDefault();
+    const reportUser = await axios.post(
+      // `https://capstoneback2.herokuapp.com/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
+      `http://localhost:4000/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
+      {
+        userReporting: currentUser.username,
+        channelReported: retrivedUser.username,
+        issues: reportIssue,
+        desc: reportReason,
+      }
+    );
+
+    console.log(reportUser);
   };
 
   return (
@@ -271,7 +297,7 @@ export function SubmitRpt() {
             Are you sure to report this user?
           </Typography>
           <Detailswrap>
-            <Repbtn onClick={handleClose}>Yes</Repbtn>
+            <Repbtn onClick={onClickReport}>Yes</Repbtn>
             <Repbtn onClick={handleClose}>No</Repbtn>
           </Detailswrap>
         </Box>

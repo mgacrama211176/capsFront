@@ -178,3 +178,15 @@ export const Congratulations = () => {
     progress: undefined,
   });
 };
+
+export const Reported = () => {
+  toast.error("User has been reported", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};

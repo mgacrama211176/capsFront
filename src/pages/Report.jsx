@@ -61,22 +61,36 @@ const rows = [
 const Report = () => {
   const [userData, setUserData] = useState(0);
   const [videoData, setVideoData] = useState(0);
+  const [reportData, setReportData] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const users = await axios.get(`http://localhost:4000/api/users/find/All`);
+      const users = await axios.get(
+        `https://capstoneback2.herokuapp.com/api/users/find/All`
+      );
       const userContainer = users.data;
       setUserData(userContainer);
     };
     const fetchVideos = async () => {
-      const videos = await axios.get(`http://localhost:4000/api/videos/trend`);
+      const videos = await axios.get(
+        `https://capstoneback2.herokuapp.com/api/videos/trend`
+      );
 
       const videoContainer = videos.data;
       setVideoData(videoContainer);
     };
+    const fetchReports = async () => {
+      const reports = await axios.get(
+        `https://capstoneback2.herokuapp.com/api/reports/All`
+      );
+
+      const reportsContainer = reports.data;
+      setReportData(reportsContainer);
+    };
 
     fetchUsers();
     fetchVideos();
+    fetchReports();
   }, []);
 
   return (
@@ -113,13 +127,31 @@ const Report = () => {
               </Typography>
             </CardContent>
           </Card>
+          <Card sx={{ width: 275, margin: 5, bgcolor: "#0dbbf0d5" }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Total Users Reported
+              </Typography>
+              <Typography variant="h5" component="div">
+                <VideoLibraryIcon />
+                {reportData.length}
+              </Typography>
+            </CardContent>
+          </Card>
         </DatasWrapper>
       </Container>
 
       {/* //USER REPORTS TABLE */}
       <Container>
         <Header>USER REPORTS</Header>
-        <TableContainer component={Paper} sx={{ width: "100%" }}>
+        <TableContainer
+          component={Paper}
+          sx={{ width: "100%", margin: "10px 0px" }}
+        >
           <Table sx={{ width: "100%" }} aria-label="simple table">
             <TableHead>
               <TableRow
@@ -134,19 +166,19 @@ const Report = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {reportData.map((report) => (
                 <TableRow
-                  key={row.name}
+                  key={report._id}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     bgcolor: "#f0030347",
                   }}
                 >
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.calories}</TableCell>
-                  <TableCell align="center">{row.fat}</TableCell>
+                  <TableCell align="center">{report.userReporting}</TableCell>
+                  <TableCell align="center">{report.channelReported}</TableCell>
+                  <TableCell align="center">{report.issues}</TableCell>
                   <TableCell align="center" sx={{ maxWidth: 200 }}>
-                    {row.carbs}
+                    {report.desc}
                   </TableCell>
                 </TableRow>
               ))}
