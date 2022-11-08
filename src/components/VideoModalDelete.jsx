@@ -14,6 +14,7 @@ import Avatar from "@mui/material/Avatar";
 
 //MUI ICONS
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 //Router Dom
 import { useNavigate } from "react-router-dom";
@@ -160,6 +161,7 @@ export const LogoutModal = () => {
 
   const onClickLogout = () => {
     dispatch(logout(currentUser));
+    handleClose();
     nav("/");
   };
 
@@ -168,12 +170,16 @@ export const LogoutModal = () => {
       <Button
         onClick={handleOpen}
         sx={{
+          fontWeight: "bold",
           fontSize: "10px",
           color: "black",
           margin: 0,
           padding: 0,
+          display: "flex",
+          gap: 11,
         }}
       >
+        <LogoutIcon />
         Logout
       </Button>
       <Modal

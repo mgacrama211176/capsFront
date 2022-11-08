@@ -15,7 +15,6 @@ import { LogoutModal } from "./VideoModalDelete";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FlagIcon from "@mui/icons-material/Flag";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
-import LogoutIcon from "@mui/icons-material/Logout";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 
@@ -82,11 +81,6 @@ const HoverMenu = ({ setOpenModal }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.username.currentUser);
   const [rightMenu, setRightMenu] = useState(false);
-
-  const OnclickLogout = () => {
-    // dispatch(logout(currentUser));
-    // nav("/");
-  };
 
   const onHover = () => {
     rightMenu ? setRightMenu(false) : setRightMenu(true);
@@ -170,9 +164,9 @@ const HoverMenu = ({ setOpenModal }) => {
                   <LiveHelpIcon />
                   HELP
                 </DropdownContent>
-                <DropdownContent onClick={OnclickLogout}>
+                <DropdownContent>
                   {/* CALL LogoutModal to use the logout Modal */}
-                  <LogoutIcon />
+
                   <LogoutModal />
                 </DropdownContent>
               </ContentWrapper>
