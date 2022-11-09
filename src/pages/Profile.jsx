@@ -642,12 +642,11 @@ const Profile = ({ nav }) => {
                 </ImgCon>
 
                 <UsernameWrapper>
-                  TEST
                   {retrivedUser.fullName !== undefined
                     ? retrivedUser.fullName
                     : retrivedUser.username}
                   <br />
-                  {retrivedUser.userCategory}TEST
+                  {retrivedUser.userCategory}
                   <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>

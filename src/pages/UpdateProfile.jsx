@@ -15,6 +15,11 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 //firebase
 import app from "../firebase";
@@ -207,7 +212,10 @@ const UpdateProfile = () => {
 
   const onChangeHandle = (e) => {
     const newUser = { ...newData };
+
     newUser[e.target.id] = e.target.value;
+
+    console.log(newUser[e.target.value]);
     setNewData(newUser);
   };
 
@@ -375,6 +383,22 @@ const UpdateProfile = () => {
                 sx={InputMedia}
               />
             )}
+
+            {/* CATEGORY HERE */}
+            <Box sx={InputMedia}>
+              <FormControl fullWidth>
+                <InputLabel>Category</InputLabel>
+                <Select
+                  id="userCategory"
+                  label={currentUser.userCategory}
+                  onChange={(e) => onChangeHandle(e)}
+                >
+                  <MenuItem value="Animator">Animator</MenuItem>
+                  <MenuItem value="Employer">Employer</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+
             {currentUser?.address ? (
               <TextField
                 id="address"
