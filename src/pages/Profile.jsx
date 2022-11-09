@@ -195,8 +195,7 @@ const Subbtn = styled.button`
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    right: 60px;
-    top: 220px;
+    margin: 95px 73px;
   }
 `;
 
