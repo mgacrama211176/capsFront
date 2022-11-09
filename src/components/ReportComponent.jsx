@@ -276,7 +276,8 @@ export function SubmitRpt({
         desc: reportReason,
       }
     );
-
+    Reported();
+    nav("/");
     console.log(reportUser);
   };
 

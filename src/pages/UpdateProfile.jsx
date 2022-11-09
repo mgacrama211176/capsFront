@@ -216,7 +216,6 @@ const UpdateProfile = () => {
     const newUser = { ...newData };
     newUser[e.target.name] = e.target.value;
     setNewData(newUser);
-    console.log(newUser);
   };
 
   const onClickUpdateSubmit = async (e) => {

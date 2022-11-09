@@ -18,6 +18,7 @@ import videoSlice from "../redux/videoSlice";
 
 //loader
 import LoadingAnimation from "../components/LoadingAnimation";
+import { ToastContainer } from "react-toastify";
 
 const Container = styled.div`
   display: flex;
@@ -84,6 +85,17 @@ const Home = ({ type, category }) => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -4,32 +4,21 @@ import styled from "styled-components";
 import Follow from "../components/Follow";
 import Card from "../components/Card";
 import axios from "axios";
-import media from "../media";
 import ReportComponent from "../components/ReportComponent";
+import { ToastContainer } from "react-toastify";
 
 //MUI COMPONENTS
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 
-import FormLabel from "@mui/material/FormLabel";
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import Tooltip from "@mui/material/Tooltip";
 import ScrollToTop from "react-scroll-to-top";
 //REDUX
-import { current } from "@reduxjs/toolkit";
+
 import { useSelector } from "react-redux";
 
 //ROUTER DOM
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //MUI ICONS
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import FlagIcon from "@mui/icons-material/Flag";
+
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -70,8 +59,6 @@ const ProfWrapper = styled.div`
     right: 110px;
   }
 `;
-
-const Followrap = styled.div``;
 
 const Infowrapper = styled.div`
   margin-top: 2%;
@@ -533,38 +520,7 @@ const AnchorVl = styled.div`
     border-left: 2px solid white;
   }
 `;
-const Scrolltopbt = styled.button`
-  margin: 10px;
-  padding: 20px 30px;
-  text-align: center;
-  font-size: 1.7em;
-  max-height: 50px;
-  transition: 0.5s;
-  color: white;
-  display: block;
-  border: 0px;
-  font-weight: 1000;
-  background-color: transparent;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 
-  &:hover {
-    background-position: right center;
-
-    text-decoration: none;
-  }
-  &:active {
-    transform: scale(1.3);
-  }
-`;
-const Scrolltopwrap = styled.div`
-  justify-content: center;
-  color: black;
-  width: 100%;
-  position: fixed;
-`;
 //MODAL
 
 const style = {
@@ -671,6 +627,17 @@ const Profile = ({ nav }) => {
 
   return (
     <MainWrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <ScrollToTop smooth top="300" color="#132550" />
       {loader ? (
         <>
@@ -744,8 +711,6 @@ const Profile = ({ nav }) => {
                 <Aboutdt>
                   <hr />
                   Joined {retrivedUser?.createdAt}
-                  <hr />
-                  Total views: 100
                   <hr />
                   <ReportComponent retrivedUser={retrivedUser} />
                 </Aboutdt>
