@@ -58,14 +58,16 @@ const ProfWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* MOBILE S */
-  @media (max-width: 320px) {
-    flex-direction: column;
-  }
   /* Mobile Large */
   @media (max-width: 425px) {
     width: 34%;
     right: 250px;
+  }
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 23%;
+    right: 274px;
   }
 `;
 
@@ -107,6 +109,11 @@ const Imginner = styled.div`
     width: 90%;
     height: 90%;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 70%;
+    height: 70%;
+  }
 `;
 
 const Pimg = styled.img`
@@ -134,6 +141,10 @@ const Detailswrap = styled.div`
   padding: 1em;
 
   justify-content: center;
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+  }
 `;
 
 const Subsinfo = styled.div`
@@ -144,6 +155,10 @@ const Subsinfo = styled.div`
   @media (max-width: 425px) {
     font-size: 0.8em;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+  }
 `;
 const UsernameWrapper = styled.span`
   margin: 3.5rem 1rem;
@@ -153,6 +168,11 @@ const UsernameWrapper = styled.span`
   @media (max-width: 425px) {
     margin: 2.5rem 5rem;
     font-size: 1.1em;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.9em;
+    margin: 2.5rem 4rem;
   }
 `;
 
@@ -196,6 +216,10 @@ const Subbtn = styled.button`
   /* Mobile Large */
   @media (max-width: 425px) {
     margin: 95px 73px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    margin: 70px 10px;
   }
 `;
 
@@ -271,6 +295,11 @@ const Aboutwrapper = styled.div`
   @media (max-width: 425px) {
     width: 42%;
   }
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 32%;
+  }
 `;
 
 const Aboutme = styled.h1`
@@ -279,6 +308,11 @@ const Aboutme = styled.h1`
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding-left: 5em;
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding-left: 3.3em;
   }
 `;
 const ContentWrap = styled.div`
@@ -371,6 +405,11 @@ const VidWrapper = styled.div`
     width: 42%;
     right: 250px;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 33%;
+    right: 277px;
+  }
 `;
 
 const VidContainer = styled.div`
@@ -399,6 +438,11 @@ const ContactWrapper = styled.div`
   @media (max-width: 425px) {
     width: 42%;
     margin-right: 600px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 33%;
+    right: 26px;
   }
 `;
 
@@ -455,6 +499,10 @@ const Anchorbt = styled.button`
   @media (max-width: 425px) {
     font-size: smaller;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: x-small;
+  }
 `;
 const Anchorwrap = styled.div`
   align-items: center;
@@ -467,6 +515,11 @@ const AnchorVl = styled.div`
   margin-top: 2%;
   border-left: 4px solid white;
   height: 50px;
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    height: 30px;
+    border-left: 2px solid white;
+  }
 `;
 const Scrolltopbt = styled.button`
   margin: 10px;
@@ -518,7 +571,7 @@ const style = {
 // SX Media
 const InputMedia = {
   width: {
-    xs: "200px",
+    xs: "150px",
     sm: "300px",
     md: "350px",
     lg: "400px",
