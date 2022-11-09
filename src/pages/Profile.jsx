@@ -372,6 +372,11 @@ const DownldCV = styled.button`
   @media (max-width: 425px) {
     padding: 10px 15px;
     font-size: 0.8em;
+    /* MOBILE S */
+    @media (max-width: 320px) {
+      padding: 10px 15px;
+      font-size: 0.6em;
+    }
   }
 `;
 
