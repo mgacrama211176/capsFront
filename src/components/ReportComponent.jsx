@@ -86,10 +86,8 @@ const Submitbtn = styled.button`
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    padding: 10px 15px;
     bottom: 4px;
     font-size: 0.8em;
-    font-weight: 700;
   }
 `;
 

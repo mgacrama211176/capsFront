@@ -32,7 +32,11 @@ const Wrapper = styled.div`
   justify-content: center;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 45.2%;
+    width: 72.1%;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 58.5%;
   }
 `;
 const H2 = styled.h2`

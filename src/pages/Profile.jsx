@@ -54,18 +54,20 @@ const ProfWrapper = styled.div`
   width: 85%;
   position: relative;
   display: flex;
-  margin-bottom: 2%;
   justify-content: center;
   align-items: center;
+  margin: 20px;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 56%;
+    right: 80px;
+  }
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    flex-direction: column;
-  }
-  /* Mobile Large */
-  @media (max-width: 425px) {
-    width: 34%;
-    right: 250px;
+    width: 38%;
+    right: 110px;
   }
 `;
 
@@ -92,7 +94,7 @@ const ImgCon = styled.figure`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin-left: 22%;
+    margin-left: 25%;
   }
 `;
 
@@ -106,6 +108,11 @@ const Imginner = styled.div`
   @media (max-width: 425px) {
     width: 90%;
     height: 90%;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 70%;
+    height: 70%;
   }
 `;
 
@@ -134,6 +141,10 @@ const Detailswrap = styled.div`
   padding: 1em;
 
   justify-content: center;
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+  }
 `;
 
 const Subsinfo = styled.div`
@@ -144,15 +155,24 @@ const Subsinfo = styled.div`
   @media (max-width: 425px) {
     font-size: 0.8em;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+  }
 `;
 const UsernameWrapper = styled.span`
-  margin: 2.5rem 1rem;
+  margin: 3.5rem 1rem;
   text-decoration: uppercase;
   font-size: 2rem;
   /* Mobile Large */
   @media (max-width: 425px) {
     margin: 2.5rem 5rem;
     font-size: 1.1em;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.9em;
+    margin: 2.5rem 4rem;
   }
 `;
 
@@ -168,9 +188,8 @@ const Subbtn = styled.button`
   border: 0px;
   font-weight: 700;
   position: absolute;
-
-  right: 60px;
-  top: 120px;
+  margin: 55px 160px;
+  right: 0px;
 
   cursor: pointer;
   user-select: none;
@@ -192,11 +211,15 @@ const Subbtn = styled.button`
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
+    margin: 80px 125px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    right: 60px;
-    top: 220px;
+    margin: 95px 73px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    margin: 70px 10px;
   }
 `;
 
@@ -241,6 +264,12 @@ const Submitbtn = styled.button`
     font-size: 0.8em;
     font-weight: 700;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+    padding: 8px;
+    margin: 6px 50px;
+  }
 `;
 
 //About Section
@@ -264,13 +293,17 @@ const Aboutwrapper = styled.div`
   flex: 50%;
   padding: 10px;
 
-  /* margin-right: 100px; */
   display: inline-block;
   border-radius: 40px;
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
+    width: 68%;
+  }
+
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 53%;
   }
 `;
 
@@ -280,6 +313,11 @@ const Aboutme = styled.h1`
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding-left: 5em;
+  }
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+    padding-left: 3.3em;
   }
 `;
 const ContentWrap = styled.div`
@@ -338,7 +376,11 @@ const DownldCV = styled.button`
   /* Mobile Large */
   @media (max-width: 425px) {
     padding: 10px 15px;
-    font-size: 0.8em;
+    font-size: 0.6em;
+    /* MOBILE S */
+    @media (max-width: 320px) {
+      padding: 10px 15px;
+    }
   }
 `;
 
@@ -361,16 +403,18 @@ const VidWrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin: 2% 100px;
-  /* margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 2%; */
+  margin: 20px;
   border-radius: 40px;
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
-    right: 250px;
+    width: 70%;
+    right: 80px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 56%;
+    right: 112px;
   }
 `;
 
@@ -390,16 +434,20 @@ const ContactWrapper = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
-  margin: 0px 100px;
-
+  margin: 20px;
   align-content: center;
   justify-content: center;
   border-radius: 20px;
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
-    margin-right: 600px;
+    width: 70%;
+    right: 80px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 56%;
+    right: 112px;
   }
 `;
 
@@ -423,6 +471,10 @@ const ContactHeader = styled.h1`
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding: 5px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 1.2em;
   }
 `;
 
@@ -456,6 +508,10 @@ const Anchorbt = styled.button`
   @media (max-width: 425px) {
     font-size: smaller;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: x-small;
+  }
 `;
 const Anchorwrap = styled.div`
   align-items: center;
@@ -468,6 +524,11 @@ const AnchorVl = styled.div`
   margin-top: 2%;
   border-left: 4px solid white;
   height: 50px;
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    height: 30px;
+    border-left: 2px solid white;
+  }
 `;
 const Scrolltopbt = styled.button`
   margin: 10px;
@@ -519,7 +580,7 @@ const style = {
 // SX Media
 const InputMedia = {
   width: {
-    xs: "200px",
+    xs: "150px",
     sm: "300px",
     md: "350px",
     lg: "400px",
@@ -629,7 +690,6 @@ const Profile = ({ nav }) => {
                     : retrivedUser.username}
                   <br />
                   {retrivedUser.userCategory}
-                  <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
                   <Follow currentUser={currentUser} merger={retrivedUser} />

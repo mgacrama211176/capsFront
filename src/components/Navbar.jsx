@@ -29,6 +29,15 @@ const Wrapper = styled.div`
   justify-content: space-between;
   position: relative;
   width: 100%;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    width: 90%;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 90%;
+  }
 `;
 
 const LeftContainer = styled.div`
