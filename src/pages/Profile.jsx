@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import axios from "axios";
 import media from "../media";
 import ReportComponent from "../components/ReportComponent";
+import Avatar from "@mui/material/Avatar";
 
 //MUI COMPONENTS
 import Box from "@mui/material/Box";
@@ -92,9 +93,17 @@ const ImgCon = styled.figure`
   height: 10em;
   margin-left: 35%;
 
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
+    margin-left: 20%;
+  }
   /* Mobile Large */
   @media (max-width: 425px) {
     margin-left: 25%;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    margin-left: 11%;
   }
 `;
 
@@ -141,8 +150,7 @@ const Infoleft = styled.div`
 const Detailswrap = styled.div`
   width: 100%;
   display: flex;
-  padding: 1em;
-
+  margin: 50px;
   justify-content: center;
 
   /* MOBILE S */
@@ -164,18 +172,18 @@ const Subsinfo = styled.div`
   }
 `;
 const UsernameWrapper = styled.span`
-  margin: 3.5rem 1rem;
+  margin: 3.5rem 3rem;
   text-decoration: uppercase;
   font-size: 2rem;
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 2.5rem 5rem;
-    font-size: 1.1em;
+    margin: 3rem 7rem;
+    font-size: 1em;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
     font-size: 0.9em;
-    margin: 2.5rem 4rem;
+    margin: 2.5rem 3.5rem;
   }
 `;
 
@@ -209,20 +217,20 @@ const Subbtn = styled.button`
   }
   /* Mobile Laptop */
   @media (max-width: 1024px) {
-    right: 30px;
-    top: 130px;
+    right: 59px;
+    top: 160px;
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
-    margin: 80px 125px;
+    margin: 80px 112px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 95px 73px;
+    margin: 80px 40px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    margin: 70px 10px;
+    margin: 70px -10px;
   }
 `;
 
@@ -598,6 +606,23 @@ const InputMedia = {
   },
 };
 
+const AvaMedia = {
+  width: {
+    xs: "150px",
+    sm: "200px",
+    md: "200px",
+    lg: "200px",
+    xl: "200px",
+  },
+  height: {
+    xs: "150px",
+    sm: "200px",
+    md: "200px",
+    lg: "200px",
+    xl: "200px",
+  },
+};
+
 const Profile = ({ nav }) => {
   let { id } = useParams();
 
@@ -682,10 +707,17 @@ const Profile = ({ nav }) => {
             <Infowrapper>
               <Infoleft>
                 <ImgCon>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={retrivedUser.image}
+                    sx={AvaMedia}
+                  />
+                </ImgCon>
+                {/* <ImgCon>
                   <Imginner>
                     <Pimg src={retrivedUser.image}></Pimg>
                   </Imginner>
-                </ImgCon>
+                </ImgCon> */}
 
                 <UsernameWrapper>
                   {retrivedUser.fullName !== undefined
