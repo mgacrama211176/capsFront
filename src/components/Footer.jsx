@@ -34,6 +34,10 @@ const Wrapper = styled.div`
   @media (max-width: 425px) {
     width: 45.2%;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    width: 37.2%;
+  }
 `;
 const H2 = styled.h2`
   color: white;
