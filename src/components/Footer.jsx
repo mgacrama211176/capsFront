@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   justify-content: center;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 45.2%;
+    width: 56%;
   }
   /* MOBILE S */
   @media (max-width: 320px) {

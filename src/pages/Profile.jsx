@@ -54,20 +54,17 @@ const ProfWrapper = styled.div`
   width: 85%;
   position: relative;
   display: flex;
-  margin-bottom: 2%;
   justify-content: center;
   align-items: center;
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 34%;
-    right: 250px;
+    width: 37%;
   }
 
   /* MOBILE S */
   @media (max-width: 320px) {
     width: 23%;
-    right: 274px;
   }
 `;
 
@@ -293,18 +290,17 @@ const Aboutwrapper = styled.div`
   flex: 50%;
   padding: 10px;
 
-  /* margin-right: 100px; */
   display: inline-block;
   border-radius: 40px;
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
+    width: 52%;
   }
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 32%;
+    width: 40%;
   }
 `;
 
@@ -377,11 +373,10 @@ const DownldCV = styled.button`
   /* Mobile Large */
   @media (max-width: 425px) {
     padding: 10px 15px;
-    font-size: 0.8em;
+    font-size: 0.6em;
     /* MOBILE S */
     @media (max-width: 320px) {
       padding: 10px 15px;
-      font-size: 0.6em;
     }
   }
 `;
@@ -405,21 +400,16 @@ const VidWrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin: 2% 100px;
-  /* margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 2%; */
+
   border-radius: 40px;
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
-    right: 250px;
+    width: 54%;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 33%;
-    right: 277px;
+    width: 43%;
   }
 `;
 
@@ -439,7 +429,6 @@ const ContactWrapper = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
-  margin: 0px 100px;
 
   align-content: center;
   justify-content: center;
@@ -447,13 +436,11 @@ const ContactWrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 42%;
-    margin-right: 600px;
+    width: 54%;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 33%;
-    right: 26px;
+    width: 43%;
   }
 `;
 
@@ -681,44 +668,45 @@ const Profile = ({ nav }) => {
         </>
       ) : (
         <>
-          <ProfWrapper>
-            <Infowrapper>
-              <Infoleft>
-                <ImgCon>
-                  <Imginner>
-                    <Pimg src={retrivedUser.image}></Pimg>
-                  </Imginner>
-                </ImgCon>
-
-                <UsernameWrapper>
-                  {retrivedUser.fullName !== undefined
-                    ? retrivedUser.fullName
-                    : retrivedUser.username}
-                  <br />
-                  {retrivedUser.userCategory}
-                </UsernameWrapper>
-                <Subbtn>
-                  <Follow currentUser={currentUser} merger={retrivedUser} />
-                </Subbtn>
-              </Infoleft>
-              <Detailswrap>
-                <Subsinfo>
-                  {retrivedUser.subscribers} Subscribers
-                  <Vl />
-                  {retrivedUser?.subscribedUsers?.length} Subscribed Users
-                </Subsinfo>
-              </Detailswrap>
-              <Anchorwrap>
-                <Anchorbt onClick={scrollAbout}>About</Anchorbt>
-                <AnchorVl />
-                <Anchorbt onClick={scrollVideos}>Videos</Anchorbt>
-                <AnchorVl />
-                <Anchorbt onClick={scrollContact}>Contact</Anchorbt>
-              </Anchorwrap>
-            </Infowrapper>
-          </ProfWrapper>
-          {/* About Section */}
           <Row>
+            <ProfWrapper>
+              <Infowrapper>
+                <Infoleft>
+                  <ImgCon>
+                    <Imginner>
+                      <Pimg src={retrivedUser.image}></Pimg>
+                    </Imginner>
+                  </ImgCon>
+
+                  <UsernameWrapper>
+                    {retrivedUser.fullName !== undefined
+                      ? retrivedUser.fullName
+                      : retrivedUser.username}
+                    <br />
+                    {retrivedUser.userCategory}
+                  </UsernameWrapper>
+                  <Subbtn>
+                    <Follow currentUser={currentUser} merger={retrivedUser} />
+                  </Subbtn>
+                </Infoleft>
+                <Detailswrap>
+                  <Subsinfo>
+                    {retrivedUser.subscribers} Subscribers
+                    <Vl />
+                    {retrivedUser?.subscribedUsers?.length} Subscribed Users
+                  </Subsinfo>
+                </Detailswrap>
+                <Anchorwrap>
+                  <Anchorbt onClick={scrollAbout}>About</Anchorbt>
+                  <AnchorVl />
+                  <Anchorbt onClick={scrollVideos}>Videos</Anchorbt>
+                  <AnchorVl />
+                  <Anchorbt onClick={scrollContact}>Contact</Anchorbt>
+                </Anchorwrap>
+              </Infowrapper>
+            </ProfWrapper>
+            {/* About Section */}
+
             <Aboutwrapper id="About">
               <Aboutme>About Me</Aboutme>
               <Aboutdetails>{retrivedUser.about}</Aboutdetails>
@@ -764,57 +752,58 @@ const Profile = ({ nav }) => {
                 </a>
               </ContentWrap>
             </Aboutwrapper>
+
+            <VidWrapper>
+              <Vidtitle id="Video">Videos</Vidtitle>
+              <VidContainer>
+                <>
+                  {retrievedVideos.map((video) => (
+                    <Card
+                      key={video._id}
+                      video={video}
+                      type="profile"
+                      currentUser={currentUser}
+                    />
+                  ))}
+                </>
+              </VidContainer>
+            </VidWrapper>
+            {/* Contact Me Section */}
+            <ContactWrapper>
+              <ContactInnerWrap id="Contact">
+                <ContactDetails>
+                  <ContactHeader>
+                    Contact Me
+                    <ContactMailIcon />
+                  </ContactHeader>
+                  <Stack
+                    component="form"
+                    spacing={2}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <TextField
+                      label="Email"
+                      helperText="Please enter your email"
+                      defaultValue={retrivedUser.email}
+                      sx={InputMedia}
+                    />
+                    <TextField
+                      sx={{
+                        InputMedia,
+                      }}
+                      label="Message"
+                      multiline
+                      rows={4}
+                      helperText="Input some message"
+                      defaultValue="Hi! I am interested with your videos and artworks."
+                    />
+                  </Stack>
+                  <Submitbtn>Send</Submitbtn>
+                </ContactDetails>
+              </ContactInnerWrap>
+            </ContactWrapper>
           </Row>
-          <VidWrapper>
-            <Vidtitle id="Video">Videos</Vidtitle>
-            <VidContainer>
-              <>
-                {retrievedVideos.map((video) => (
-                  <Card
-                    key={video._id}
-                    video={video}
-                    type="profile"
-                    currentUser={currentUser}
-                  />
-                ))}
-              </>
-            </VidContainer>
-          </VidWrapper>
-          {/* Contact Me Section */}
-          <ContactWrapper>
-            <ContactInnerWrap id="Contact">
-              <ContactDetails>
-                <ContactHeader>
-                  Contact Me
-                  <ContactMailIcon />
-                </ContactHeader>
-                <Stack
-                  component="form"
-                  spacing={2}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <TextField
-                    label="Email"
-                    helperText="Please enter your email"
-                    defaultValue={retrivedUser.email}
-                    sx={InputMedia}
-                  />
-                  <TextField
-                    sx={{
-                      InputMedia,
-                    }}
-                    label="Message"
-                    multiline
-                    rows={4}
-                    helperText="Input some message"
-                    defaultValue="Hi! I am interested with your videos and artworks."
-                  />
-                </Stack>
-                <Submitbtn>Send</Submitbtn>
-              </ContactDetails>
-            </ContactInnerWrap>
-          </ContactWrapper>
         </>
       )}
       <Footer />
