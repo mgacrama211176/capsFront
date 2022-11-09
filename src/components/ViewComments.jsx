@@ -70,8 +70,6 @@ const ViewComments = ({ videoId }) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(currentUser._id);
-    console.log(videoId);
     try {
       const currentUserComment = await axios.post(
         `https://capstoneback2.herokuapp.com/api/comments/${currentUser._id}/${videoId}`,

@@ -233,7 +233,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
             )}
             <ProgressBar
               completed={videoPercentage}
-              width="30rem"
+              width="30em"
               bgColor="#B2792D"
               baseBgColor="#132550"
               maxCompleted={100}
@@ -266,7 +266,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
             )}
             <ProgressBar
               completed={thumbnailPercentage}
-              width="30rem"
+              width="10%"
               bgColor="#B2792D"
               baseBgColor="#132550"
             />
