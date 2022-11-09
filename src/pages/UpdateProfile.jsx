@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 
 const CardContainer = styled.div`
   position: relative;
-  top: 150px;
+  top: 70px;
   flex-direction: column;
   align-items: center;
   display: flex;
@@ -78,7 +78,7 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   flex-flow: wrap column;
-  max-width: 300px;
+  max-width: 200px;
 
   /* Mobile Large */
   @media (max-width: 425px) {
@@ -86,8 +86,10 @@ const ImageContainer = styled.div`
   }
 `;
 
+const ImgContainer = styled.div``;
+
 const CardImage = styled.img`
-  width: 50%;
+  width: 100%;
   border-radius: 50%;
   background-color: transparent;
 `;
@@ -203,7 +205,7 @@ const UpdateProfile = () => {
 
   const [newData, setNewData] = useState({
     username: currentUser?.username,
-    userCategory: currentUser?.userCategory,
+    category: currentUser?.userCategory,
     fullName: currentUser?.fullName,
     address: currentUser?.address,
     birthdate: currentUser?.birthdate,
@@ -212,11 +214,9 @@ const UpdateProfile = () => {
 
   const onChangeHandle = (e) => {
     const newUser = { ...newData };
-
-    newUser[e.target.id] = e.target.value;
-
-    console.log(newUser[e.target.value]);
+    newUser[e.target.name] = e.target.value;
     setNewData(newUser);
+    console.log(newUser);
   };
 
   const onClickUpdateSubmit = async (e) => {
@@ -226,7 +226,7 @@ const UpdateProfile = () => {
         `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
         {
           username: newData.username,
-          userCategory: newData.userCategory,
+          userCategory: newData.category,
           fullName: newData.fullName,
           address: newData.address,
           birthdate: newData.birthdate,
@@ -315,19 +315,34 @@ const UpdateProfile = () => {
     newProfile && uploadFile(newProfile, "image");
   }, [newProfile]);
 
+  const categories = [
+    {
+      value: "Animator",
+      label: "Animator",
+    },
+    {
+      value: "Employer",
+      label: "Employer",
+    },
+  ];
+
   return (
     <Container>
       {/* <AccountSet>Account Update</AccountSet> */}
       <Wrapper>
         <CardContainer>
           <ImageContainer>
+            <ImgContainer>
+              <CardImage src={currentUser?.image} />
+            </ImgContainer>
+
             {imageUploadPercentage}
-            <CardImage src={currentUser?.image} />
             <UpdateImageContainer onClick={handleNewImageUpload}>
               <BrushIcon />
               <Input
                 type="file"
                 id="image"
+                name="image"
                 accept="image/*"
                 ref={profileRef}
                 onChange={(e) => setNewProfile(e.target.files[0])}
@@ -351,6 +366,7 @@ const UpdateProfile = () => {
             <TextField
               disabled
               id="Email"
+              name="Email"
               label={currentUser?.email}
               variant="outlined"
               placeholder="Email"
@@ -358,6 +374,7 @@ const UpdateProfile = () => {
             />
             <TextField
               id="username"
+              name="username"
               label={currentUser?.username}
               variant="outlined"
               placeholder="Channel Name"
@@ -367,6 +384,7 @@ const UpdateProfile = () => {
             {currentUser?.fullName ? (
               <TextField
                 id="fullName"
+                name="fullName"
                 label={currentUser?.fullName}
                 variant="outlined"
                 placeholder="Full Name"
@@ -376,6 +394,7 @@ const UpdateProfile = () => {
             ) : (
               <TextField
                 id="fullName"
+                name="fullName"
                 label="Full Name"
                 variant="outlined"
                 placeholder="Full Name"
@@ -385,23 +404,29 @@ const UpdateProfile = () => {
             )}
 
             {/* CATEGORY HERE */}
-            <Box sx={InputMedia}>
-              <FormControl fullWidth>
-                <InputLabel>Category</InputLabel>
-                <Select
-                  id="userCategory"
-                  label={currentUser.userCategory}
-                  onChange={(e) => onChangeHandle(e)}
-                >
-                  <MenuItem value="Animator">Animator</MenuItem>
-                  <MenuItem value="Employer">Employer</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+            <TextField
+              id="category"
+              name="category"
+              select
+              label="Category"
+              value={newData?.category}
+              onChange={(e) => {
+                onChangeHandle(e);
+              }}
+              helperText="Please select your Category"
+              sx={InputMedia}
+            >
+              {categories.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
             {currentUser?.address ? (
               <TextField
                 id="address"
+                name="address"
                 label={currentUser.address}
                 variant="outlined"
                 placeholder="Address"
@@ -411,6 +436,7 @@ const UpdateProfile = () => {
             ) : (
               <TextField
                 id="address"
+                name="address"
                 label="Address"
                 variant="outlined"
                 placeholder="Address"
@@ -420,6 +446,7 @@ const UpdateProfile = () => {
             )}
             <TextField
               id="birthdate"
+              name="birthdate"
               variant="outlined"
               type="date"
               value={currentUser?.birthdate}
@@ -429,6 +456,7 @@ const UpdateProfile = () => {
             />
             <TextField
               id="about"
+              name="about"
               label={`About the ${currentUser?.userCategory}`}
               variant="outlined"
               helperText="Write a short description about your channel"

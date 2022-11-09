@@ -14,7 +14,7 @@ import {
 } from "firebase/storage";
 
 //Toaster
-import { Uploaded } from "./Toasts";
+import { Uploaded, thumbnailError, VideoError } from "./Toasts";
 
 //Progress Bar
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -130,6 +130,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const [videoPercentage, setVideoPercentage] = useState(0);
   const videoRef = useRef(null);
   const thumbRef = useRef(null);
+  const [errorUpload, setErrorUpload] = useState("");
 
   const [uploadInformation, setUploadInformation] = useState({
     title: "",
@@ -193,19 +194,36 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const uploadHandler = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      `https://capstoneback2.herokuapp.com/api/videos/${currentUser}`,
-      {
-        title: uploadInformation.title,
-        desc: uploadInformation.desc,
-        tags: uploadInformation.tags,
-        videoUrl: uploadInformation.videoUrl,
-        imgUrl: uploadInformation.imgUrl,
+    if (
+      uploadInformation.videoUrl !== undefined &&
+      uploadInformation.imgUrl !== undefined
+    ) {
+      const response = await axios.post(
+        `https://capstoneback2.herokuapp.com/api/videos/${currentUser}`,
+        {
+          title: uploadInformation.title,
+          desc: uploadInformation.desc,
+          tags: uploadInformation.tags,
+          videoUrl: uploadInformation.videoUrl,
+          imgUrl: uploadInformation.imgUrl,
+        }
+      );
+      setOpenModal(false);
+      response.status === 200 && nav("/");
+      Uploaded();
+    } else {
+      if (
+        uploadInformation.videoUrl === undefined &&
+        uploadInformation.imgUrl === undefined
+      ) {
+        setErrorUpload("Please Upload a Video and a thumbnail!");
+      } else if (uploadInformation.videoUrl === undefined) {
+        setErrorUpload("Please Upload a Video!");
+      } else {
+        thumbnailError();
       }
-    );
-    setOpenModal(false);
-    response.status === 200 && nav("/");
-    Uploaded();
+    }
+    setErrorUpload("");
   };
 
   const handleVideoClick = () => {
@@ -215,6 +233,8 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const handleThumbClick = () => {
     thumbRef.current.click();
   };
+
+  console.log(uploadInformation.videoUrl);
 
   return (
     <Container>
@@ -249,6 +269,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
               style={{ display: "none" }}
               ref={videoRef}
             />
+            {uploadInformation.videoUrl === undefined ? errorUpload : ""}
             <Button onClick={handleVideoClick}>Upload Video</Button>
           </>
         )}
@@ -282,6 +303,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
               style={{ display: "none" }}
               ref={thumbRef}
             />
+            {uploadInformation.imgUrl === undefined ? errorUpload : ""}
             <Button onClick={handleThumbClick}>Upload Thumbnail</Button>
           </>
         )}

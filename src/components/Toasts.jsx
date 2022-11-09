@@ -190,3 +190,26 @@ export const Reported = () => {
     progress: undefined,
   });
 };
+
+export const thumbnailError = () => {
+  toast.error("Please upload a thumbnail", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
+export const VideoError = () => {
+  toast.error("Please upload a video", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
