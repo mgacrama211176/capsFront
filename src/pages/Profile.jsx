@@ -104,6 +104,8 @@ const Imginner = styled.div`
   position: relative;
   border-radius: 50%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
   /* Mobile Large */
   @media (max-width: 425px) {
     width: 90%;
@@ -117,6 +119,7 @@ const Imginner = styled.div`
 `;
 
 const Pimg = styled.img`
+  display: block;
   min-width: 100%;
   max-width: 105%;
   min-height: 100%;
