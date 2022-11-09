@@ -264,6 +264,12 @@ const Submitbtn = styled.button`
     font-size: 0.8em;
     font-weight: 700;
   }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+    padding: 8px;
+    margin: 6px 50px;
+  }
 `;
 
 //About Section
@@ -471,6 +477,10 @@ const ContactHeader = styled.h1`
   @media (max-width: 425px) {
     font-size: 1.5em;
     padding: 5px;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    font-size: 1.2em;
   }
 `;
 
