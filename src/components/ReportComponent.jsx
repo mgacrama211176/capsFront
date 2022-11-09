@@ -269,8 +269,8 @@ export function SubmitRpt({
   const onClickReport = async (e) => {
     e.preventDefault();
     const reportUser = await axios.post(
-      // `https://capstoneback2.herokuapp.com/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
-      `http://localhost:4000/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
+      `https://capstoneback2.herokuapp.com/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
+      // `http://localhost:4000/api/reports/addReport/${currentUser._id}/${retrivedUser._id}`,
       {
         userReporting: currentUser.username,
         channelReported: retrivedUser.username,

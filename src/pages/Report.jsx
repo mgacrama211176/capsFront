@@ -43,21 +43,6 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData(
-    "Hitoru",
-    "Sir Gian",
-    "Way gamit",
-    "Way gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamitay gamit"
-  ),
-  createData(
-    "Marlon",
-    "Sir Gian",
-    "Way gamit",
-    "Way gamitay gamitay gamitay gamitay gamitay Way gamitay gamitay gamitay gamitay gamitay Way gamitay gamitay gamitay gamitay gamitay"
-  ),
-];
-
 const Report = () => {
   const [userData, setUserData] = useState(0);
   const [videoData, setVideoData] = useState(0);
@@ -166,22 +151,28 @@ const Report = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {reportData.map((report) => (
-                <TableRow
-                  key={report._id}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    bgcolor: "#f0030347",
-                  }}
-                >
-                  <TableCell align="center">{report.userReporting}</TableCell>
-                  <TableCell align="center">{report.channelReported}</TableCell>
-                  <TableCell align="center">{report.issues}</TableCell>
-                  <TableCell align="center" sx={{ maxWidth: 200 }}>
-                    {report.desc}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {Array.isArray(reportData)
+                ? reportData.map((report) => (
+                    <TableRow
+                      key={report._id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                        bgcolor: "#f0030347",
+                      }}
+                    >
+                      <TableCell align="center">
+                        {report.userReporting}
+                      </TableCell>
+                      <TableCell align="center">
+                        {report.channelReported}
+                      </TableCell>
+                      <TableCell align="center">{report.issues}</TableCell>
+                      <TableCell align="center" sx={{ maxWidth: 200 }}>
+                        {report.desc}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
             </TableBody>
           </Table>
         </TableContainer>
