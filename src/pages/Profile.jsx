@@ -60,7 +60,8 @@ const ProfWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 37%;
+    width: 56%;
+    right: 80px;
   }
 
   /* MOBILE S */
@@ -92,7 +93,7 @@ const ImgCon = styled.figure`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin-left: 22%;
+    margin-left: 25%;
   }
 `;
 
@@ -296,7 +297,7 @@ const Aboutwrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 52%;
+    width: 68%;
   }
 
   /* MOBILE S */
@@ -406,7 +407,8 @@ const VidWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 54%;
+    width: 70%;
+    right: 80px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
@@ -437,7 +439,8 @@ const ContactWrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 54%;
+    width: 70%;
+    right: 80px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
