@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
+import TextField from "@mui/material/TextField";
 
 //TOAST
 import { DeleteNotif, UnauthorizedNotif, CommentSuccess } from "./Toasts";
@@ -48,6 +49,7 @@ const Date = styled.span`
 const Text = styled.span`
   color: ${({ theme }) => theme.titleColor};
   font-size: 14px;
+  width: 50px;
 `;
 
 const Separator = styled.div`
@@ -56,6 +58,7 @@ const Separator = styled.div`
 `;
 
 const UpdateContainer = styled.div`
+  align-items: center;
   display: flex;
   width: 100%;
 `;
@@ -154,11 +157,12 @@ const CommentsBox = ({
           {editor ? (
             <>
               <UpdateContainer>
-                <Input
-                  placeholder="Update comment"
+                <TextField
+                  label="Update Comment"
                   id="comment"
-                  type="text"
                   onChange={(e) => onChangeHandler(e)}
+                  multiline
+                  sx={{ width: "100%" }}
                 />
 
                 <SendIcon
@@ -169,7 +173,14 @@ const CommentsBox = ({
             </>
           ) : (
             <>
-              <Text>{comment.desc}</Text>
+              <TextField
+                id="outlined-textarea"
+                label="Comment"
+                multiline
+                value={comment.desc}
+                disabled
+                sx={{ color: "black" }}
+              />
             </>
           )}
         </Details>

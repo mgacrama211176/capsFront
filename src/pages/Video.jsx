@@ -69,7 +69,7 @@ const VideoWrapper = styled.div`
   justify-content: center;
   align-content: center;
   object-fit: fill;
-  width: 100%;
+  width: 80%;
 `;
 
 const VideoFrame = styled.video`
