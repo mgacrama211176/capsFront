@@ -146,7 +146,7 @@ const Subsinfo = styled.div`
   }
 `;
 const UsernameWrapper = styled.span`
-  margin: 2.5rem 1rem;
+  margin: 3.5rem 1rem;
   text-decoration: uppercase;
   font-size: 2rem;
   /* Mobile Large */
@@ -168,9 +168,8 @@ const Subbtn = styled.button`
   border: 0px;
   font-weight: 700;
   position: absolute;
-
-  right: 60px;
-  top: 120px;
+  margin: 55px 160px;
+  right: 0px;
 
   cursor: pointer;
   user-select: none;
@@ -192,6 +191,7 @@ const Subbtn = styled.button`
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
+    margin: 80px 125px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
@@ -629,7 +629,6 @@ const Profile = ({ nav }) => {
                     : retrivedUser.username}
                   <br />
                   {retrivedUser.userCategory}
-                  <PersonOutlineIcon />
                 </UsernameWrapper>
                 <Subbtn>
                   <Follow currentUser={currentUser} merger={retrivedUser} />
