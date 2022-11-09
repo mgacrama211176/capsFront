@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 37.2%;
+    width: 58.5%;
   }
 `;
 const H2 = styled.h2`
