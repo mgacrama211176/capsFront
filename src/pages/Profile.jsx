@@ -455,6 +455,9 @@ const ContactInnerWrap = styled.div`
 const ContactDetails = styled.div``;
 
 const ContactHeader = styled.h1`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 0;
   color: black;
   /* Mobile Large */
@@ -560,6 +563,7 @@ const Profile = ({ nav }) => {
   const [retrivedUser, setRetrievedUser] = useState({});
   const [retrievedVideos, setRetrivedVideos] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [message, setMessage] = useState({ email: "", message: "" });
 
   useEffect(() => {
     const getProfile = async () => {
@@ -624,6 +628,13 @@ const Profile = ({ nav }) => {
       inline: "start",
     });
   }
+
+  const onChangeHandle = (e) => {
+    const contact = { ...message };
+    contact[e.target.name] = e.target.value;
+    console.log(contact);
+    setMessage(contact);
+  };
 
   return (
     <MainWrapper>
@@ -751,6 +762,7 @@ const Profile = ({ nav }) => {
                   Contact Me
                   <ContactMailIcon />
                 </ContactHeader>
+
                 <Stack
                   component="form"
                   spacing={2}
@@ -758,12 +770,16 @@ const Profile = ({ nav }) => {
                   autoComplete="off"
                 >
                   <TextField
+                    name="email"
                     label="Email"
                     helperText="Please enter your email"
-                    defaultValue={retrivedUser.email}
                     sx={InputMedia}
+                    onChange={(e) => {
+                      onChangeHandle(e);
+                    }}
                   />
                   <TextField
+                    name="message"
                     sx={{
                       InputMedia,
                     }}
@@ -772,8 +788,12 @@ const Profile = ({ nav }) => {
                     rows={4}
                     helperText="Input some message"
                     defaultValue="Hi! I am interested with your videos and artworks."
+                    onChange={(e) => {
+                      onChangeHandle(e);
+                    }}
                   />
                 </Stack>
+
                 <Submitbtn>Send</Submitbtn>
               </ContactDetails>
             </ContactInnerWrap>

@@ -333,8 +333,6 @@ const UpdateProfile = () => {
     },
   ];
 
-  console.log(currentUser);
-
   return (
     <Container>
       {/* <AccountSet>Account Update</AccountSet> */}
@@ -431,6 +429,7 @@ const UpdateProfile = () => {
                 </MenuItem>
               ))}
             </TextField>
+
             {newData?.category === "Animator" ? (
               <>
                 {/* Employment Availablity HERE */}
