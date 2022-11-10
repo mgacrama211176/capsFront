@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import axios from "axios";
 import ReportComponent from "../components/ReportComponent";
 import { ToastContainer } from "react-toastify";
+import Avatar from "@mui/material/Avatar";
 
 //MUI COMPONENTS
 
@@ -79,9 +80,18 @@ const ImgCon = styled.figure`
   height: 10em;
   margin-left: 35%;
 
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
+    margin-left: 28%;
+  }
+
   /* Mobile Large */
   @media (max-width: 425px) {
     margin-left: 25%;
+  }
+  /* MOBILE S */
+  @media (max-width: 320px) {
+    margin-left: 15%;
   }
 `;
 
@@ -131,6 +141,15 @@ const Detailswrap = styled.div`
   padding: 1em;
 
   justify-content: center;
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
+    padding: 2em;
+  }
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    margin: 2em;
+  }
 
   /* MOBILE S */
   @media (max-width: 320px) {
@@ -141,6 +160,7 @@ const Subsinfo = styled.div`
   display: flex;
   gap: 2em;
   position: relative;
+
   /* Mobile Large */
   @media (max-width: 425px) {
     font-size: 0.8em;
@@ -150,19 +170,25 @@ const Subsinfo = styled.div`
     font-size: 0.6em;
   }
 `;
-const UsernameWrapper = styled.span`
+const UsernameWrapper = styled.div`
   margin: 3.5rem 1rem;
+  width: 100%;
   text-decoration: uppercase;
   font-size: 2rem;
+
+  /* Mobile Tablet */
+  @media (max-width: 768px) {
+    margin: 1rem 0.4rem;
+  }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 2.5rem 5rem;
-    font-size: 1.1em;
+    margin: -1rem 4rem;
+    font-size: 1rem;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
     font-size: 0.9em;
-    margin: 2.5rem 4rem;
+    margin: -1.3rem 1.9rem;
   }
 `;
 
@@ -196,20 +222,21 @@ const Subbtn = styled.button`
   }
   /* Mobile Laptop */
   @media (max-width: 1024px) {
-    right: 30px;
-    top: 130px;
+    right: 94px;
+    top: 160px;
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
-    margin: 80px 125px;
+    margin: 50px 85px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 95px 73px;
+    margin: 95px 19px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    margin: 70px 10px;
+    margin: 160px 0px;
+    right: 50px;
   }
 `;
 
@@ -557,6 +584,23 @@ const InputMedia = {
   },
 };
 
+const AvaMedia = {
+  width: {
+    xs: "130px",
+    sm: "140px",
+    md: "150px",
+    lg: "170px",
+    xl: "170px",
+  },
+  height: {
+    xs: "130px",
+    sm: "140px",
+    md: "150px",
+    lg: "170px",
+    xl: "170px",
+  },
+};
+
 const Profile = ({ nav }) => {
   let { id } = useParams();
 
@@ -660,9 +704,11 @@ const Profile = ({ nav }) => {
             <Infowrapper>
               <Infoleft>
                 <ImgCon>
-                  <Imginner>
-                    <Pimg src={retrivedUser.image}></Pimg>
-                  </Imginner>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={retrivedUser.image}
+                    sx={AvaMedia}
+                  />
                 </ImgCon>
 
                 <UsernameWrapper>
