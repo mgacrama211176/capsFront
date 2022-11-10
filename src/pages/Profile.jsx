@@ -710,8 +710,9 @@ const Profile = ({ nav }) => {
                 <Abtdthd>Stats</Abtdthd>
                 <Aboutdt>
                   <hr />
-                  Joined {retrivedUser?.createdAt}
+                  Joined: {retrivedUser?.createdAt}
                   <hr />
+                  Employment Status: {retrivedUser.employmentStatus}
                   <ReportComponent retrivedUser={retrivedUser} />
                 </Aboutdt>
 
