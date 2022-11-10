@@ -17,6 +17,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
 const Container = styled.div``;
 
@@ -156,6 +157,21 @@ const HoverMenu = ({ setOpenModal }) => {
                     UPDATE PROFILE
                   </DropdownContent>
                 </Link>
+
+                {/* PROFILING ANIMATORS */}
+                {currentUser.userCategory === "Employer" ? (
+                  <>
+                    <Link to={"/animators"} style={{ textDecoration: "none" }}>
+                      <DropdownContent>
+                        <AccessibilityNewIcon />
+                        Animator Profiles
+                      </DropdownContent>
+                    </Link>
+                  </>
+                ) : (
+                  ""
+                )}
+
                 <DropdownContent>
                   <FlagIcon />
                   REPORT

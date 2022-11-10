@@ -1,20 +1,21 @@
-import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 //ROUTER DOM
-import Home from '../pages/Home';
-import Video from '../pages/Video';
-import Signin from '../pages/Signin';
-import Signup from '../pages/Signup';
-import Profile from '../pages/Profile';
-import Password from '../pages/ForgotPassword';
-import ReceivedEmail from '../pages/ReceivedEmail';
-import Search from '../pages/Search';
-import Report from '../pages/Report';
-import Update from '../pages/UpdateProfile';
+import Home from "../pages/Home";
+import Video from "../pages/Video";
+import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
+import Profile from "../pages/Profile";
+import Password from "../pages/ForgotPassword";
+import ReceivedEmail from "../pages/ReceivedEmail";
+import Search from "../pages/Search";
+import Report from "../pages/Report";
+import Update from "../pages/UpdateProfile";
+import AnimatorProfiles from "../pages/AnimatorProfiles";
 
 //Framer Motion
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from "framer-motion";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ const AnimatedRoutes = () => {
         <Route path="/receivedEmail/:token" element={<ReceivedEmail />}></Route>
         <Route path="/video/:id" element={<Video />}></Route>
         <Route path="/update" element={<Update />}></Route>
+        <Route path="/animators" element={<AnimatorProfiles />}></Route>
 
         {/* CATEGORIES ROUTES */}
         <Route
