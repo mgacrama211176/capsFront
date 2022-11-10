@@ -19,6 +19,11 @@ import { Uploaded, thumbnailError, VideoError } from "./Toasts";
 //Progress Bar
 import ProgressBar from "@ramonak/react-progress-bar";
 
+//MUI
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+
 const Container = styled.div`
   width: 100%;
   min-height: 100%;
@@ -44,7 +49,7 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 15px;
   align-items: center;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 `;
 
 const Close = styled.div`
@@ -105,10 +110,6 @@ const Select = styled.select`
   width: 80%;
 `;
 
-const Option = styled.option``;
-
-const Label = styled.label``;
-
 const Video = styled.video`
   width: 320px;
   height: 240px;
@@ -122,6 +123,23 @@ const UploadedImg = styled.img`
   width: 100%;
 `;
 
+const InputMedia = {
+  width: {
+    xs: "200px",
+    sm: "300px",
+    md: "350px",
+    lg: "400px",
+    xl: "500px",
+  },
+  fontSize: {
+    xs: "20px",
+    sm: "30px",
+    md: "40px",
+    lg: "50px",
+    xl: "60px",
+  },
+};
+
 const Upload = ({ setOpenModal, currentUser }) => {
   const nav = useNavigate();
   const [thumbnail, setThumbnail] = useState(undefined);
@@ -132,20 +150,53 @@ const Upload = ({ setOpenModal, currentUser }) => {
   const thumbRef = useRef(null);
   const [errorUpload, setErrorUpload] = useState("");
 
+  const UploadErrorVideo = "Video";
+  const UploadErrorThumb = "Thumbnail";
+
   const [uploadInformation, setUploadInformation] = useState({
     title: "",
     desc: "",
     tags: "Traditional Animation",
   });
 
+  const categories = [
+    {
+      value: "Traditional Animation",
+      label: "Traditional Animation",
+    },
+    {
+      value: "2D Animation",
+      label: "2D Animation",
+    },
+    {
+      value: "3D Animation",
+      label: "3D Animation",
+    },
+    {
+      value: "Motion Graphics",
+      label: "Motion Graphics",
+    },
+    {
+      value: "Stop Motion",
+      label: "Stop Motion",
+    },
+  ];
+  const handleVideoClick = () => {
+    videoRef.current.click();
+  };
+
+  const handleThumbClick = () => {
+    thumbRef.current.click();
+  };
+
   const onChangeHandleInformation = (e) => {
     const newInfo = { ...uploadInformation };
-    newInfo[e.target.id] = e.target.value;
-    console.log(newInfo);
+    newInfo[e.target.name] = e.target.value;
     setUploadInformation(newInfo);
   };
 
   const uploadFile = (file, urlType) => {
+    setErrorUpload("");
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
 
@@ -216,25 +267,17 @@ const Upload = ({ setOpenModal, currentUser }) => {
         uploadInformation.videoUrl === undefined &&
         uploadInformation.imgUrl === undefined
       ) {
-        setErrorUpload("Please Upload a Video and a thumbnail!");
+        setErrorUpload(
+          `Please Upload a ${UploadErrorVideo} and a ${UploadErrorThumb}!`
+        );
       } else if (uploadInformation.videoUrl === undefined) {
-        setErrorUpload("Please Upload a Video!");
+        setErrorUpload(`Please Upload a ${UploadErrorVideo}!`);
       } else {
-        thumbnailError();
+        setErrorUpload(`Please Upload a ${UploadErrorThumb}!`);
       }
     }
-    setErrorUpload("");
+    console.log(errorUpload);
   };
-
-  const handleVideoClick = () => {
-    videoRef.current.click();
-  };
-
-  const handleThumbClick = () => {
-    thumbRef.current.click();
-  };
-
-  console.log(uploadInformation.videoUrl);
 
   return (
     <Container>
@@ -269,7 +312,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
               style={{ display: "none" }}
               ref={videoRef}
             />
-            {uploadInformation.videoUrl === undefined ? errorUpload : ""}
+
             <Button onClick={handleVideoClick}>Upload Video</Button>
           </>
         )}
@@ -303,35 +346,60 @@ const Upload = ({ setOpenModal, currentUser }) => {
               style={{ display: "none" }}
               ref={thumbRef}
             />
-            {uploadInformation.imgUrl === undefined ? errorUpload : ""}
+
             <Button onClick={handleThumbClick}>Upload Thumbnail</Button>
           </>
         )}
-
-        <Input
-          type="text"
-          placeholder="Title"
-          id="title"
-          onChange={(e) => onChangeHandleInformation(e)}
-        />
-        <TextArea
-          placeholder="Description"
-          rows={15}
-          id="desc"
-          onChange={(e) => onChangeHandleInformation(e)}
-        ></TextArea>
-
-        <Select
-          name="tags"
-          id="tags"
-          onChange={(e) => onChangeHandleInformation(e)}
+        {errorUpload}
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": {
+              m: 1,
+              width: "25ch",
+              display: "flex",
+              flexDirection: "column",
+            },
+          }}
+          noValidate
+          autoComplete="off"
         >
-          <Option value="Traditional Animation">Traditional Animation</Option>
-          <Option value="2D animation">2D animation</Option>
-          <Option value="3D animation">3D animation</Option>
-          <Option value="Motion Graphics">Motion Graphics</Option>
-          <Option value="Stop Motion">Stop Motion</Option>
-        </Select>
+          <TextField
+            id="title"
+            name="title"
+            label="Title"
+            variant="outlined"
+            placeholder="title"
+            onChange={(e) => onChangeHandleInformation(e)}
+            sx={InputMedia}
+          />
+          <TextField
+            id="desc"
+            name="desc"
+            label="Description"
+            placeholder="Description"
+            multiline
+            maxRows={10}
+            onChange={(e) => onChangeHandleInformation(e)}
+            sx={InputMedia}
+          />
+          <TextField
+            id="tags"
+            name="tags"
+            select
+            label="Category"
+            value={categories.value}
+            onChange={(e) => onChangeHandleInformation(e)}
+            helperText="Please select your video Category"
+            sx={InputMedia}
+          >
+            {categories.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Box>
 
         <Button onClick={uploadHandler}>Upload</Button>
       </Wrapper>
