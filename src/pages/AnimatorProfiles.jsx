@@ -17,6 +17,13 @@ const TypoMedia = {
   },
 };
 
+const BoxMedia = {
+  display: "Flex",
+  flexWrap: "wrap",
+  gap: 2,
+  flexDirection: "row",
+};
+
 const AnimatorProfiles = () => {
   let [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
@@ -46,14 +53,7 @@ const AnimatorProfiles = () => {
             Animator Profiles
           </Typography>
           {/* <AnimatorCards /> */}
-          <Box
-            sx={{
-              display: "Flex",
-              flexWrap: "wrap",
-              gap: 2,
-              flexDirection: "row",
-            }}
-          >
+          <Box sx={BoxMedia}>
             {users.map((user) => (
               <AnimatorCards key={user._id} user={user} />
             ))}
