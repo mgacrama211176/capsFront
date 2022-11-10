@@ -181,12 +181,6 @@ const InputMedia = {
     xl: "60px",
   },
 };
-// const textfieldStyle = {
-//   display: "flex",
-//   m: 2,
-//   width: "600px",
-//   backgroundColor: "Transparent",
-// };
 
 const Input = styled.input`
   display: none;
@@ -210,11 +204,13 @@ const UpdateProfile = () => {
     address: currentUser?.address,
     birthdate: currentUser?.birthdate,
     about: currentUser?.about,
+    employment: currentUser?.employmentStatus,
   });
 
   const onChangeHandle = (e) => {
     const newUser = { ...newData };
     newUser[e.target.name] = e.target.value;
+    console.log(newUser);
     setNewData(newUser);
   };
 
@@ -232,6 +228,7 @@ const UpdateProfile = () => {
           about: newData.about,
           uploadCV: newData.uploadCv,
           image: newData.image,
+          employmentStatus: newData.employment,
         }
       );
 
@@ -324,6 +321,19 @@ const UpdateProfile = () => {
       label: "Employer",
     },
   ];
+
+  const availablity = [
+    {
+      value: "Available",
+      label: "Available",
+    },
+    {
+      value: "Not-Available",
+      label: "Not-Available",
+    },
+  ];
+
+  console.log(currentUser);
 
   return (
     <Container>
@@ -421,6 +431,31 @@ const UpdateProfile = () => {
                 </MenuItem>
               ))}
             </TextField>
+            {newData?.category === "Animator" ? (
+              <>
+                {/* Employment Availablity HERE */}
+                <TextField
+                  id="employment"
+                  name="employment"
+                  select
+                  label="Employment Availability"
+                  // value={newData?.employment}
+                  onChange={(e) => {
+                    onChangeHandle(e);
+                  }}
+                  helperText="Are you looking for a Job?"
+                  sx={InputMedia}
+                >
+                  {availablity.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </>
+            ) : (
+              ""
+            )}
 
             {currentUser?.address ? (
               <TextField
