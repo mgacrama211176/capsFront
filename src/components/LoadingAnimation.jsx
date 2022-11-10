@@ -58,3 +58,17 @@ export const LoadingComments = () => {
     </Loader>
   );
 };
+
+export const LoadingAnimators = () => {
+  return (
+    <Loader>
+      <ClimbingBoxLoader
+        color="#132550"
+        loading
+        size={40}
+        speedMultiplier={1}
+      />
+      Loading Animators...
+    </Loader>
+  );
+};

@@ -3,7 +3,7 @@ import AnimatorCards from "../components/AnimatorCards";
 import axios from "axios";
 
 //loader
-import LoadingAnimation from "../components/LoadingAnimation";
+import { LoadingAnimators } from "../components/LoadingAnimation";
 
 //MUI
 import Container from "@mui/material/Container";
@@ -20,6 +20,7 @@ const AnimatorProfiles = () => {
     );
     setUsers(fetchedUsers.data);
     console.log(fetchedUsers.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -28,15 +29,30 @@ const AnimatorProfiles = () => {
 
   return (
     <Container>
-      <Typography variant="h3" gutterBottom>
-        Animator Profiles
-      </Typography>
-      {/* <AnimatorCards /> */}
-      <Box sx={{ display: "Flex", flexFlow: "wrap", gap: 5 }}>
-        {users.map((user) => (
-          <AnimatorCards key={user._id} user={user} />
-        ))}
-      </Box>
+      {loading ? (
+        <>
+          <LoadingAnimators />
+        </>
+      ) : (
+        <>
+          <Typography variant="h3" gutterBottom>
+            Animator Profiles
+          </Typography>
+          {/* <AnimatorCards /> */}
+          <Box
+            sx={{
+              display: "Flex",
+              flexWrap: "wrap",
+              gap: 2,
+              flexDirection: "row",
+            }}
+          >
+            {users.map((user) => (
+              <AnimatorCards key={user._id} user={user} />
+            ))}
+          </Box>
+        </>
+      )}
     </Container>
   );
 };
