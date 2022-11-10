@@ -10,6 +10,13 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+const TypoMedia = {
+  fontSize: "2.5rem",
+  "@media (max-width:600px)": {
+    fontSize: "2rem",
+  },
+};
+
 const AnimatorProfiles = () => {
   let [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
@@ -35,7 +42,7 @@ const AnimatorProfiles = () => {
         </>
       ) : (
         <>
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h3" gutterBottom sx={TypoMedia}>
             Animator Profiles
           </Typography>
           {/* <AnimatorCards /> */}

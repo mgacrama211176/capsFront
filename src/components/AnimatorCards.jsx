@@ -11,6 +11,35 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 
+const BtMedia = {
+  fontSize: {
+    xs: "9px",
+    sm: "10px",
+    md: "11px",
+    lg: "13px",
+    xl: "13px",
+  },
+};
+
+const TypoMedia = {
+  fontSize: {
+    xs: "18px",
+    sm: "19px",
+    md: "19px",
+    lg: "22px",
+    xl: "22px",
+  },
+};
+const TypoMedia2 = {
+  fontSize: {
+    xs: "14px",
+    sm: "14px",
+    md: "15px",
+    lg: "16px",
+    xl: "16px",
+  },
+};
+
 const AnimatorCards = ({ user }) => {
   return (
     <Box>
@@ -24,10 +53,19 @@ const AnimatorCards = ({ user }) => {
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                sx={TypoMedia}
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
                 {user.username}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                sx={TypoMedia2}
+                variant="body2"
+                color="text.secondary"
+              >
                 {user.about}
               </Typography>
             </CardContent>
@@ -36,7 +74,7 @@ const AnimatorCards = ({ user }) => {
                 to={`/profile/About/${user._id}`}
                 style={{ textDecoration: "none" }}
               >
-                <Button size="small" variant="contained">
+                <Button sx={BtMedia} size="small" variant="contained">
                   View Profile
                 </Button>
               </Link>
@@ -49,7 +87,12 @@ const AnimatorCards = ({ user }) => {
                       target="_blank"
                       style={{ textDecoration: "none" }}
                     >
-                      <Button size="small" variant="contained" disabled>
+                      <Button
+                        sx={BtMedia}
+                        size="small"
+                        variant="contained"
+                        disabled
+                      >
                         Download CV
                       </Button>
                     </a>
@@ -63,7 +106,7 @@ const AnimatorCards = ({ user }) => {
                     target="_blank"
                     style={{ textDecoration: "none" }}
                   >
-                    <Button size="small" variant="contained">
+                    <Button sx={BtMedia} size="small" variant="contained">
                       Download CV
                     </Button>
                   </a>
@@ -73,7 +116,7 @@ const AnimatorCards = ({ user }) => {
                 href={`mailto: ${user.email}`}
                 style={{ textDecoration: "none" }}
               >
-                <Button size="small" variant="contained">
+                <Button sx={BtMedia} size="small" variant="contained">
                   Email
                 </Button>
               </a>
