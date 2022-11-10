@@ -159,7 +159,7 @@ const HoverMenu = ({ setOpenModal }) => {
                 </Link>
 
                 {/* PROFILING ANIMATORS */}
-                {currentUser.userCategory === "Employer" ? (
+                {currentUser?.userCategory === "Employer" ? (
                   <>
                     <Link to={"/animators"} style={{ textDecoration: "none" }}>
                       <DropdownContent>
