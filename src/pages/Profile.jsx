@@ -40,13 +40,13 @@ const MainWrapper = styled.div`
 
 /* PROFILE Section*/
 const ProfWrapper = styled.div`
-  color: white;
+  color: black;
   width: 85%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 60px;
 
   /* Mobile Large */
   @media (max-width: 425px) {
@@ -63,10 +63,11 @@ const ProfWrapper = styled.div`
 
 const Infowrapper = styled.div`
   margin-top: 2%;
-  padding: 4em 4em 8em 4em;
+  padding: 2em 2em 2em 2em;
   width: 85%;
-  background-color: #132550;
+  background-color: transparent;
   border-radius: 100px;
+  box-shadow: 5px 5px 5px #383535;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,7 +149,7 @@ const Detailswrap = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 2em;
+    margin: 0.7em;
   }
 
   /* MOBILE S */
@@ -182,7 +183,7 @@ const UsernameWrapper = styled.div`
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: -1rem 4rem;
+    margin: -1rem 6.7rem;
     font-size: 1rem;
   }
   /* MOBILE S */
@@ -227,11 +228,11 @@ const Subbtn = styled.button`
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
-    margin: 50px 85px;
+    margin: 5px 70px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 95px 19px;
+    margin: 125px 19px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
@@ -241,7 +242,7 @@ const Subbtn = styled.button`
 `;
 
 const Vl = styled.div`
-  border-left: 3px solid white;
+  border-left: 3px solid black;
   height: 25px;
 `;
 
@@ -506,7 +507,7 @@ const Anchorbt = styled.button`
   font-size: 1.7em;
   max-height: 50px;
   transition: 0.5s;
-  color: white;
+  color: black;
   display: block;
   border: 0px;
   font-weight: 1000;
@@ -539,10 +540,11 @@ const Anchorwrap = styled.div`
   flex-direction: row;
   display: flex;
   position: relative;
+  margin: 1em;
 `;
 const AnchorVl = styled.div`
   margin-top: 2%;
-  border-left: 4px solid white;
+  border-left: 4px solid black;
   height: 50px;
   /* MOBILE S */
   @media (max-width: 320px) {
