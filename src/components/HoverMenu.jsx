@@ -173,10 +173,6 @@ const HoverMenu = ({ setOpenModal }) => {
                 )}
 
                 <DropdownContent>
-                  <FlagIcon />
-                  REPORT
-                </DropdownContent>
-                <DropdownContent>
                   <LiveHelpIcon />
                   HELP
                 </DropdownContent>
