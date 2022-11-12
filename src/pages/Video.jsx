@@ -398,6 +398,7 @@ const Video = () => {
                     src={currentVideo?.videoUrl}
                     controls
                     controlsList="nodownload"
+                    onContextMenu={(e) => e.preventDefault()}
                   ></VideoFrame>
                 </VideoWrapper>
 
