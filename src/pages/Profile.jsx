@@ -70,7 +70,7 @@ const Infowrapper = styled.div`
   margin: 20px;
   padding: 4em 4em 1em 4em;
   width: 60%;
-  background-color: #6466681a;
+  background-color: white;
   box-shadow: 10px 5px 5px black;
   border-radius: 100px;
   display: flex;
