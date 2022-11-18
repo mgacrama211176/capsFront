@@ -50,8 +50,8 @@ const ProfWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 56%;
-    right: 80px;
+    width: 65%;
+    right: 40px;
   }
 
   /* MOBILE S */
@@ -315,7 +315,7 @@ const Aboutwrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 68%;
+    width: 79%;
   }
 
   /* MOBILE S */
@@ -425,8 +425,8 @@ const VidWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 70%;
-    right: 80px;
+    width: 82%;
+    right: 40px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
@@ -458,8 +458,8 @@ const ContactWrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 70%;
-    right: 80px;
+    width: 82%;
+    right: 40px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
@@ -539,11 +539,20 @@ const Anchorwrap = styled.div`
   flex-direction: row;
   display: flex;
   position: relative;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `;
 const AnchorVl = styled.div`
   margin-top: 2%;
   border-left: 4px solid white;
   height: 50px;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    display: none;
+  }
   /* MOBILE S */
   @media (max-width: 320px) {
     height: 30px;
