@@ -22,6 +22,7 @@ const BoxMedia = {
   flexWrap: "wrap",
   gap: 2,
   flexDirection: "row",
+  justifyContent: "center",
 };
 
 const AnimatorProfiles = () => {

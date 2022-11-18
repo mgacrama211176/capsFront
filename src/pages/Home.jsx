@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../media";
+import { useSpring } from "framer-motion";
 
 //Components
 import Card from "../components/Card";

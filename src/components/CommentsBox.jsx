@@ -73,6 +73,11 @@ const Input = styled.input`
   color: ${({ theme }) => theme.titleColor};
 `;
 
+const AvaMedia = {
+  color: "black",
+  width: "100%",
+};
+
 const CommentsBox = ({
   comment,
   currentUser,
@@ -179,7 +184,7 @@ const CommentsBox = ({
                 multiline
                 value={comment.desc}
                 disabled
-                sx={{ color: "black" }}
+                sx={AvaMedia}
               />
             </>
           )}

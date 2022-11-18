@@ -64,24 +64,21 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const VideoWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-content: center;
-  object-fit: fill;
-  width: 80%;
 `;
 
 const VideoFrame = styled.video`
   padding: 10px;
-  max-height: 1024px;
   margin-top: 10px;
   border: none;
-  width: 100%;
-  object-fit: cover;
+  width: 80%;
 `;
 
 const VideoInformationContainer = styled.div`
+  margin-top: 10px;
   padding: 5px;
   width: 100%;
 `;
@@ -174,6 +171,10 @@ const Channel = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  } ;
 `;
 
 const ChannelInfo = styled.div`
@@ -399,6 +400,8 @@ const Video = () => {
                     controls
                     controlsList="nodownload"
                     onContextMenu={(e) => e.preventDefault()}
+                    loop
+                    autoPlay
                   ></VideoFrame>
                 </VideoWrapper>
 
