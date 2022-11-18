@@ -56,8 +56,8 @@ const ProfWrapper = styled.div`
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 38%;
-    right: 110px;
+    width: 42%;
+    right: 73px;
   }
 `;
 
@@ -320,7 +320,7 @@ const Aboutwrapper = styled.div`
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 53%;
+    width: 61%;
   }
 `;
 
@@ -430,8 +430,8 @@ const VidWrapper = styled.div`
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 56%;
-    right: 112px;
+    width: 65%;
+    right: 74px;
   }
 `;
 
@@ -463,8 +463,8 @@ const ContactWrapper = styled.div`
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 56%;
-    right: 112px;
+    width: 65%;
+    right: 74px;
   }
 `;
 
