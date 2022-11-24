@@ -75,7 +75,7 @@ const Home = ({ type, category }) => {
     } else {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `https://filanimeback.onrender.com//api/videos/${type}`
+          `https://filanimeback.onrender.com/api/videos/${type}`
         );
         setLoading(false);
         setVideos(randomReturn.data);
