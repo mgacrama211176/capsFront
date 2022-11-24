@@ -92,7 +92,7 @@ const Follow = ({ currentUser, merger }) => {
       } else {
         if (currentUser.subscribedUsers.includes(merger._id)) {
           await axios.put(
-            `https://capstoneback2.herokuapp.com/api/users/unsub/${currentUser._id}/${merger._id}`
+            `https://filanimeback.onrender.com/api/users/unsub/${currentUser._id}/${merger._id}`
           );
         }
         dispatch(subscription(merger._id));

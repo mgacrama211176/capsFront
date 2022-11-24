@@ -621,7 +621,7 @@ const Profile = ({ nav }) => {
   useEffect(() => {
     const getProfile = async () => {
       const profile = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/users/find/${id}`
+        `https://filanimeback.onrender.com/api/users/find/${id}`
       );
       setRetrievedUser(profile.data);
       setLoader(false);
@@ -629,7 +629,7 @@ const Profile = ({ nav }) => {
 
     const fetchingVideos = async () => {
       const Uploaded = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/videos/find/userVideos/${id}`
+        `https://filanimeback.onrender.com/api/videos/find/userVideos/${id}`
       );
       setRetrivedVideos(Uploaded.data);
     };

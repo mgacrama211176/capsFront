@@ -216,7 +216,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const update = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
+        `https://filanimeback.onrender.com/api/users/${currentUser._id}`,
         {
           username: newData.username,
           userCategory: newData.category,

@@ -250,7 +250,7 @@ const Upload = ({ setOpenModal, currentUser }) => {
       uploadInformation.imgUrl !== undefined
     ) {
       const response = await axios.post(
-        `https://capstoneback2.herokuapp.com/api/videos/${currentUser}`,
+        `https://filanimeback.onrender.com/api/videos/${currentUser}`,
         {
           title: uploadInformation.title,
           desc: uploadInformation.desc,

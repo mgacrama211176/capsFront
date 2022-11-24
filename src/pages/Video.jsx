@@ -293,10 +293,10 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoResponse = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/videos/find/${path}`
+          `https://filanimeback.onrender.com/api/videos/find/${path}`
         );
         const channelResponse = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/users/find/${videoResponse.data.userId}`
+          `https://filanimeback.onrender.com/api/users/find/${videoResponse.data.userId}`
         );
 
         setChannel(channelResponse.data);
@@ -311,7 +311,7 @@ const Video = () => {
     const views = async () => {
       if (viewCounter === true) {
         const increase = await axios.put(
-          `https://capstoneback2.herokuapp.com/api/videos/views/view/${path}`
+          `https://filanimeback.onrender.com/api/videos/views/view/${path}`
         );
         setLoading(false);
       } else {
@@ -327,7 +327,7 @@ const Video = () => {
       loginRequired();
     } else {
       const like = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/like/${currentUser._id}/${currentVideo._id}`
+        `https://filanimeback.onrender.com/api/users/like/${currentUser._id}/${currentVideo._id}`
       );
       setLoading(false);
       dispatch(LikeFunction(currentUser._id));
@@ -340,7 +340,7 @@ const Video = () => {
       loginRequired();
     } else {
       await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/dislike/${currentUser._id}/${currentVideo._id}`
+        `https://filanimeback.onrender.com/api/users/dislike/${currentUser._id}/${currentVideo._id}`
       );
       setLoading(false);
       dispatch(DislikeFunction(currentUser._id));
@@ -352,12 +352,12 @@ const Video = () => {
     try {
       if (currentUser?.saveVideos.includes(currentVideo._id)) {
         const unsave = await axios.put(
-          `https://capstoneback2.herokuapp.com/api/users/unsave/${currentUser._id}/${currentVideo._id}`
+          `https://filanimeback.onrender.com/api/users/unsave/${currentUser._id}/${currentVideo._id}`
         );
         dispatch(reduxSaveVideo(currentVideo._id));
       } else {
         await axios.put(
-          `https://capstoneback2.herokuapp.com/api/users/save/${currentUser._id}/${currentVideo._id}`
+          `https://filanimeback.onrender.com/api/users/save/${currentUser._id}/${currentVideo._id}`
         );
         SaveNotif();
         dispatch(reduxSaveVideo(currentVideo._id));

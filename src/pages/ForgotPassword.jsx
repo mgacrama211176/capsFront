@@ -178,7 +178,7 @@ const Signin = () => {
   const checkEmail = async () => {
     try {
       const result = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/find/email/${user.email}`
+        `https://filanimeback.onrender.com/api/users/find/email/${user.email}`
       );
       if (!result.data) {
         NotFound();

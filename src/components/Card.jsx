@@ -193,7 +193,7 @@ const Card = ({ type, video, currentUser }) => {
   useEffect(() => {
     const fetchingChannel = async () => {
       const channel = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/users/find/${video?.userId}`
+        `https://filanimeback.onrender.com/api/users/find/${video?.userId}`
       );
       setChannel(channel?.data);
     };
