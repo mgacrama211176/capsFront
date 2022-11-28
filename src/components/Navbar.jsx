@@ -58,7 +58,7 @@ const Logo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 4rem;
+  height: 5rem;
 `;
 
 const Search = styled.div`
