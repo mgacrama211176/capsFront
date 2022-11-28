@@ -48,6 +48,11 @@ const ProfWrapper = styled.div`
   align-items: center;
   margin: 60px;
 
+  /* Mobile Laptop */
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
   /* Mobile Large */
   @media (max-width: 425px) {
     width: 56%;
@@ -62,10 +67,11 @@ const ProfWrapper = styled.div`
 `;
 
 const Infowrapper = styled.div`
-  margin-top: 2%;
-  padding: 2em 2em 2em 2em;
-  width: 85%;
-  background-color: transparent;
+  margin: 20px;
+  padding: 4em 4em 1em 4em;
+  width: 60%;
+  background-color: white;
+  box-shadow: 10px 5px 5px black;
   border-radius: 100px;
   box-shadow: 5px 5px 5px #383535;
   display: flex;
@@ -161,7 +167,14 @@ const Subsinfo = styled.div`
   display: flex;
   gap: 2em;
   position: relative;
+  color: black;
 
+  /* Mobile Laptop */
+  @media (max-width: 1024px) {
+    margin: 2rem;
+  }
+
+  border-radius: 10px;
   /* Mobile Large */
   @media (max-width: 425px) {
     font-size: 0.8em;
@@ -176,6 +189,13 @@ const UsernameWrapper = styled.div`
   width: 100%;
   text-decoration: uppercase;
   font-size: 2rem;
+  color: black;
+
+  /* Mobile Laptop */
+  @media (max-width: 1024px) {
+    margin: 2rem 1rem;
+    top: 50px;
+  }
 
   /* Mobile Tablet */
   @media (max-width: 768px) {
@@ -205,7 +225,7 @@ const Subbtn = styled.button`
   border: 0px;
   font-weight: 700;
   position: absolute;
-  margin: 55px 160px;
+  margin: 55px 270px;
   right: 0px;
 
   cursor: pointer;
@@ -221,22 +241,27 @@ const Subbtn = styled.button`
   &:active {
     transform: scale(1.3);
   }
+  /* Mobile Laptop L */
+  @media (max-width: 1440px) {
+    top: 175px;
+    right: 157px;
+  }
   /* Mobile Laptop */
   @media (max-width: 1024px) {
-    right: 94px;
-    top: 160px;
+    right: 47px;
+    top: 174px;
   }
   /* Mobile Tablet */
   @media (max-width: 768px) {
-    margin: 5px 70px;
+    margin: 50px 175px;
   }
   /* Mobile Large */
   @media (max-width: 425px) {
-    margin: 125px 19px;
+    margin: 95px 60px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    margin: 160px 0px;
+    margin: 85px 0px;
     right: 50px;
   }
 `;
@@ -507,7 +532,7 @@ const Anchorbt = styled.button`
   font-size: 1.7em;
   max-height: 50px;
   transition: 0.5s;
-  color: black;
+  color: #000000;
   display: block;
   border: 0px;
   font-weight: 1000;
@@ -549,7 +574,7 @@ const AnchorVl = styled.div`
   /* MOBILE S */
   @media (max-width: 320px) {
     height: 30px;
-    border-left: 2px solid white;
+    border-left: 2px solid black;
   }
 `;
 
