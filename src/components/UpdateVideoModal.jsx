@@ -86,7 +86,7 @@ const UpdateVideoModal = ({ video }) => {
         console.log(video._id);
         console.log(currentUser._id);
         await axios.put(
-          `https://capstoneback2.herokuapp.com/api/videos/${video._id}/${currentUser._id}`,
+          `https://filanimeback.onrender.com/api/videos/${video._id}/${currentUser._id}`,
           {
             title: videoInfo.title,
             tags: videoInfo.category,

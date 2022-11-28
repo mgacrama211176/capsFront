@@ -62,6 +62,14 @@ const AnimatorCards = ({ user }) => {
                 {user.username}
               </Typography>
               <Typography
+                sx={TypoMedia}
+                gutterBottom
+                variant="h1"
+                component="div"
+              >
+                {user.email}
+              </Typography>
+              <Typography
                 sx={TypoMedia2}
                 variant="body2"
                 color="text.secondary"

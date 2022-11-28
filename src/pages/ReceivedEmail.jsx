@@ -157,7 +157,7 @@ const Signin = () => {
   const onSubmitReset = async () => {
     try {
       const reset = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/find/email/reset/${token}`,
+        `https://filanimeback.onrender.com/api/users/find/email/reset/${token}`,
         {
           password: user.password,
         }

@@ -15,7 +15,7 @@ const Recommendation = ({ tags }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       const response = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/videos/tags?tags=${tags}`
+        `https://filanimeback.onrender.com/api/videos/tags?tags=${tags}`
       );
       setVideos(response.data);
     };

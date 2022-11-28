@@ -55,14 +55,14 @@ const ProfWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 56%;
-    right: 80px;
+    width: 65%;
+    right: 40px;
   }
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 38%;
-    right: 110px;
+    width: 42%;
+    right: 73px;
   }
 `;
 
@@ -341,12 +341,12 @@ const Aboutwrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 68%;
+    width: 79%;
   }
 
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 53%;
+    width: 61%;
   }
 `;
 
@@ -451,13 +451,13 @@ const VidWrapper = styled.div`
 
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 70%;
-    right: 80px;
+    width: 82%;
+    right: 40px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 56%;
-    right: 112px;
+    width: 65%;
+    right: 74px;
   }
 `;
 
@@ -484,13 +484,13 @@ const ContactWrapper = styled.div`
   margin-bottom: 2%;
   /* Mobile Large */
   @media (max-width: 425px) {
-    width: 70%;
-    right: 80px;
+    width: 82%;
+    right: 40px;
   }
   /* MOBILE S */
   @media (max-width: 320px) {
-    width: 56%;
-    right: 112px;
+    width: 65%;
+    right: 74px;
   }
 `;
 
@@ -565,12 +565,20 @@ const Anchorwrap = styled.div`
   flex-direction: row;
   display: flex;
   position: relative;
-  margin: 1em;
+
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `;
 const AnchorVl = styled.div`
   margin-top: 2%;
   border-left: 4px solid black;
   height: 50px;
+  /* Mobile Large */
+  @media (max-width: 425px) {
+    display: none;
+  }
   /* MOBILE S */
   @media (max-width: 320px) {
     height: 30px;
@@ -639,7 +647,7 @@ const Profile = ({ nav }) => {
   useEffect(() => {
     const getProfile = async () => {
       const profile = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/users/find/${id}`
+        `https://filanimeback.onrender.com/api/users/find/${id}`
       );
       setRetrievedUser(profile.data);
       setLoader(false);
@@ -647,7 +655,7 @@ const Profile = ({ nav }) => {
 
     const fetchingVideos = async () => {
       const Uploaded = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/videos/find/userVideos/${id}`
+        `https://filanimeback.onrender.com/api/videos/find/userVideos/${id}`
       );
       setRetrivedVideos(Uploaded.data);
     };

@@ -265,7 +265,7 @@ export const SubsCriptionModal = ({ currentUser, merger }) => {
     } else {
       const follower = async () => {
         const perform = await axios.put(
-          `https://capstoneback2.herokuapp.com/api/users/sub/${currentUser._id}/${merger._id}`
+          `https://filanimeback.onrender.com/api/users/sub/${currentUser._id}/${merger._id}`
         );
         dispatch(subscription(merger._id));
         console.log(perform);

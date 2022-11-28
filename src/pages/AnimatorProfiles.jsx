@@ -22,6 +22,7 @@ const BoxMedia = {
   flexWrap: "wrap",
   gap: 2,
   flexDirection: "row",
+  justifyContent: "center",
 };
 
 const AnimatorProfiles = () => {
@@ -30,7 +31,7 @@ const AnimatorProfiles = () => {
 
   const fetchingProfiles = async () => {
     const fetchedUsers = await axios.get(
-      `https://capstoneback2.herokuapp.com/api/users/find/All`
+      `https://filanimeback.onrender.com/api/users/find/All`
     );
     setUsers(fetchedUsers.data);
     console.log(fetchedUsers.data);

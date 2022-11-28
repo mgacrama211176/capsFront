@@ -58,7 +58,6 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 
-  /* Mobile Large */
   @media (max-width: 425px) {
     width: 75%;
     margin: 10px 20px;
@@ -71,6 +70,11 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   display: flex;
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -154,16 +158,10 @@ const UpdateImageContainer = styled.div`
   }
 `;
 
-const Options = styled.option``;
-
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
 `;
-
-const ButtonStyle = {
-  width: "100%",
-};
 
 const InputMedia = {
   width: {
@@ -218,7 +216,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const update = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/users/${currentUser._id}`,
+        `https://filanimeback.onrender.com/api/users/${currentUser._id}`,
         {
           username: newData.username,
           userCategory: newData.category,

@@ -248,7 +248,7 @@ const Signup = () => {
   const onClickAddSubmit = async (e) => {
     e.preventDefault();
     const NewUser = await axios.post(
-      `https://capstoneback2.herokuapp.com/api/auth/signup`,
+      `https://filanimeback.onrender.com/api/auth/signup`,
       {
         email: user.email,
         username: user.username,

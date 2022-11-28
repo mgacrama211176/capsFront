@@ -50,14 +50,14 @@ const Report = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/users/find/All`
+        `https://filanimeback.onrender.com/api/users/find/All`
       );
       const userContainer = users.data;
       setUserData(userContainer);
     };
     const fetchVideos = async () => {
       const videos = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/videos/trend`
+        `https://filanimeback.onrender.com/api/videos/trend`
       );
 
       const videoContainer = videos.data;
@@ -65,7 +65,7 @@ const Report = () => {
     };
     const fetchReports = async () => {
       const reports = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/reports/All`
+        `https://filanimeback.onrender.com/api/reports/All`
       );
 
       const reportsContainer = reports.data;

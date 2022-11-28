@@ -73,6 +73,11 @@ const Input = styled.input`
   color: ${({ theme }) => theme.titleColor};
 `;
 
+const AvaMedia = {
+  color: "black",
+  width: "100%",
+};
+
 const CommentsBox = ({
   comment,
   currentUser,
@@ -85,7 +90,7 @@ const CommentsBox = ({
   useEffect(() => {
     const fetchComments = async () => {
       const responseToComments = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/users/find/${comment.userId}`
+        `https://filanimeback.onrender.com/api/users/find/${comment.userId}`
       );
 
       setChannel(responseToComments.data);
@@ -95,7 +100,7 @@ const CommentsBox = ({
 
   const deleteComment = async () => {
     const deletedComment = await axios.delete(
-      `https://capstoneback2.herokuapp.com/api/comments/${comment._id}`
+      `https://filanimeback.onrender.com/api/comments/${comment._id}`
     );
     DeleteNotif();
   };
@@ -118,7 +123,7 @@ const CommentsBox = ({
     console.log(selectedComment);
     try {
       const latestComment = await axios.put(
-        `https://capstoneback2.herokuapp.com/api/comments/${selectedComment}`,
+        `https://filanimeback.onrender.com/api/comments/${selectedComment}`,
         { desc: updatedComment }
       );
       CommentSuccess();
@@ -179,7 +184,7 @@ const CommentsBox = ({
                 multiline
                 value={comment.desc}
                 disabled
-                sx={{ color: "black" }}
+                sx={AvaMedia}
               />
             </>
           )}

@@ -54,7 +54,7 @@ const ViewComments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       const responseComments = await axios.get(
-        `https://capstoneback2.herokuapp.com/api/comments/${videoId}`
+        `https://filanimeback.onrender.com/api/comments/${videoId}`
       );
       dispatch(FetchSuccess(responseComments.data));
       setComments(responseComments.data);
@@ -72,7 +72,7 @@ const ViewComments = ({ videoId }) => {
     e.preventDefault();
     try {
       const currentUserComment = await axios.post(
-        `https://capstoneback2.herokuapp.com/api/comments/${currentUser._id}/${videoId}`,
+        `https://filanimeback.onrender.com/api/comments/${currentUser._id}/${videoId}`,
         {
           desc: newComment,
         }

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../media";
+import { useSpring } from "framer-motion";
 
 //Components
 import Card from "../components/Card";
@@ -47,7 +48,7 @@ const Home = ({ type, category }) => {
     if (type === "sub") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
+          `https://filanimeback.onrender.com/api/videos/${type}/${currentUser?._id}`
         );
         setVideos(randomReturn.data);
         setLoading(false);
@@ -56,7 +57,7 @@ const Home = ({ type, category }) => {
     } else if (type === "library") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/videos/${type}/${currentUser?._id}`
+          `https://filanimeback.onrender.com/api/videos/${type}/${currentUser?._id}`
         );
         setLoading(false);
         setVideos(randomReturn.data);
@@ -65,7 +66,7 @@ const Home = ({ type, category }) => {
     } else if (type === "category") {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/videos/${type}/${category}`
+          `https://filanimeback.onrender.com/api/videos/${type}/${category}`
         );
         setLoading(false);
         setVideos(randomReturn.data);
@@ -74,7 +75,7 @@ const Home = ({ type, category }) => {
     } else {
       const fetchingVideos = async () => {
         const randomReturn = await axios.get(
-          `https://capstoneback2.herokuapp.com/api/videos/${type}`
+          `https://filanimeback.onrender.com/api/videos/${type}`
         );
         setLoading(false);
         setVideos(randomReturn.data);
