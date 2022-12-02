@@ -139,6 +139,7 @@ const ChannelImage = styled.img`
 
 const Texts = styled.div`
   display: flex;
+  font-family: Roboto, Arial, sans-serif;
   flex-flow: column wrap;
   min-width: ${(props) => (props.type === "sm" ? "0px" : "250px")};
   color: black;
@@ -151,8 +152,9 @@ const Texts = styled.div`
 
 const Title = styled.h1`
   font-size: ${(props) => props.type !== "sm" && "16px"};
+  font-family: Roboto, Arial, sans-serif;
   font-weight: 500;
-  color: black;
+  color: ${({ theme }) => theme.text};
   display: flex;
   width: 80%;
 
@@ -166,14 +168,16 @@ const Title = styled.h1`
 `;
 
 const AnimatorName = styled.h2`
+  font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
-  color: black;
+  color: ${({ theme }) => theme.text};
   margin: 5px 0;
 `;
 
 const Info = styled.div`
+  font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
-  color: black;
+  color: ${({ theme }) => theme.text};
 `;
 
 const ImgContainer = styled.div`

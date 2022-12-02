@@ -13,7 +13,7 @@ export const darkTheme = {
 export const coloredTheme = {
   bg: "#132550",
   bgLighter: "#132550",
-  text: "white",
+  text: "black",
   textSoft: "#ffff",
   soft: "#b2792d",
   content: "#ffffff",
