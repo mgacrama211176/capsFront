@@ -20,7 +20,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 
 //Functionmalities
-import { deleteObject } from "firebase/storage";
 import axios from "axios";
 
 //Redux
@@ -30,6 +29,9 @@ import { logout } from "../redux/userSlice";
 
 //TOAST
 import { Congratulations, loginRequired } from "../components/Toasts";
+
+//firebase
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 const style = {
   position: "absolute",
@@ -90,13 +92,21 @@ const Substyle = {
 
 const VideoModalDelete = ({ video }) => {
   const [open, setOpen] = React.useState(false);
+  const nav = useNavigate();
+
+  const storage = getStorage();
+  const videoDelete = ref(storage, video.videoUrl);
+  const imgDelete = ref(storage, video.imgUrl);
+
   const handleOpen = () => {
     setOpen(true);
-    console.log(video._id);
   };
   const handleClose = () => setOpen(false);
 
   const ConfirmDelete = async () => {
+    console.log(videoDelete);
+    console.log(imgDelete);
+
     try {
       //delete Videodata on Mongo
       const deleting = await axios.delete(
@@ -105,15 +115,12 @@ const VideoModalDelete = ({ video }) => {
       const deletingAllComments = await axios.delete(
         `https://filanimeback.onrender.com/api/comments/deleteAll/${video._id}`
       );
-      console.log(deletingAllComments);
-      console.log(deleting);
 
       //delete video on firebase
       deleteObject(videoDelete);
       deleteObject(imgDelete);
-
       console.log(`deleted from database`);
-      DeleteVideoNotif();
+      nav(`/`);
     } catch (err) {
       console.log(err);
     }

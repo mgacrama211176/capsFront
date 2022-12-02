@@ -804,6 +804,7 @@ const Profile = ({ nav }) => {
                     video={video}
                     type="profile"
                     currentUser={currentUser}
+                    retrivedUser={retrivedUser}
                   />
                 ))}
               </>

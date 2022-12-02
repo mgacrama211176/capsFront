@@ -10,6 +10,9 @@ import axios from "axios";
 
 import { useSelector } from "react-redux";
 
+//Router Dom
+import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   margin: 20px;
   display: flex;
@@ -56,6 +59,7 @@ const Options = styled.option`
 `;
 
 const UpdateVideoModal = ({ video }) => {
+  const nav = useNavigate();
   const { currentUser } = useSelector((state) => state.username);
   const [open, setOpen] = React.useState(false);
   const [category, setCategory] = useState(video.tags[0]);
@@ -94,6 +98,7 @@ const UpdateVideoModal = ({ video }) => {
           }
         );
         console.log(`success update`);
+        nav(`/`);
       } catch (err) {
         console.log(err);
       }
