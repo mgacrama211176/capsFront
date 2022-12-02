@@ -100,10 +100,10 @@ const VideoModalDelete = ({ video }) => {
     try {
       //delete Videodata on Mongo
       const deleting = await axios.delete(
-        `https://capstoneback2.herokuapp.com/api/videos/${video._id}`
+        `https://filanimeback.onrender.com/api/videos/${video._id}`
       );
       const deletingAllComments = await axios.delete(
-        `https://capstoneback2.herokuapp.com/api/comments/deleteAll/${video._id}`
+        `https://filanimeback.onrender.com/api/comments/deleteAll/${video._id}`
       );
       console.log(deletingAllComments);
       console.log(deleting);
