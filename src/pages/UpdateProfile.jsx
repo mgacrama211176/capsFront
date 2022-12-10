@@ -203,6 +203,7 @@ const UpdateProfile = () => {
     birthdate: currentUser?.birthdate,
     about: currentUser?.about,
     employment: currentUser?.employmentStatus,
+    phoneNumber: currentUser?.phoneNumber,
   });
 
   const onChangeHandle = (e) => {
@@ -227,11 +228,12 @@ const UpdateProfile = () => {
           uploadCV: newData.uploadCv,
           image: newData.image,
           employmentStatus: newData.employment,
+          phoneNumber: newData.phoneNumber,
         }
       );
-
+      console.log(update);
       dispatch(loginSuccess(update.data));
-      nav(`/profile/About/${currentUser._id}`);
+      // nav(`/profile/About/${currentUser._id}`);
     } catch (err) {
       console.log(err);
     }
@@ -453,6 +455,15 @@ const UpdateProfile = () => {
             ) : (
               ""
             )}
+            <TextField
+              id="phoneNumber"
+              name="phoneNumber"
+              label={currentUser.phoneNumber}
+              variant="outlined"
+              placeholder="Mobile Number"
+              onChange={(e) => onChangeHandle(e)}
+              sx={InputMedia}
+            />
 
             {currentUser?.address ? (
               <TextField

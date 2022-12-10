@@ -689,6 +689,8 @@ const Profile = ({ nav }) => {
     setMessage(contact);
   };
 
+  console.log(retrivedUser);
+
   return (
     <MainWrapper>
       <ToastContainer
@@ -768,6 +770,8 @@ const Profile = ({ nav }) => {
                   User email: {retrivedUser.email}
                   <hr />
                   Address: {retrivedUser.address}
+                  <hr />
+                  Phone Number: {retrivedUser.phoneNumber}
                 </Aboutdt>
               </ContentWrap>
             </Aboutwrapper>
@@ -827,13 +831,15 @@ const Profile = ({ nav }) => {
                 >
                   <TextField
                     name="email"
-                    label="Email"
                     helperText="Please enter your email"
                     sx={InputMedia}
+                    value={retrivedUser.email}
                     onChange={(e) => {
                       onChangeHandle(e);
                     }}
+                    disabled
                   />
+
                   <TextField
                     name="message"
                     sx={{
